@@ -1,16 +1,16 @@
 import logo from "../assets/logo-land.png";
 import search from "../assets/search.png"
 import dropdownIcon from "../assets/drop.png";
-import './luyende.css';
+import '../luyende/luyende.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import background from '../assets/background.svg';
 import { Link } from "react-router-dom";
 
 const luyende = () => {
   return (
-    <div>
+    <div id="main">
         <div id="header">
-        <Link to="/">
+            <Link to="/">
                 <img src={logo} alt="Logo" style={{ width: "90px", height: "45px", cursor: "pointer"}} />
             </Link>
         <div className="header-menu">
@@ -92,8 +92,12 @@ const luyende = () => {
           </button>
         </div>
         <div className="button">
+          <Link to="/login/login">
           <button className="login-button">Đăng nhập</button>
+          </Link>
+          <Link to="/register/register">
           <button className="register-button">Đăng ký</button>
+          </Link>
         </div>
       </div>
       <div
@@ -263,9 +267,8 @@ const luyende = () => {
       </tbody>
     </table>
     </div>
-    <div className="container footer-content mt-5">
-      <div className="row flex flex-row justify-content-between">
-        <div className="col col-lg-5 pb-1 pt-3">
+    <div className="row flex flex-row justify-content-between">
+    <div className="col col-lg-5 pb-1 pt-3 ps-5 ms-5">
       <h5>
         <strong>CÔNG TY CỔ PHẦN GIÁO DỤC MCLASS VIỆT NAM</strong>
       </h5>
@@ -292,10 +295,8 @@ const luyende = () => {
       <br />
     </div>
   </div>
-</div>
-
     </div>
   )
 }
 
-export default luyende
+export default luyende;

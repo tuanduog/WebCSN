@@ -44,3 +44,9 @@
     user-select: none;
     vertical-align: middle;
 }
+
+.center-text-input {
+    text-align: center;
+    appearance: none;
+    -webkit-appearance: none; 
+  }

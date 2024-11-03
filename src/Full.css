@@ -206,7 +206,7 @@ img.dropdown{
     list-style: none;           /* Removes default bullets for the <ul> */
     padding: 0;                 /* Removes default padding */
     margin: 0;                  /* Removes default margin */
-    border-radius: 10px 0 10px 0;
+    border-radius: 10px !important;
     width: fit-content;          /* Adjusts to fit the content */
     max-width: 90vw;             /* Limits width to 90% of the viewport */
     height: auto;                /* Automatically adjusts height based on content */
@@ -235,16 +235,14 @@ img.dropdown{
 }
 
 .sub-menu-side ul li {
-    position: relative;
+    position: relative !important;
 }
 
 .sub-menu-side {
     background-color: hsla(0, 0%, 100%, .97);
     border-radius: 0 10px 10px 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .05);
-    position: absolute;
-    left: 416px;
-    top: 124px;
+    position: absolute !important;
     width: 950px;
     display: none;
     height: 513px;
@@ -252,7 +250,7 @@ img.dropdown{
 }
 
 .sub-menu-side a {
-    margin-left: 25px;
+    
     display: inline-block;
 }
 
@@ -378,7 +376,7 @@ img.dropdown{
     display: inline-block;
     overflow: hidden;
     padding-bottom: -30px;
-    background-color: #E0E0E0;
+    background-color: #e8e8e8;
     padding-right: 5px;
     border-radius: 4px;
     

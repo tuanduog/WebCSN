@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import cors from "cors";
 import mysql from 'mysql2';
 import 'dotenv/config'; 
@@ -38,12 +38,26 @@ app.post('/register/register', (req, res) => {
     });
   });
 });
+app.post('/login/login', (req, res) => {
+  const sql = "SELECT * FROM users WHERE username = ?";
+  db.query (sql, [req.body.name], (err, data) =>{
+    if (err) {
+      return res.json({ Error: "Login error in server"});
+    } 
+    if(data.length > 0){
+      bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) =>{
+        if(err) return res.json({Error : "Password compare fail"});
+        if(response) {
+          return res.json({Status : "Đăng nhập thành công"});
+        } else return res.json({Error : "Sai mật khẩu"});
+      })
+    } else return res.json({Error : "Tài khoản không tồn tại"});
+  })
+})
 
 app.listen(8081, ()=> {
   console.log("Server running")
 })
-
-
 
 
 // const saltRounds = 10;

@@ -124,12 +124,13 @@ const ctietsach = () => {
         -
       </button>
       <input
-        type="number"
-        className="form-control mx-2"
-        value={quantity}
-        readOnly
-        style={{ width: '60px' }}
-      />
+  type="number"
+  className="form-control mx-2 center-text-input"
+  value={quantity}
+  readOnly
+  style={{ width: '60px' }}
+/>
+
       <button className="btn btn-primary" onClick={increment}>
         +
       </button>

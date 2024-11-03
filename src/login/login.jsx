@@ -2,12 +2,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle, faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const location = useLocation();
-  const [username, setUsername] = useState(location.state?.username || '');
+  // const location = useLocation();
+  // const [username] = useState(location.state?.username || '');
   function xemMK(){
     var x = document.getElementById("logpass");
     if(x.type === "password"){
@@ -16,6 +18,41 @@ const Login = () => {
       x.type = "password";
     }
   }
+  const [values, setValues] = useState({
+    name: '',
+    password: ''
+  });
+  const navigate = useNavigate();
+  // useEffect(() => {
+    
+  //   if (isModalOpen) {
+  //     document.body.style.overflow = 'hidden';
+  //   } else {
+  //     document.body.style.overflow = 'auto';
+  //   }
+
+  //   return () => {
+  //     document.body.style.overflow = 'auto';
+  //   };
+  // }, [isModalOpen]);
+  // const handleRegisterClick = ()=> {
+  //   setShowRegisterForm(false);
+  //   setShowLoginForm(true);
+  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:8081/login/login', values)
+      .then(res => {
+        if(res.data.Status === "Đăng nhập thành công"){
+          navigate('/');
+          
+        } else alert(res.data.Error);
+        //handleRegisterClick();
+      })
+      .then(err => {
+        console.error("Error during registration:", err);
+      });
+  };
 
   return (
     
@@ -29,14 +66,14 @@ const Login = () => {
           {/* Email Input */}
           <div className="form-group mb-3">
             <label className='mb-2'>Tên đăng nhập</label>
-            <input type="text" id="namelog" className="form-control" value={username}
-        onChange={(e) => setUsername(e.target.value)}/>
+            <input type="text" id="namelog" className="form-control"
+            onChange={e => setValues({...values, name : e.target.value})}/>
           </div>
 
           {/* Password Input */}
           <div className="form-group">
             <label className='mb-2'>Mật khẩu</label>
-            <input type="password" id="logpass" className="form-control" />
+            <input type="password" id="logpass" className="form-control" onChange={e => setValues({...values, password : e.target.value})}/>
           </div>
           <div className='form-group'>
             <input type='checkbox' className='mt-2' onClick={xemMK}/> Xem mật khẩu
@@ -47,7 +84,7 @@ const Login = () => {
             <div className="col d-flex justify-content-center">
               <div className="form-check">
                 <input className="form-check-input" type="checkbox" id="form2Example31" defaultChecked />
-                <label className="form-check-label"> Remember me </label>
+                <label className="form-check-label"> Nhớ tài khoản </label>
               </div>
             </div>
             <div className="col text-right">
@@ -57,7 +94,7 @@ const Login = () => {
 
           {/* Sign In Button */}
             <div className="d-flex justify-content-center">
-                <button type="submit" id='loginButton' className="btn btn-primary mb-4" style={{ width: '100%' }}>
+                <button type="submit" id='loginButton' className="btn btn-primary mb-4" style={{ width: '100%' }} onClick={handleSubmit}>
                     Đăng nhập
                 </button>
             </div>
