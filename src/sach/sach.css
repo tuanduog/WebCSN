@@ -1,0 +1,419 @@
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Poppins, Roboto, Helvetica, Arial, sans-serif;
+}
+
+#main {
+    width: 100%;
+}
+
+#header {
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color:#f8f9ff !important;
+    box-shadow: 4px 6px rgba(0, 0, 0, 0.1);
+    padding-top: 25px;
+    padding-bottom: 5px;
+    padding-left: 25px;
+    display: flex;
+    align-items: center;
+}
+
+#header>* {
+    margin-right: 50px;
+}
+
+.search-container {
+    background-color: #e0e0e0 !important;
+    margin-left: 80px;
+    height: 50px;
+    display: inline;
+    display: flex;
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 4px;
+}
+
+img.dropdown{
+    position: absolute;
+    margin-left: 239px;
+    width: 10px;
+    height: auto;
+}
+.dm {
+    padding-left: 15px;
+    display: flex;
+    margin-right: -40px;
+}
+
+#course-books:hover img.dropdown {
+    transform: rotate(180deg);
+  }
+
+.button {
+    display: flex;
+    position: absolute;
+    right: 15px;
+}
+
+.search-container input[type="text"] {
+    flex: 1;
+    font-size: 13px;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    background-color: #e0e0e0 !important;
+}
+
+.search-container button {
+    margin-top: 2px;
+    margin-right: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.srch {
+    margin-top: -4px;
+    width: 17px;
+    height: auto;
+    background-color: transparent;
+}
+
+
+
+.login-button {
+    padding: 10px 20px;
+    color: #000;
+    background-color: #e0e0e0 !important;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    height: 44px;
+}
+
+
+.register-button {
+    padding: 10px 20px;
+    background-color: #c4423e;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    height: 44px;
+}
+
+
+#course-books {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between the anchor and image */
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 21px !important;
+    background-color: #e0e0e0 !important;
+    transition: background-color 0.3s ease;
+    width: 300px;
+  }
+  
+
+#course-books a {
+    text-decoration: none;
+    color: #142744;
+}
+
+.sub-header-menu {
+    position: absolute;
+    padding: 10px;
+    background-color: #f8f9ff;
+    list-style-type: none;
+    width: 300px !important; /* Adjusts width to fit content */
+    max-width: 90vw;    /* Ensures the menu doesn't exceed 90% of the viewport width */
+    height: auto;       /* Automatically adjusts height based on content */
+    max-height: 80vh;   /* Limits height to avoid overflow */
+    display: none;
+    left: 167px;
+    top: 65px;
+    z-index: 1000;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for aesthetics */
+    border-radius: 8px; /* Optional: Rounds the corners */
+}
+
+
+
+#course-books:hover+.sub-header-menu,
+.sub-header-menu:hover {
+    display: block;
+}
+
+.sub-header-menu li a {
+    display: block;
+    padding: 15px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #000;
+}
+
+.sub-header-menu .sub-header-menu1 {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none;
+    width: 540px;
+    list-style-type: none;
+    height: 420px !important;
+}
+
+.sub-header-menu li:hover .sub-header-menu1 {
+    display: block;
+}
+
+.sub-header-menu a:hover {
+    background-color: #ececec;
+
+}
+
+.containt {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 35px;
+    background-color: #ebeff9;
+}
+
+.containt p {
+    font-size: 16px;
+    line-height: 36px;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 0;
+    background-color: #cbd5e3;
+    font-weight: 700;
+    padding-left: 1rem !important;
+}
+
+.menu-side {
+    list-style: none;           /* Removes default bullets for the <ul> */
+    padding: 0;                 /* Removes default padding */
+    margin: 0;                  /* Removes default margin */
+    border-radius: 10px 0 10px 0;
+    width: fit-content;          /* Adjusts to fit the content */
+    max-width: 90vw;             /* Limits width to 90% of the viewport */
+    height: auto;                /* Automatically adjusts height based on content */
+    max-height: 85vh;            /* Ensures it doesn't overflow the screen */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Adds shadow effect */
+        /* Enables scrolling if content exceeds max-height */
+    background-color: #fff;      /* Optional: Sets background color */
+}
+
+
+
+.menu-side li {
+    border-bottom: 1px solid #e8e8e8;
+    line-height: 44px;
+    height: 44px;
+    padding: 0 1em;
+    width: 100% !important;
+
+    list-style-type: none;
+}
+
+.menu-side a {
+    text-decoration: none;
+    color: #142744;
+    display: block;
+}
+
+.sub-menu-side ul li {
+    position: relative;
+}
+
+.sub-menu-side {
+    background-color: hsla(0, 0%, 100%, .97);
+    border-radius: 0 10px 10px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .05);
+    position: absolute;
+    left: 416px;
+    top: 124px;
+    width: 950px;
+    display: none;
+    height: 513px;
+    z-index: 1000;
+}
+
+.sub-menu-side a {
+    margin-left: 25px;
+    display: inline-block;
+}
+
+.menu-side a:hover {
+    color: #007bff;
+    font-weight: 700;
+}
+
+.menu-side li:hover .sub-menu-side {
+    display: block;
+}
+
+.sub-menu-side a:hover {
+    color: red;
+    font-weight: 700;
+    text-decoration: ☐red;
+}
+.content{
+    background-color: #f8f9ff;
+    width: 100%;
+    height: auto !important;
+}
+.h1{
+    font-weight: 600;
+    font-size: 28px;
+}
+.dm li{
+    display: inline-block;
+    margin-right:10px;
+}
+.dm a{
+    text-decoration: none;
+    color: #676666;
+    font-size: 13px;
+}
+.dm a:hover{
+    text-decoration: underline;
+}
+.dmsach{
+    margin-left: 60px;
+    border: 1px solid #ddd;
+    width: fit-content;
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 1345px;
+}
+h4{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+a{text-decoration: none;}
+.dmsach li{
+    height: 45px;
+    line-height: 45px;
+}
+.dmsach  a{
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+}
+li{list-style-type: none;}
+.dms{display:flex;}
+.sach img{
+    width:256px;
+    height: 160px;
+
+    }
+    span{color: #000;}
+    .sach li{
+        z-index: -1;
+        padding: 25px;
+        margin-left: 45px;
+        margin-bottom: 25px;
+        display: inline-block;
+        border: 1px solid #ddd;
+        line-height: 35px;
+        background-color: #d9e8f6;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    .sach a{
+        font-size: 17px;
+    }
+    
+.row{
+ background-color: #edf1f4;
+ padding: 45px 0;
+ display: flex;
+ padding-left: 45px;
+}
+.r1{
+display: block;
+margin-right: 55px;
+}
+.r1 p{
+font-size: 14px;
+line-height: 25px;
+}
+.btn-primary {
+background-color: #c4423e;
+}
+
+
+.card-body {
+background-color: #d9e8f6;
+}
+
+@media (max-width: 1024px) {
+    #header {
+        flex-wrap: wrap;
+        padding: 1rem;
+    }
+
+    .search-container {
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    #course-books {
+        margin-left: 0;
+    }
+
+    .button {
+        position: static;
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 768px) {
+    .containt {
+        flex-direction: column;
+    }
+
+    .menu-side,
+    .sub-menu-side {
+        width: 100%;
+    }
+
+    .poster1,
+    .poster img {
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-container {
+        width: 100%;
+    }
+
+    .login-button,
+    .register-button {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+
+    .select img {
+        width: 100%;
+        height: auto;
+    }
+
+    .body {
+        width: 100%;
+    }
+}

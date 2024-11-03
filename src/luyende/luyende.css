@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, Roboto, Helvetica, Arial, sans-serif;
+}
+#header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding-top: 25px;
+    padding-bottom: 5px;
+    padding-left: 25px;
+    display: flex;
+    align-items: center;
+}
+#header > * {
+    margin-right: 50px;
+}
+.search-container {
+    width: 400px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ececec;
+    border-radius: 20px;
+    padding: 4px;
+}
+.button {
+    display: flex;
+    position: absolute;
+    right: 15px;
+}
+.search-container input[type="text"] {
+    flex: 1;
+    font-size: 18px;
+    height: 100%;
+    padding: 4px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    padding-left: 15px;
+    background-color: #ececec;
+}
+
+.search-container button {
+    padding: 4px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.search-icon {
+    width: 16px;
+    height: 16px;
+    fill: #000;
+}
+
+.login-button {
+    padding: 10px 20px;
+    background-color: #ececec;
+    color: #000;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    height: 44px;
+}
+.search-container {
+    background-color: #ececec;
+}
+.register-button {
+    padding: 10px 20px;
+    background-color: #c4423e;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    height: 44px;
+}
+#course-books {
+    border-radius: 21px;
+    background-color: #ececec;
+    padding: 9px 24px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    padding-right: 96px;
+}
+#course-books a {
+    text-decoration: none;
+    color: #142744;
+}
+
+.sub-header-menu {
+    margin-top: 3px;
+    position: absolute;
+    padding: 10px;
+    background-color: #f8f9ff;
+    list-style-type: none;
+    width: 300px !important; /* Adjusts width to fit content */
+    max-width: 90vw;    /* Ensures the menu doesn't exceed 90% of the viewport width */
+    height: auto;       /* Automatically adjusts height based on content */
+    max-height: 80vh;   /* Limits height to avoid overflow */
+    display: none;
+    left: 167px;
+    top: 65px;
+    z-index: 1000;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for aesthetics */
+    border-radius: 8px; /* Optional: Rounds the corners */
+}
+
+.dm {
+    padding-left: 10px;
+    display: flex;
+    margin-right: -40px;
+}
+#course-books:hover + .sub-header-menu,
+.sub-header-menu:hover {
+    display: block;
+}
+.sub-header-menu li a {
+    display: block;
+    padding: 15px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #000;
+}
+.sub-header-menu .sub-header-menu1 {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 0 5px 0 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none;
+    width: 540px;
+    list-style-type: none;
+    height: 350px;
+}
+.sub-header-menu li:hover .sub-header-menu1 {
+    display: block;
+}
+.sub-header-menu a:hover {
+    background-color: #ececec;
+}
+.content {
+    background-color: #f8f9ff;
+    width: 100%;
+    max-height: 1050px;
+}
+.footer-wrap{
+    margin-top: -30px;
+}
