@@ -38,8 +38,6 @@ const Full = () => {
       }
     })
   }
-  
-  
 
   return (
     <div id="main">
