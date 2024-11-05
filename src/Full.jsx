@@ -1,14 +1,46 @@
 import "./Full.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "./assets/logo-land.png";
 import search from "./assets/search.png"
 import dropdownIcon from "./assets/drop.png";
 import anh from "./assets/anh.jpg";
 import pnm from "./assets/pmn.jpg";
 import hoa from "./assets/hoa.jpg"
+import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserLarge } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const Full = () => {
-    
+  const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [auth, setAuth] = useState(false);
+  axios.defaults.withCredentials = true;
+  useEffect(()=> {
+    axios.get("http://localhost:8081")
+    .then(res => {
+      if(res.data.Status === "Success"){
+        setAuth(true);
+        setName(res.data.name);
+        navigate('/');
+      } else {
+        setAuth(false);
+       
+      }
+    })
+  })
+  const handleLogout = () => {
+    axios.get("http://localhost:8081/logout")
+    .then (res => {
+      if(res.data.Status === "Success"){
+      location.reload(true);
+      }
+    })
+  }
+  
+  
+
   return (
     <div id="main">
       <div id="header">
@@ -91,14 +123,38 @@ const Full = () => {
             <img src={search} alt="Search" className="srch" />
           </button>
         </div>
+        {auth ? (
+        <div className="user-info">
+        <div className="dropdown">
+          <button
+            className="btn btn-secondary dropdown bg-white dropdown-button"
+            type="button"
+            id="dropdownMenuButton"
+            aria-haspopup="true"
+          >
+            <FontAwesomeIcon icon={faUserLarge} style={{ fontSize: '1.5em' }} color="black" /> 
+          </button>
+          <div className="dropdown-menu">
+            <a className="dropdown-item" href="#">
+              {name}
+            </a>
+            <a className="dropdown-item" href="#" onClick={handleLogout}>
+              <FontAwesomeIcon icon={faRightFromBracket} /> Đăng xuất
+            </a>
+          </div>
+        </div>
+      </div>
+        
+      ) : (
         <div className="button">
           <Link to="/login/login">
-          <button className="login-button">Đăng nhập</button>
+            <button className="login-button">Đăng nhập</button>
           </Link>
           <Link to="/register/register">
-          <button className="register-button">Đăng ký</button>
+            <button className="register-button">Đăng ký</button>
           </Link>
         </div>
+      )}
       </div>
       <div className="containt">
         <ul className="menu-side">
