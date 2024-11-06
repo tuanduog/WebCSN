@@ -22,6 +22,7 @@ const Login = () => {
     name: '',
     password: ''
   });
+  axios.defaults.withCredentials = true;
   const navigate = useNavigate();
   // useEffect(() => {
     
@@ -44,6 +45,7 @@ const Login = () => {
     axios.post('http://localhost:8081/login/login', values)
       .then(res => {
         if(res.data.Status === "Đăng nhập thành công"){
+          
           navigate('/');
           
         } else alert(res.data.Error);

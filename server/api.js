@@ -4,15 +4,47 @@ import mysql from 'mysql2';
 import 'dotenv/config'; 
 import bcrypt from "bcrypt";
 import cookieParser from "cookie-parser";
+import jwt from "jsonwebtoken";
 const salt = 10;
 const app = express()
-app.use(cors());
+app.use(cors(
+  {
+    origin: ["http://localhost:5173"],
+    methods: ["POST, GET"],
+    credentials: true
+  }
+));
 app.use(express.json());
 
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: "bankh"
+})
+app.use(cookieParser());
+
+const verifyUser = (req, res, next) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ Error: "Token not provided" });
+  }
+
+  jwt.verify(token, "jwt-secret-key", (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ Error: "Token verification failed" });
+    } else {
+      req.name = decoded.name; 
+      next();
+    }
+  });
+};
+app.get('/', verifyUser, (req, res) => {
+  return res.json({Status: "Success", name: req.name});
+})
+app.get('/logout', (req, res) => {
+  res.clearCookie('token');
+  return res.json({Status : "Success"});
 })
 
 app.post('/register/register', (req, res) => {
@@ -38,22 +70,26 @@ app.post('/register/register', (req, res) => {
     });
   });
 });
+
 app.post('/login/login', (req, res) => {
   const sql = "SELECT * FROM users WHERE username = ?";
-  db.query (sql, [req.body.name], (err, data) =>{
+  db.query(sql, [req.body.name], (err, data) => {
     if (err) {
-      return res.json({ Error: "Login error in server"});
+      return res.json({ Error: "Login error in server" });
     } 
-    if(data.length > 0){
-      bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) =>{
-        if(err) return res.json({Error : "Password compare fail"});
-        if(response) {
-          return res.json({Status : "Đăng nhập thành công"});
-        } else return res.json({Error : "Sai mật khẩu"});
-      })
-    } else return res.json({Error : "Tài khoản không tồn tại"});
-  })
-})
+    if (data.length > 0) {
+      bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
+        if (err) return res.json({ Error: "Password compare fail" });
+        if (response) {
+          const name = data[0].username; // Fixed to data[0].username instead of data[0].name
+          const token = jwt.sign({ name }, "jwt-secret-key", { expiresIn: '1d' });
+          res.cookie('token', token, { httpOnly: true, secure: true });
+          return res.json({ Status: "Đăng nhập thành công" });
+        } else return res.json({ Error: "Sai mật khẩu" });
+      });
+    } else return res.json({ Error: "Tài khoản không tồn tại" });
+  });
+});
 
 app.listen(8081, ()=> {
   console.log("Server running")

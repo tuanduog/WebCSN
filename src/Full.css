@@ -61,6 +61,39 @@ img.dropdown{
     position: absolute;
     right: 15px;
 }
+.user-info {
+    display: flex;
+    position: absolute;
+    right: 15px;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-button {
+    cursor: pointer;
+  }
+  
+  .dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Positions the dropdown below the button */
+    left: -55px; /* Offset for alignment */
+    width: auto;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+  }
+  .dropdown-menu a {
+    text-align: center;
+  }
+  
+  /* Show dropdown menu on hover */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 
 /* .search-container input[type="text"] {
     flex: 1;
