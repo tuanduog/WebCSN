@@ -488,9 +488,11 @@ const Full = () => {
                     <div className="maint-containt-1">
                         <div className="containt-1">
                             <div className="body">
+                            <Link to='/khoahoc/khoahoc'>
                                 <a href=""> <img
                                         src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
                                         alt=""/></a>
+                                        </Link>
                                 <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
                                 <div className="text">
                                     <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
@@ -506,9 +508,11 @@ const Full = () => {
                                 </div>
                             </div>
                             <div className="body">
+                            <Link to='/khoahoc/khoahoc'>
                                 <a href=""> <img
                                         src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
                                         alt=""/></a>
+                                        </Link>
                                 <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
                                 <div className="text">
                                     <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
@@ -524,9 +528,11 @@ const Full = () => {
                                 </div>
                             </div>
                             <div className="body">
+                            <Link to='/khoahoc/khoahoc'>
                                 <a href=""> <img
                                         src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
                                         alt=""/></a>
+                                        </Link>
                                 <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
                                 <div className="text">
                                     <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
@@ -542,9 +548,11 @@ const Full = () => {
                                 </div>
                             </div>
                             <div className="body">
+                            <Link to='/khoahoc/khoahoc'>
                                 <a href=""> <img
                                         src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
                                         alt=""/></a>
+                                        </Link>
                                 <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
                                 <div className="text">
                                     <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
@@ -562,9 +570,11 @@ const Full = () => {
                         </div><br/>
                         <div className="containt-1">
                             <div className="body">
+                            <Link to='/khoahoc/khoahoc'>
                                 <a href=""> <img
                                         src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
                                         alt=""/></a>
+                                        </Link>
                                 <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
                                 <div className="text">
                                     <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
@@ -580,9 +590,11 @@ const Full = () => {
                                 </div>
                             </div>
                             <div className="body">
+                            <Link to='/khoahoc/khoahoc'>
                                 <a href=""> <img
                                         src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
                                         alt=""/></a>
+                                        </Link>
                                 <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
                                 <div className="text">
                                     <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
@@ -618,9 +630,11 @@ const Full = () => {
                                 </div>
                             </div>
                             <div className="body">
+                            <Link to='/khoahoc/khoahoc'>
                                 <a href=""> <img
                                         src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
                                         alt=""/></a>
+                                        </Link>
                                 <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
                                 <div className="text">
                                     <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
@@ -642,9 +656,11 @@ const Full = () => {
                         <div className="maint-containt-1">
                             <div className="containt-1">
                                 <div className="body">
-                                    <a href=""> <img
-                                            src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                            alt=""/></a>
+                                <Link to='/khoahoc/khoahoc'>
+                                <a href=""> <img
+                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
+                                        alt=""/></a>
+                                        </Link>
                                     <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
                                     <div className="text">
                                         <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
@@ -660,9 +676,11 @@ const Full = () => {
                                     </div>
                                 </div>
                                 <div className="body">
-                                    <a href=""> <img
-                                            src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                            alt=""/></a>
+                                <Link to='/khoahoc/khoahoc'>
+                                <a href=""> <img
+                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
+                                        alt=""/></a>
+                                        </Link>
                                     <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
                                     <div className="text">
                                         <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
@@ -678,9 +696,11 @@ const Full = () => {
                                     </div>
                                 </div>
                                 <div className="body">
-                                    <a href=""> <img
-                                            src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                            alt=""/></a>
+                                <Link to='/khoahoc/khoahoc'>
+                                <a href=""> <img
+                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
+                                        alt=""/></a>
+                                        </Link>
                                     <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
                                     <div className="text">
                                         <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
@@ -696,9 +716,11 @@ const Full = () => {
                                     </div>
                                 </div>
                                 <div className="body">
-                                    <a href=""> <img
-                                            src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                            alt=""/></a>
+                                 <Link to='/khoahoc/khoahoc'>
+                                <a href=""> <img
+                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
+                                        alt=""/></a>
+                                        </Link>
                                     <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
                                     <div className="text">
                                         <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
