@@ -1,0 +1,15 @@
+
+.old-price{
+    color: gray;
+    font-weight: 500;
+}
+.final-price{
+    
+    font-size: 24px;
+    font-weight: 700;
+}
+.card img {
+    width: 100%; /* Makes the image span the width of the container */
+    height: 100%; /* Makes the image span the height of the container */
+    object-fit: cover; /* Ensures the image covers the container (cropping may occur) */
+  }

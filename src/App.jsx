@@ -7,6 +7,7 @@ import Sach from './sach/sach';
 import Login from './login/login';
 import Register from './register/register';
 import Ctietsach from './sach/ctietsach/ctietsach'
+import Khoahoc from './khoahoc/khoahoc';
 const App = () => {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/sach/sach' element={<Sach/>}/>
         <Route path='/login/login' element={<Login/>}/>
         <Route path='/register/register' element={<Register/>}/>
+        <Route path='/khoahoc/khoahoc'element={<Khoahoc/>}/>
       </Routes>
     </BrowserRouter>
   );
