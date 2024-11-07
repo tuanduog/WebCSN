@@ -22,7 +22,8 @@ const Register = () => {
   const [values, setValues] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    confirmpassword: ''
   });
   const navigate = useNavigate();
   // useEffect(() => {
@@ -43,6 +44,10 @@ const Register = () => {
   // };
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(values.confirmpassword != values.password){
+      alert("Vui lòng xác nhận lại đúng mật khẩu");
+      return;
+    }
     axios.post('http://localhost:8081/register/register', values)
       .then(res => {
         if(res.data.Status === "Success"){
@@ -83,7 +88,7 @@ const Register = () => {
 
           <div className="form-group">
             <label className='mb-2'>Xác nhận lại mật khẩu</label>
-            <input type="password" id="confirmrespass" className="form-control" required/>
+            <input type="password" id="confirmrespass" className="form-control" onChange={e => setValues({...values, confirmpassword: e.target.value})} required/>
           </div>
 
          

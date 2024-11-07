@@ -2,14 +2,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle, faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
-// import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 const Login = () => {
-  // const location = useLocation();
-  // const [username] = useState(location.state?.username || '');
+  
   function xemMK(){
     var x = document.getElementById("logpass");
     if(x.type === "password"){
@@ -40,8 +39,16 @@ const Login = () => {
   //   setShowRegisterForm(false);
   //   setShowLoginForm(true);
   // };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(!values.password){
+      alert("Bạn cần nhập mật khẩu");
+      return;
+    } else
+    if(!values.name){
+      alert("Bạn cần nhập tên đăng nhập")
+    } else {
     axios.post('http://localhost:8081/login/login', values)
       .then(res => {
         if(res.data.Status === "Đăng nhập thành công"){
@@ -54,6 +61,7 @@ const Login = () => {
       .then(err => {
         console.error("Error during registration:", err);
       });
+    }
   };
 
   return (
@@ -69,13 +77,17 @@ const Login = () => {
           <div className="form-group mb-3">
             <label className='mb-2'>Tên đăng nhập</label>
             <input type="text" id="namelog" className="form-control"
-            onChange={e => setValues({...values, name : e.target.value})}/>
+            onChange={e => setValues({...values, name : e.target.value})}
+            required
+            />
           </div>
 
           {/* Password Input */}
           <div className="form-group">
             <label className='mb-2'>Mật khẩu</label>
-            <input type="password" id="logpass" className="form-control" onChange={e => setValues({...values, password : e.target.value})}/>
+            <input type="password" id="logpass" className="form-control" onChange={e => setValues({...values, password : e.target.value})}
+            required
+            />
           </div>
           <div className='form-group'>
             <input type='checkbox' className='mt-2' onClick={xemMK}/> Xem mật khẩu
@@ -106,9 +118,11 @@ const Login = () => {
             <p>Chưa có tài khoản? <Link to="/register/register">Đăng ký</Link></p>
             <p>hoặc đăng nhập với:</p>
             <div>
-              <button type="button" className="btn btn-link btn-floating mx-1" style={{ color: '#3b5998' }}>
-                <FontAwesomeIcon icon={faFacebook} size="lg" />
-              </button>
+ 
+                <button type="button" className="btn btn-link btn-floating mx-1" style={{ color: '#3b5998' }}>
+                  <FontAwesomeIcon icon={faFacebook} size="lg" />
+                </button>
+              
               <button type="button" className="btn btn-link btn-floating mx-1" style={{ color: '#db4a39' }}>
                 <FontAwesomeIcon icon={faGoogle} size="lg" />
               </button>

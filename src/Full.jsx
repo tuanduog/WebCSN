@@ -1,159 +1,59 @@
 import "./Full.css";
-import { Link, useNavigate } from "react-router-dom";
-import logo from "./assets/logo-land.png";
-import search from "./assets/search.png"
-import dropdownIcon from "./assets/drop.png";
+import { Link} from "react-router-dom";
+// import logo from "./assets/logo-land.png";
+// import search from "./assets/search.png"
+// import dropdownIcon from "./assets/drop.png";
 import anh from "./assets/anh.jpg";
 import pnm from "./assets/pmn.jpg";
 import hoa from "./assets/hoa.jpg"
-import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserLarge } from '@fortawesome/free-solid-svg-icons';
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+// import { useEffect, useState } from "react";
+// // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// // import { faUserLarge } from '@fortawesome/free-solid-svg-icons';
+// // import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+// import axios from "axios";
+
 
 const Full = () => {
-  const navigate = useNavigate();
-  const [name, setName] = useState('');
-  const [auth, setAuth] = useState(false);
-  axios.defaults.withCredentials = true;
-  useEffect(()=> {
-    axios.get("http://localhost:8081")
-    .then(res => {
-      if(res.data.Status === "Success"){
-        setAuth(true);
-        setName(res.data.name);
-        navigate('/');
-      } else {
-        setAuth(false);
-       
-      }
-    })
-  })
-  const handleLogout = () => {
-    axios.get("http://localhost:8081/logout")
-    .then (res => {
-      if(res.data.Status === "Success"){
-      location.reload(true);
-      }
-    })
-  }
+  // const navigate = useNavigate();
+  // const [name, setName] = useState('');
+  // const [auth, setAuth] = useState(false);
 
+  // axios.defaults.withCredentials = true;
+  // useEffect(() => {
+  //   // call api once
+  //   axios.get("http://localhost:8081")
+  //     .then(res => {
+  //       if (res.data.Status === "Success") {
+  //         setAuth(true);
+  //         setName(res.data.name);
+  //         navigate('/' , {state: {auth}}); 
+  //       } else {
+  //         setAuth(false);
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.error("Error fetching data:", err);
+  //       setAuth(false);
+  //     });
+  // }, []); // it's key problem for call api just 1
+
+  // const handleLogout = () => {
+  //   axios.get("http://localhost:8081/logout")
+  //     .then(res => {
+  //       if (res.data.Status === "Success") {
+  //         setAuth(false);
+  //         setName('');
+  //         navigate('/'); 
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.error("Error logging out:", err);
+  //     });
+  // };
+  
   return (
     <div id="main">
-      <div id="header">
-        <img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} />
-        <div className="header-menu">
-          <div id="course-books">
-            <a href="#" className="dm">Khóa học & sách</a>
-            <img className="dropdown" src={dropdownIcon} alt="Dropdown Icon" />
-          </div>
-          <ul className="sub-header-menu">
-            <li>
-              <a href="#">KHÓA 2K6 - LUYỆN THI THPT QG 2024</a>
-              <ul className="sub-header-menu1">
-                <li>
-                  <a href="#">LIVE C - Luyện Thi Chuyên Đề</a>
-                  <a href="#">LIVE T - Luyện Đề</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">LIVE G - Tổng Ôn</a>
-            </li>
-            <li>
-              <a href="#">KHÓA ĐÁNH GIÁ NĂNG LỰC 2K6</a>
-              <ul className="sub-header-menu1">
-                <li>
-                  <a href="#">Đánh giá năng lực ĐHQGHN</a>
-                  <a href="#">Đánh giá năng lực ĐHQG TP Hồ Chí Minh</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Chinh Phục lớp 11</a>
-              <ul className="sub-header-menu1">
-                <li>
-                  <a href="#">Toán - Thầy Trần Lâm</a>
-                  <a href="#">Vật Lý - Thầy Kiêu</a>
-                  <a href="#">Hóa - Thầy Ngọc</a>
-                  <a href="#">Ngữ Văn - Cô Bình</a>
-                  <a href="#">Toán - Thầy Hồ Đức Thuận</a>
-                  <a href="#">Vật Lý - Thầy Vũ Tuấn Anh</a>
-                  <a href="#">Hóa - Thầy Phạm Văn Thuận</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Chinh Phục lớp 10</a>
-              <ul className="sub-header-menu1">
-                <li>
-                  <a href="#">Toán</a>
-                  <a href="#">Ngữ Văn - Cô Bình</a>
-                  <a href="#">Hóa Học - Cô Hằng</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Bậc Đại Học</a>
-              <ul className="sub-header-menu1">
-                <li>
-                  <a href="#">PRE TOEIC</a>
-                  <a href="#">VẬT LÝ ĐẠI CƯƠNG</a>
-                  <a href="#">TOÁN CAO CẤP</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">IELTS</a>
-              <ul className="sub-header-menu1">
-                <li>
-                  <a href="#">Khóa LIVE</a>
-                  <a href="#">Khóa IELTS CLC</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div className="search-container">
-          <input type="text" placeholder="Tìm kiếm khóa học" />
-          <button type="submit">
-            <img src={search} alt="Search" className="srch" />
-          </button>
-        </div>
-        {auth ? (
-        <div className="user-info">
-        <div className="dropdown">
-          <button
-            className="btn btn-secondary dropdown bg-white dropdown-button"
-            type="button"
-            id="dropdownMenuButton"
-            aria-haspopup="true"
-          >
-            <FontAwesomeIcon icon={faUserLarge} style={{ fontSize: '1.5em' }} color="black" /> 
-          </button>
-          <div className="dropdown-menu">
-            <a className="dropdown-item" href="#">
-              {name}
-            </a>
-            <a className="dropdown-item" href="#" onClick={handleLogout}>
-              <FontAwesomeIcon icon={faRightFromBracket} /> Đăng xuất
-            </a>
-          </div>
-        </div>
-      </div>
-        
-      ) : (
-        <div className="button">
-          <Link to="/login/login">
-            <button className="login-button">Đăng nhập</button>
-          </Link>
-          <Link to="/register/register">
-            <button className="register-button">Đăng ký</button>
-          </Link>
-        </div>
-      )}
-      </div>
+      
       <div className="containt">
         <ul className="menu-side">
           <p className="danhmuc">DANH MỤC</p>

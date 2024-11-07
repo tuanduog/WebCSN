@@ -1,103 +1,12 @@
-import React from "react";
+// import React from "react";
 import "./khoahoc.css"
-import logo from "../assets/logo-land.png";
+
 import avatar from "../assets/avatar.jpg";
-import dropdownIcon from "../assets/drop.png";
-import { useState } from 'react';
-import search from "../assets/search.png"
-import { Link } from "react-router-dom"
+
 
 const khoahoc = () =>{
     return (
         <div>
-        <div id="header">
-         <Link to="/">
-             <img src={logo} alt="Logo" style={{ width: "90px", height: "45px", cursor: "pointer"}} />
-         </Link>
-     <div className="header-menu">
-       <div id="course-books">
-         <a href="#" className="dm">Khóa học & sách</a>
-         <img className="dropdown" src={dropdownIcon} alt="Dropdown Icon" />
-       </div>
-       <ul className="sub-header-menu">
-         <li>
-           <a href="#">KHÓA 2K6 - LUYỆN THI THPT QG 2024</a>
-           <ul className="sub-header-menu1">
-             <li>
-               <a href="#">LIVE C - Luyện Thi Chuyên Đề</a>
-               <a href="#">LIVE T - Luyện Đề</a>
-             </li>
-           </ul>
-         </li>
-         <li>
-           <a href="#">LIVE G - Tổng Ôn</a>
-         </li>
-         <li>
-           <a href="#">KHÓA ĐÁNH GIÁ NĂNG LỰC 2K6</a>
-           <ul className="sub-header-menu1">
-             <li>
-               <a href="#">Đánh giá năng lực ĐHQGHN</a>
-               <a href="#">Đánh giá năng lực ĐHQG TP Hồ Chí Minh</a>
-             </li>
-           </ul>
-         </li>
-         <li>
-           <a href="#">Chinh Phục lớp 11</a>
-           <ul className="sub-header-menu1">
-             <li>
-               <a href="#">Toán - Thầy Trần Lâm</a>
-               <a href="#">Vật Lý - Thầy Kiêu</a>
-               <a href="#">Hóa - Thầy Ngọc</a>
-               <a href="#">Ngữ Văn - Cô Bình</a>
-               <a href="#">Toán - Thầy Hồ Đức Thuận</a>
-               <a href="#">Vật Lý - Thầy Vũ Tuấn Anh</a>
-               <a href="#">Hóa - Thầy Phạm Văn Thuận</a>
-             </li>
-           </ul>
-         </li>
-         <li>
-           <a href="#">Chinh Phục lớp 10</a>
-           <ul className="sub-header-menu1">
-             <li>
-               <a href="#">Toán</a>
-               <a href="#">Ngữ Văn - Cô Bình</a>
-               <a href="#">Hóa Học - Cô Hằng</a>
-             </li>
-           </ul>
-         </li>
-         <li>
-           <a href="#">Bậc Đại Học</a>
-           <ul className="sub-header-menu1">
-             <li>
-               <a href="#">PRE TOEIC</a>
-               <a href="#">VẬT LÝ ĐẠI CƯƠNG</a>
-               <a href="#">TOÁN CAO CẤP</a>
-             </li>
-           </ul>
-         </li>
-         <li>
-           <a href="#">IELTS</a>
-           <ul className="sub-header-menu1">
-             <li>
-               <a href="#">Khóa LIVE</a>
-               <a href="#">Khóa IELTS CLC</a>
-             </li>
-           </ul>
-         </li>
-       </ul>
-     </div>
-     <div className="search-container">
-       <input type="text" placeholder="Tìm kiếm khóa học" />
-       <button type="submit">
-         <img src={search} alt="Search" className="srch" />
-       </button>
-     </div>
-     <div className="button">
-       <button className="login-button">Đăng nhập</button>
-       <button className="register-button">Đăng ký</button>
-     </div>
-     
-   </div> 
    
      <div className="row ">
          
@@ -168,10 +77,10 @@ const khoahoc = () =>{
             <img src={avatar} alt="" />
           </div>
           <div className="col" >
-          <div class="card-body" style={{backgroundColor:"white",border:"none"} } >
+          <div className="card-body" style={{backgroundColor:"white",border:"none"} } >
         
-        <p class="card-text" >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        <p className="card-text" >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
       </div>
           </div>
         </div>
@@ -183,10 +92,10 @@ const khoahoc = () =>{
           </div>
           <div className="col" >
           
-          <div class="card-body " style={{backgroundColor:"white"}}>
+          <div className="card-body " style={{backgroundColor:"white"}}>
         
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
       </div>
           </div>
         </div>
@@ -197,17 +106,17 @@ const khoahoc = () =>{
             <img src={avatar} alt="" />
           </div>
           <div className="col">
-          <div class="card-body" style={{backgroundColor:"white"}}>
+          <div className="card-body" style={{backgroundColor:"white"}}>
         
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
       </div>
           </div>
         </div>
       </div>
-      <div class="form-floating" style={{backgroundColor:"white"}}>
-  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{height:"100px"}}></textarea>
-  <label for="floatingTextarea2">Comments</label>
+      <div className="form-floating" style={{backgroundColor:"white"}}>
+  <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{height:"100px"}}></textarea>
+  <label htmlFor="floatingTextarea2">Comments</label>
   <a href="" className="btn btn-primary float-end p-2 m-2">Gửi bình luận </a>
 </div>
           

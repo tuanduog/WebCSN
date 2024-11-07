@@ -51,7 +51,7 @@ app.post('/register/register', (req, res) => {
   const sql = "INSERT INTO users (`username`, `email`, `password`) VALUES (?, ?, ?)";
 
   const saltRounds = 10; 
-
+  const password = req.body.password.toString();
   // Hash the password
   bcrypt.hash(req.body.password.toString(), saltRounds, (err, hash) => {
     if (err) return res.json({ Error: "Error hashing password" });
@@ -81,7 +81,7 @@ app.post('/login/login', (req, res) => {
       bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
         if (err) return res.json({ Error: "Password compare fail" });
         if (response) {
-          const name = data[0].username; // Fixed to data[0].username instead of data[0].name
+          const name = data[0].username;
           const token = jwt.sign({ name }, "jwt-secret-key", { expiresIn: '1d' });
           res.cookie('token', token, { httpOnly: true, secure: true });
           return res.json({ Status: "Đăng nhập thành công" });
