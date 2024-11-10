@@ -54,7 +54,7 @@ const Login = () => {
         if(res.data.Status === "Đăng nhập thành công"){
           
           navigate('/');
-          
+          location.reload();
         } else alert(res.data.Error);
         //handleRegisterClick();
       })

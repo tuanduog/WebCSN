@@ -59,10 +59,10 @@ const Full = () => {
           <p className="danhmuc">DANH MỤC</p>
 
           <li>
-            <a href="#">KHÓA 2K6 - LUYỆN THI THPT QG 2024</a>
+            <a href="#">KHÓA 2K7 - LUYỆN THI THPT QG 2025</a>
             <ul className="sub-menu-side">
               <li>
-                <strong>KHÓA 2K6 - LUYỆN THI THPT QG 2024</strong>
+                <strong>KHÓA 2K7 - LUYỆN THI THPT QG 2025</strong>
               </li>
               <li>
                 <a href="#">LIVE C - Luyện Thi Chuyên Đề</a>

@@ -1,6 +1,6 @@
 // import React from "react";
 import "./khoahoc.css"
-
+import 'bootstrap/dist/css/bootstrap.css';
 import avatar from "../assets/avatar.jpg";
 
 
@@ -49,8 +49,8 @@ const khoahoc = () =>{
                  </span>
               </div>
               <p className="fw-bold">Hotline: 0934.556.247 </p>
-              <a href="" className="btn btn-primary p-2 m-10  ">Hướng dẫn đăng ký</a>
-              
+              <a className="btn btn-primary p-2">Mua khóa học</a>
+              <a className="btn btn-primary p-2 mx-4">Thêm vào giỏ</a>
          </div>
 
          <div className="row " style={{border:"none"}}>

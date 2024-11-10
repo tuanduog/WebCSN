@@ -7,7 +7,7 @@ const bangvinhdanh = () => {
       <div className="content">
         <h1>
           BẢNG VINH DANH HỌC SINH ĐẠT GIẢI THÀNH TÍCH CAO KỲ KHẢO SÁT CHẤT LƯỢNG
-          THÁNG 8
+          THÁNG 9
         </h1>
       </div>
       <div className="btn-group d-flex justify-content-center">

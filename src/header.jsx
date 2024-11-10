@@ -3,6 +3,7 @@ import search from "./assets/search.png";
 import dropdownIcon from "./assets/drop.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faUserLarge, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "./authContext";
 import "./Full.css";
@@ -12,7 +13,7 @@ const Header = () => {
 
   return (
     <div id="header">
-      <img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} />
+      <Link to="/"><img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} /></Link>
       <div className="header-menu">
         <div id="course-books">
           <a href="#" className="dm">Khóa học & sách</a>
@@ -86,13 +87,14 @@ const Header = () => {
         </ul>
       </div>
       <div className="search-container">
-        <input type="text" placeholder="Tìm kiếm khóa học" />
+        <input type="text" placeholder="Tìm kiếm khóa học" style={{fontSize: "17px"}}/>
         <button type="submit">
           <img src={search} alt="Search" className="srch" />
         </button>
       </div>
       {auth ? (
         <div className="user-info">
+          <div className="cart"><Link to="/Cart/cart"><FontAwesomeIcon icon={faCartShopping} style={{fontSize: "1.5rem", cursor: "pointer"}} color="black"/></Link> </div>
           <div className="dropdown">
             <button
               className="btn btn-secondary dropdown bg-white dropdown-button"
