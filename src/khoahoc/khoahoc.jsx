@@ -2,8 +2,9 @@
 import "./khoahoc.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import avatar from "../assets/avatar.jpg";
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { faChartLine } from "@fortawesome/free-solid-svg-icons";
 const khoahoc = () =>{
     return (
         <div>
@@ -31,20 +32,22 @@ const khoahoc = () =>{
                 </div>
 
               <div className="row justify-content-between p-2">
-          
+
                  <span className="col">
-                 Môn: Toán học
+                  <FontAwesomeIcon icon={faBook} className="vad"></FontAwesomeIcon>
+                  Môn: Toán học
                   
                  </span>
                  <span className="col">
-                 
+                  <FontAwesomeIcon icon={faChartLine}></FontAwesomeIcon>
                  Cấp độ: Lớp 11
                  </span>
                  <span className="col">
-                 
+                 <FontAwesomeIcon icon={faChartLine}></FontAwesomeIcon>
                  Video: 0 video
                  </span>
                  <span className="col">
+                 <FontAwesomeIcon icon={faChartLine}></FontAwesomeIcon>
                  Thời lượng: 0 phút
                  </span>
               </div>

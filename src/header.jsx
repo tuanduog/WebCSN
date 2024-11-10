@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <div id="header">
-      <img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} />
+      <Link to="/"><img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} /></Link>
       
       <div className=" d-flex justify-content-center">
   <div className="dropdown dropdown-hover">
