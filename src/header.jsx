@@ -6,13 +6,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faUserLarge, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "./authContext";
-import "./Full.css";
+import "./Full.css";    
+import "../node_modules/mdb-ui-kit/css/mdb.min.css"
+import "../node_modules/mdb-ui-kit/js/mdb.es.min.js"
 
 const Header = () => {
+  
+
   const {auth, name, logout} = useAuth();
 
   return (
     <div id="header">
+<<<<<<< HEAD
       <Link to="/"><img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} /></Link>
       <div className="header-menu">
         <div id="course-books">
@@ -20,72 +25,134 @@ const Header = () => {
           <img className="dropdown" src={dropdownIcon} alt="Dropdown Icon" />
         </div>
         <ul className="sub-header-menu">
+=======
+      <img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} />
+      
+      <div className=" d-flex justify-content-center">
+  <div className="dropdown dropdown-hover">
+    <button data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init
+      className="btn btn-primary dropdown-toggle fw-bold fs-6" type="button" id="dropdownMenuButton"
+      data-mdb-toggle="dropdown" aria-expanded="false">
+      KHOÁ HỌC & SÁCH
+    </button>
+    <ul className="dropdown-menu dropdown-menu-hover " aria-labelledby="dropdownMenuButton">
+      <li>
+       <div id="sub1"className="dropdown dropdown-hover" >
+        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+      data-mdb-toggle="dropdown" aria-expanded="false" > KHÓA 2K7 - LUYỆN THI THPT QG 2024 &raquo; </a>
+        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+>>>>>>> ee64127b6cbfd964b1e42c797d1e27a7e3413380
           <li>
-            <a href="#">KHÓA 2K6 - LUYỆN THI THPT QG 2024</a>
-            <ul className="sub-header-menu1">
-              <li>
-                <a href="#">LIVE C - Luyện Thi Chuyên Đề</a>
-                <a href="#">LIVE T - Luyện Đề</a>
-              </li>
-            </ul>
+            <a className="dropdown-item" href="#">LIVE C - Luyện Thi Chuyên Đề</a>
           </li>
           <li>
-              <a href="#">LIVE G - Tổng Ôn</a>
-            </li>
-            <li>
-              <a href="#">KHÓA ĐÁNH GIÁ NĂNG LỰC 2K6</a>
-              <ul className="sub-header-menu1">
-                <li>
-                  <a href="#">Đánh giá năng lực ĐHQGHN</a>
-                  <a href="#">Đánh giá năng lực ĐHQG TP Hồ Chí Minh</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Chinh Phục lớp 11</a>
-              <ul className="sub-header-menu1">
-                <li>
-                  <a href="#">Toán - Thầy Trần Lâm</a>
-                  <a href="#">Vật Lý - Thầy Kiêu</a>
-                  <a href="#">Hóa - Thầy Ngọc</a>
-                  <a href="#">Ngữ Văn - Cô Bình</a>
-                  <a href="#">Toán - Thầy Hồ Đức Thuận</a>
-                  <a href="#">Vật Lý - Thầy Vũ Tuấn Anh</a>
-                  <a href="#">Hóa - Thầy Phạm Văn Thuận</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Chinh Phục lớp 10</a>
-              <ul className="sub-header-menu1">
-                <li>
-                  <a href="#">Toán</a>
-                  <a href="#">Ngữ Văn - Cô Bình</a>
-                  <a href="#">Hóa Học - Cô Hằng</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Bậc Đại Học</a>
-              <ul className="sub-header-menu1">
-                <li>
-                  <a href="#">PRE TOEIC</a>
-                  <a href="#">VẬT LÝ ĐẠI CƯƠNG</a>
-                  <a href="#">TOÁN CAO CẤP</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">IELTS</a>
-              <ul className="sub-header-menu1">
-                <li>
-                  <a href="#">Khóa LIVE</a>
-                  <a href="#">Khóa IELTS CLC</a>
-                </li>
-              </ul>
-            </li>
+            <a className="dropdown-item" href="#">SLIVE T - Luyện Đề</a>
+          </li>
         </ul>
-      </div>
+        </div>
+      </li>
+      <li>
+        <a className="dropdown-item fw-bold" href="#">LIVE G - Tổng Ôn</a>
+      </li>
+      <li  >
+        <div id="sub1"className="dropdown dropdown-hover" >
+        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+      data-mdb-toggle="dropdown" aria-expanded="false" > KHÓA ĐÁNH GIÁ NĂNG LỰC 2K7&raquo; </a>
+        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+          <li>
+            <a className="dropdown-item" href="#">Đánh giá năng lực ĐHQGHN</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">Đánh giá năng lực ĐHQG TP Hồ Chí Minh</a>
+          </li>
+
+        </ul>
+        </div>
+      </li>
+      <li  >
+        <div id="sub1"className="dropdown dropdown-hover" >
+        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+      data-mdb-toggle="dropdown" aria-expanded="false" > Chinh Phục lớp 11&raquo; </a>
+        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+          <li>
+            <a className="dropdown-item" href="#">Toán - Thầy Trần Lâm</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">Vật Lý - Thầy Kiêu</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">Hóa - Thầy Ngọc</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">Ngữ Văn - Cô Bình</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">Toán - Thầy Hồ Đức Thuận</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">Vật Lý - Thầy Vũ Tuấn Anh</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">Hóa - Thầy Phạm Văn Thuận</a>
+          </li>
+
+        </ul>
+        </div>
+      </li>
+      <li  >
+        <div id="sub1"className="dropdown dropdown-hover" >
+        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+      data-mdb-toggle="dropdown" aria-expanded="false" > Chinh Phục lớp 10&raquo; </a>
+        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+          <li>
+            <a className="dropdown-item" href="#">Toán</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">Ngữ Văn - Cô Bình</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">Hóa Học - Cô Hằng</a>
+          </li>
+        </ul>
+        </div>
+      </li>
+      <li  >
+        <div id="sub1"className="dropdown dropdown-hover" >
+        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+      data-mdb-toggle="dropdown" aria-expanded="false" >Bậc Đại Học&raquo; </a>
+        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+          <li>
+            <a className="dropdown-item" href="#">PRE TOEIC</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">VẬT LÝ ĐẠI CƯƠNG</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">TOÁN CAO CẤP</a>
+          </li>
+        </ul>
+        </div>
+      </li>
+      <li  >
+        <div id="sub1"className="dropdown dropdown-hover" >
+        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+      data-mdb-toggle="dropdown" aria-expanded="false" > IELTS&raquo; </a>
+        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+          <li>
+            <a className="dropdown-item" href="#">Khóa LIVE</a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">Khóa IELTS CLC</a>
+          </li>
+
+        </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+      
       <div className="search-container">
         <input type="text" placeholder="Tìm kiếm khóa học" style={{fontSize: "17px"}}/>
         <button type="submit">
