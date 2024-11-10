@@ -1,10 +1,8 @@
 import logo from "./assets/logo-land.png";
 import search from "./assets/search.png";
-import 'bootstrap/dist/css/bootstrap.css';
-import dropdownIcon from "./assets/drop.png";
+
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faUserLarge, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "./authContext";
 import "./Full.css";    
@@ -18,13 +16,21 @@ const Header = () => {
 
   return (
     <div id="header">
-      <Link to="/"><img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} /></Link>
-      <div className="header-menu">
-        <div id="course-books">
-          <a href="#" className="dm">Khóa học & sách</a>
-          <img className="dropdown" src={dropdownIcon} alt="Dropdown Icon" />
-        </div>
-        <ul className="sub-header-menu">
+      <img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} />
+      
+      <div className=" d-flex justify-content-center">
+  <div className="dropdown dropdown-hover">
+    <button data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init
+      className="btn btn-primary dropdown-toggle fw-bold fs-6" type="button" id="dropdownMenuButton"
+      data-mdb-toggle="dropdown" aria-expanded="false">
+      KHOÁ HỌC & SÁCH
+    </button>
+    <ul className="dropdown-menu dropdown-menu-hover " aria-labelledby="dropdownMenuButton">
+      <li>
+       <div id="sub1"className="dropdown dropdown-hover" >
+        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+      data-mdb-toggle="dropdown" aria-expanded="false" > KHÓA 2K7 - LUYỆN THI THPT QG 2024 &raquo; </a>
+        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
           <li>
             <a className="dropdown-item" href="#">LIVE C - Luyện Thi Chuyên Đề</a>
           </li>
@@ -78,6 +84,7 @@ const Header = () => {
           <li>
             <a className="dropdown-item" href="#">Hóa - Thầy Phạm Văn Thuận</a>
           </li>
+
         </ul>
         </div>
       </li>
@@ -136,14 +143,13 @@ const Header = () => {
 
       
       <div className="search-container">
-        <input type="text" placeholder="Tìm kiếm khóa học" style={{fontSize: "17px"}}/>
+        <input type="text" placeholder="Tìm kiếm khóa học" />
         <button type="submit">
           <img src={search} alt="Search" className="srch" />
         </button>
       </div>
       {auth ? (
         <div className="user-info">
-          <div className="cart"><Link to="/Cart/cart"><FontAwesomeIcon icon={faCartShopping} style={{fontSize: "1.5rem", cursor: "pointer"}} color="black"/></Link> </div>
           <div className="dropdown">
             <button
               className="btn btn-secondary dropdown bg-white dropdown-button"
