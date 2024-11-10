@@ -13,3 +13,7 @@
     height: 100%; /* Makes the image span the height of the container */
     object-fit: cover; /* Ensures the image covers the container (cropping may occur) */
   }
+.col {
+    display: flex;
+    justify-content: space-between;
+}
