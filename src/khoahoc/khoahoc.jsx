@@ -27,7 +27,7 @@ const khoahoc = () =>{
                 <span className="p-2 final-price fw-bold">
                     1,350,000 đ
                     
-                    <span className="badge badge-danger ms-4 pb-1 mb-2" style={{backgroundColor:'red'}}> - 50%</span>
+                    <span className="badge badge-danger ms-4 pb-1 mb-2" style={{backgroundColor:'red',color:"white"}}> - 50%</span>
                 </span>
                 </div>
 
