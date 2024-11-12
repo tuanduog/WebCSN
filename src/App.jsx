@@ -16,11 +16,11 @@ const App = () => {
   return (
     <AuthProvider>  
       <BrowserRouter>
+      <Header />
         <Routes>
           <Route path="/login/login" element={<Login />} />
           <Route path="/register/register" element={<Register />} />
         </Routes>
-        <Header />
         <Routes>
           <Route path="/" element={<Full />} />
           <Route path="/bangvinhdanh" element={<BangVinhDanh />} />
