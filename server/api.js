@@ -17,9 +17,8 @@ app.use(cors(
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "Unknown",
-  password:"Drsunknown",
+  host: "localhost",
+  user: "root",
   database: "bankh"
 })
 app.use(cookieParser());
