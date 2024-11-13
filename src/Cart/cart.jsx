@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Helmet } from 'react-helmet';
 import '../Cart/cart';
-
+import './cart.css'
 const Cart = () => {
   return (
     <div>
@@ -20,47 +20,47 @@ const Cart = () => {
         <div className="card">
           <div className="row">
             <div className="col-md-8 cart">
-              <div className="title">
-                <div className="row">
-                  <div className="col"><h4><b>Sản phẩm</b></h4></div>
-                  <div className="col align-self-center text-right text-muted">3 items</div>
-                </div>
+              <div className="title ">
               </div>   
 
-              <div className="row">
-                <div className="row main align-items-center">
-                  <div className="col-2">Hình ảnh</div>
-                  <div className="col">
-                    <div className="row">Tên khóa học</div>
+              <div className="row-2 " >
+              <div className="row-2 ">
+                  <div className="col border-0" ><h5><b>Sản phẩm</b></h5></div>
+                  <div className="col align-self-center text-right text-muted">3 items</div>
+                </div>
+                <div className="row main align-items-center border-bottom border">
+                  <div className="col-3 ps-5 border-top-0">Hình ảnh</div>
+                  <div className="col" >
+                    Tên sản phẩm
                   </div>
                   <div className="col">
-                    <div className="row ml-0">Số lượng</div>
+                   Số lượng
                   </div>
-                  <div className="col">
-                    <div className="row ml-0">Giá</div>
+                  <div className="col-2">
+                    Giá
                   </div>
-                  <div className="col">
-                    <div className="row">Chọn</div>
+                  <div className="col ps-5" >
+                    Chọn
                   </div>
                 </div>
-              </div> 
+              </div>  
 
-              <div className="roll">
+              <div className="roll border">
                 {/* List of items */}
                 {[1, 2, 3, 4, 5].map((item, index) => (
-                  <div className="row border-top border-bottom" key={index}>
-                    <div className="row main align-items-center">
+                  <div className="row border-top border-bottom " key={index}>
+                    <div className="row main align-items-center border-top-0">
                       <div className="col-2"><img className="img-fluid" src="https://i.imgur.com/1GrakTl.jpg" alt="Shirt" /></div>
                       <div className="col">
-                        <div className="row text-muted">Shirt</div>
-                        <div className="row">Cotton T-shirt</div>
+                        <div className="row text-muted border-top-0">Shirt</div>
+                        <div className="row border-top-0">Cotton T-shirt</div>
                       </div>
                       <div className="col">
                         <a href="#">-</a><a href="#" className="border">1</a><a href="#">+</a>
                       </div>
                       <div className="col">&euro; 44.00 <span className="close">&#10005;</span></div>
                       <div className="col d-flex align-items-center">
-                        <div className="row ml-2 mt-4"><input type="checkbox" aria-label="select" /></div>
+                        <div className="row ml-2 mt-4 border-top-0"><input type="checkbox" aria-label="select" /></div>
                       </div>
                     </div>
                   </div>
@@ -72,7 +72,7 @@ const Cart = () => {
               </div>
             </div>
             
-            <div className="col-md-4 summary">
+            <div className="col-md-4 summary " >
               <h5><b>Summary</b></h5>
               <hr />
               <div className="row">
