@@ -109,16 +109,32 @@ img.dropdown{
     position: absolute;
     right: 15px;
 }
+.dropdown-menu {
+    display: none; /* Hide by default */
+    position: absolute; /* Position it as an overlay */
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block; /* Show the dropdown menu on hover */
+  }
 .user-info {
     display: flex;
     position: absolute;
     right: 15px;
 }
-/* .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-   */
+.carrt {
+    display: flex;
+    right: 120px;
+    position: absolute;
+    font-size: 1.5rem;
+    color: black;
+}
+.carrt1 {
+    display: flex;
+    margin-left: 170px;
+    font-size: 1.5rem;
+    color: black;
+}
   .dropdown-button {
     cursor: pointer;
   }

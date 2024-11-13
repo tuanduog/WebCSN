@@ -4,7 +4,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import avatar from "../assets/avatar.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faBook } from "@fortawesome/free-solid-svg-icons";
-
+import { faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 const khoahoc = () =>{
     return (
         <div>
@@ -27,7 +29,7 @@ const khoahoc = () =>{
                 <span className="p-2 final-price fw-bold">
                     1,350,000 đ
                     
-                    <span className="badge badge-danger ms-4 pb-1 mb-2" style={{backgroundColor:'red'}}> - 50%</span>
+                    <span className="badge badge-danger ms-4 pb-1 mb-2" style={{backgroundColor:'red',color:"white"}}> - 50%</span>
                 </span>
                 </div>
 
@@ -35,24 +37,25 @@ const khoahoc = () =>{
 
                  <span className="col">
                   <FontAwesomeIcon icon={faBook}></FontAwesomeIcon>
-                 Môn: Toán học
+                 <span>  Môn: Toán học</span>
                   
                  </span>
                  <span className="col">
-        
-                 Cấp độ: Lớp 11
+                  <FontAwesomeIcon icon={faChartLine}></FontAwesomeIcon>
+                 <span>  Cấp độ: Lớp 11</span>
                  </span>
                  <span className="col">
-                 
-                 Video: 0 video
+                 <FontAwesomeIcon icon={faCirclePlay}></FontAwesomeIcon>
+                 <span>  Video: 0 video</span>
                  </span>
                  <span className="col">
-                 Thời lượng: 0 phút
+                  <FontAwesomeIcon icon={faClock}></FontAwesomeIcon>
+                 <span>  Thời lượng: 0 phút</span>
                  </span>
               </div>
-              <p className="fw-bold">Hotline: 0934.556.247 </p>
-              <a className="btn btn-primary p-2">Mua khóa học</a>
-              <a className="btn btn-primary p-2 mx-4">Thêm vào giỏ</a>
+              <p className="fw-bold text-danger">Hotline: 0934.556.247 </p>
+              <a className="btn btn-primary p-2 fw-bold">Mua khóa học</a>
+              <a className="btn btn-primary p-2 mx-4 fw-bold">Thêm vào giỏ</a>
          </div>
 
          <div className="row " style={{border:"none"}}>

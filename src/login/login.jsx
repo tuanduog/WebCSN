@@ -68,7 +68,7 @@ const Login = () => {
     
     <>
     {/* {showLoginForm && ( */}
-    <div id='loginForm' className="container d-flex justify-content-center align-items-center" style={{ height: '100vh', width: '100%' }}>
+    <div id='loginForm' className="container d-flex justify-content-center align-items-center " style={{ height: '100vh', width: '100%', overflow: 'hidden' }}>
       <div className="p-4" style={{ border: '1px solid black', backgroundColor: '#f8f9fa' }}>
         <form style={{ width: '350px' }}>
           <h3 className="text-center mb-4">Đăng nhập</h3>

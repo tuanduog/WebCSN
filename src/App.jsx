@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, useLocation } from 'react-router-dom';
 import Full from './Full'; 
 import BangVinhDanh from './bangvinhdanh'; 
 import TaiLieu from './tailieu/tailieu';
@@ -12,25 +12,34 @@ import Cart from './Cart/cart';
 import Header from './header';
 import { AuthProvider } from './authContext';  
 
+const AppContent = () => {
+  const location = useLocation(); 
+  
+  return (
+    <>
+      {location.pathname !== '/login/login' && location.pathname !== '/register/register' && <Header />}
+      
+      <Routes>
+        <Route path="/login/login" element={<Login />} />
+        <Route path="/register/register" element={<Register />} />
+        <Route path="/" element={<Full />} />
+        <Route path="/bangvinhdanh" element={<BangVinhDanh />} />
+        <Route path="/tailieu/tailieu" element={<TaiLieu />} />
+        <Route path="/luyende/luyende" element={<LuyenDe />} />
+        <Route path="/ctietsach" element={<Ctietsach />} />
+        <Route path="/sach/sach" element={<Sach />} />
+        <Route path="/Cart/cart" element={<Cart />} />
+        <Route path="/khoahoc/khoahoc" element={<Khoahoc />} />
+      </Routes>
+    </>
+  );
+};
+
 const App = () => {
   return (
     <AuthProvider>  
       <BrowserRouter>
-        <Routes>
-          <Route path="/login/login" element={<Login />} />
-          <Route path="/register/register" element={<Register />} />
-        </Routes>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Full />} />
-          <Route path="/bangvinhdanh" element={<BangVinhDanh />} />
-          <Route path="/tailieu/tailieu" element={<TaiLieu />} />
-          <Route path="/luyende/luyende" element={<LuyenDe />} />
-          <Route path="/ctietsach" element={<Ctietsach />} />
-          <Route path="/sach/sach" element={<Sach />} />
-          <Route path="/Cart/cart" element={< Cart/>}/>
-          <Route path="/khoahoc/khoahoc" element={<Khoahoc />} />
-        </Routes>
+        <AppContent /> 
       </BrowserRouter>
     </AuthProvider>
   );

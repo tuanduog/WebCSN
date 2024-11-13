@@ -1,9 +1,10 @@
 import logo from "./assets/logo-land.png";
 import search from "./assets/search.png";
-
+import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserLarge, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "./authContext";
 import "./Full.css";    
 import "../node_modules/mdb-ui-kit/css/mdb.min.css"
@@ -25,7 +26,7 @@ const Header = () => {
       data-mdb-toggle="dropdown" aria-expanded="false">
       KHOÁ HỌC & SÁCH
     </button>
-    <ul className="dropdown-menu dropdown-menu-hover " aria-labelledby="dropdownMenuButton">
+    <ul className="dropdown-menu dropdown-menu-hover " aria-labelledby="dropdownMenuButton" style={{marginTop: '-0.2px'}}>
       <li>
        <div id="sub1"className="dropdown dropdown-hover" >
         <a className="dropdown-item fw-bold pb-3 pt-3"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
@@ -141,33 +142,43 @@ const Header = () => {
 
       
       <div className="search-container">
-        <input type="text" placeholder="Tìm kiếm khóa học" />
+        <input type="text" placeholder="Tìm kiếm khóa học" style={{fontSize: '16px'}}/>
         <button type="submit">
           <img src={search} alt="Search" className="srch" />
         </button>
       </div>
+      <a href="Cart/cart">cart</a>
+      {auth ? (
+          <FontAwesomeIcon className="carrt" icon={faCartShopping}></FontAwesomeIcon>
+      ) : (
+        <Link to='/login/login'>
+        <FontAwesomeIcon className="carrt1" icon={faCartShopping}></FontAwesomeIcon>
+        </Link>
+      )}
       {auth ? (
         <div className="user-info">
-          <div className="dropdown">
-            <button
-              className="btn btn-secondary dropdown bg-white dropdown-button"
-              type="button"
-              id="dropdownMenuButton"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <FontAwesomeIcon icon={faUserLarge} style={{ fontSize: "1.5rem" }} color="black" />
-            </button>
-            <div className="dropdown-menu">
-              <a className="dropdown-item" href="#">
-                {name} {/* Corrected to display the user's name */}
-              </a>
-              <a className="dropdown-item" href="#" onClick={logout}>
-                <FontAwesomeIcon icon={faRightFromBracket} /> Đăng xuất
-              </a>
-            </div>
+          
+        <div className="dropdown">
+          <button
+            className="btn btn-secondary dropdown-button"
+            type="button"
+            id="dropdownMenuButton"
+            aria-haspopup="true"
+            aria-expanded="false"
+            style={{backgroundColor: '#f8f9ff'}}
+          >
+            <FontAwesomeIcon icon={faUserLarge} style={{ fontSize: "1.5rem" }} color="black" />
+          </button>
+          <div className="dropdown-menu" style={{marginLeft: '-40px'}}>
+            <a className="dropdown-item" href="#" style={{textAlign: 'center'}}>
+              {name} {/* Displays the user's name */}
+            </a>
+            <a className="dropdown-item" href="#" onClick={logout} style={{textAlign: 'center'}}>
+              <FontAwesomeIcon icon={faRightFromBracket} /> Đăng xuất
+            </a>
           </div>
         </div>
+      </div>      
       ) : (
         <div className="button">
           <Link to="/login/login">
