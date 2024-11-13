@@ -38,9 +38,9 @@ const AppContent = () => {
 const App = () => {
   return (
     <AuthProvider>  
-      <BrowserRouter>
-        <AppContent /> 
-      </BrowserRouter>
+        <BrowserRouter>
+          <AppContent /> 
+        </BrowserRouter>
     </AuthProvider>
   );
 };

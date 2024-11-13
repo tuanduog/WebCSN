@@ -34,11 +34,17 @@ const verifyUser = (req, res, next) => {
     if (err) {
       return res.status(403).json({ Error: "Token verification failed" });
     } else {
-      req.name = decoded.name; 
+      req.name = decoded.name;
+      req.userid = decoded.userid;  // Attach userid to the request
+      console.log("Decoded userid:", req.userid);  // Log for verification
       next();
     }
   });
 };
+
+
+
+
 app.get('/', verifyUser, (req, res) => {
   return res.json({Status: "Success", name: req.name});
 })
@@ -82,63 +88,48 @@ app.post('/login/login', (req, res) => {
         if (err) return res.json({ Error: "Password compare fail" });
         if (response) {
           const name = data[0].username;
-          const token = jwt.sign({ name }, "jwt-secret-key", { expiresIn: '1d' });
+          const userid = data[0].userid;
+          const token = jwt.sign({ name, userid }, "jwt-secret-key", { expiresIn: '1d' });  // Include userid in the token
+
           res.cookie('token', token, { httpOnly: true, secure: true });
           return res.json({ Status: "Đăng nhập thành công" });
-        } else return res.json({ Error: "Sai mật khẩu" });
+        } else {
+          return res.json({ Error: "Sai mật khẩu" });
+        }
       });
-    } else return res.json({ Error: "Tài khoản không tồn tại" });
+    } else {
+      return res.json({ Error: "Tài khoản không tồn tại" });
+    }
   });
 });
+
+
+app.post('/products', verifyUser, (req, res) => {
+  if (!req.body.anhsp || !req.body.tensp || !req.body.gia) {
+    return res.status(400).json({ Error: "Missing required fields" });
+  }
+
+  const sql = "INSERT INTO products (`anhsp`, `tensp`, `gia`, `userid`) VALUES (?, ?, ?, ?)";
+  const values = [
+    req.body.anhsp,
+    req.body.tensp,
+    req.body.gia,
+    req.userid  // Assuming req.userid is set by verifyUser
+  ];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Database error:", err);
+      return res.json({ Error: "Database error", Details: err.message });
+    }
+    res.json({ Status: "Product added successfully", ProductID: result.insertId });
+  });
+});
+
+
+
+
 
 app.listen(8081, ()=> {
   console.log("Server running")
 })
-
-
-// const saltRounds = 10;
-// const app = express();
-
-// // Middleware
-// app.use(express.json()); 
-// app.use(cors({
-//   origin: 'http://localhost:5173', // Allow only your frontend origin
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods if needed
-//   credentials: true, // Allow cookies if needed
-// }));
-
-// // MySQL Connection
-// let db;
-// (async () => {
-//   db = await mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: "", // Add password if necessary
-//     database: "bankh"
-//   });
-//   console.log("Connected to MySQL database");
-// })();
-
-// // Register Route
-// app.post('/register', async (req, res) => {
-//   try {
-//     const { name, email, password } = req.body;
-
-//     // Hash the password
-//     const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-//     // Prepare and execute SQL query
-//     const sql = "INSERT INTO users (`name`, `email`, `password`) VALUES (?, ?, ?)";
-//     const [result] = await db.execute(sql, [name, email, hashedPassword]);
-
-//     res.json({ message: "User registered successfully", result });
-//   } catch (err) {
-//     console.error("Error:", err);
-//     res.status(500).json({ error: "Failed to register user" });
-//   }
-// });
-
-// // Start the server
-// app.listen(8081, () => {
-//   console.log("Server running on http://localhost:8081");
-// });

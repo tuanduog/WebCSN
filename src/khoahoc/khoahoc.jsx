@@ -1,24 +1,46 @@
-// import React from "react";
-import "./khoahoc.css"
+import "./khoahoc.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import avatar from "../assets/avatar.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faBook } from "@fortawesome/free-solid-svg-icons";
-import { faChartLine } from "@fortawesome/free-solid-svg-icons";
-import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
-const khoahoc = () =>{
+import { faBook, faChartLine, faCirclePlay, faClock } from "@fortawesome/free-solid-svg-icons";
+import data from "../data/data";
+import axios from 'axios';
+
+const Khoahoc = () => {
+  // Access the first product in your product_data array
+  const product = data.product_data[0];
+
+  const handleAddToCart = () => {
+    const productData = {
+      anhsp: product.anh,
+      tensp: product.tensp,
+      gia: product.gia,
+      soluong: product.soluong
+    };
+  
+    axios.post('http://localhost:8081/products', productData)
+      .then(res => {
+        if (res.data.Status === "Product added successfully") {
+          alert('Product added to the cart successfully!');
+        } else {
+          alert('Error: ' + (res.data.Error || 'Unknown error'));
+        }
+      })
+      .catch(err => {
+        console.error('Error adding to cart:', err);
+        alert('An error occurred while adding the product to the cart.');
+      });
+  };
+  
     return (
         <div>
-   
-     <div className="row ">
-         
+        <div className="row ">
          <div className="col">
-             <img  src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg" alt="COMBO 3 SACH" width="450px" height="320px" />
+             <img  src={product.anh} alt="COMBO 3 SACH" width="450px" height="320px" />
        
          </div>
          <div className="col">
-             <h2 className="fw-bold" style={{color:'black'} }>LIVE G -Tổng ôn - Toán học 2K6 - HTT</h2>
+             <h2 className="fw-bold" style={{color:'black'} }>{product.tensp}</h2>
             
              <p style={{fontWeight:"bold"}}>Giảng viên: Hồ Đức Thuận</p>
              <p>Tình trạng: Còn hàng</p>
@@ -27,7 +49,7 @@ const khoahoc = () =>{
                     <del>2,700,000 đ</del>
                 </span>
                 <span className="p-2 final-price fw-bold">
-                    1,350,000 đ
+                    {product.gia}
                     
                     <span className="badge badge-danger ms-4 pb-1 mb-2" style={{backgroundColor:'red',color:"white"}}> - 50%</span>
                 </span>
@@ -54,7 +76,7 @@ const khoahoc = () =>{
                  </span>
               </div>
               <p className="fw-bold text-danger">Hotline: 0934.556.247 </p>
-              <a className="btn btn-primary p-2 fw-bold">Mua khóa học</a>
+              <button className="btn btn-primary p-2 fw-bold" onClick={handleAddToCart}>Mua khóa học</button>     {/* test*/}
               <a className="btn btn-primary p-2 mx-4 fw-bold">Thêm vào giỏ</a>
          </div>
 
@@ -164,4 +186,4 @@ const khoahoc = () =>{
 </div>
     )
 }
-export default khoahoc;
+export default Khoahoc;

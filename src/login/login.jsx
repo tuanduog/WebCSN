@@ -42,12 +42,12 @@ const Login = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(!values.name){
+      alert("Bạn cần nhập tên đăng nhập")
+    } else
     if(!values.password){
       alert("Bạn cần nhập mật khẩu");
       return;
-    } else
-    if(!values.name){
-      alert("Bạn cần nhập tên đăng nhập")
     } else {
     axios.post('http://localhost:8081/login/login', values)
       .then(res => {
