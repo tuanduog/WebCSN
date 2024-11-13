@@ -17,8 +17,9 @@ app.use(cors(
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
+  host: "127.0.0.1",
+  user: "Unknown",
+  password:"Drsunknown",
   database: "bankh"
 })
 app.use(cookieParser());
@@ -91,7 +92,7 @@ app.post('/login/login', (req, res) => {
   });
 });
 
-app.listen(8081, ()=> {
+app.listen(8801, ()=> {
   console.log("Server running")
 })
 
