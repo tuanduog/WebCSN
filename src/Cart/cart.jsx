@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../Cart/cart';
-import './cart.css'
+
 const Cart = () => {
   return (
     <div>
