@@ -103,7 +103,6 @@ app.post('/login/login', (req, res) => {
   });
 });
 
-<<<<<<< HEAD
 
 app.post('/products', verifyUser, (req, res) => {
   if (!req.body.anhsp || !req.body.tensp || !req.body.gia) {
@@ -132,8 +131,5 @@ app.post('/products', verifyUser, (req, res) => {
 
 
 app.listen(8081, ()=> {
-=======
-app.listen(8801, ()=> {
->>>>>>> fd19f7ed75f877b0e406336e1500582c82234540
   console.log("Server running")
 })
