@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import avatar from "../assets/avatar.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faBook } from "@fortawesome/free-solid-svg-icons";
-import {  faChart } from "@fortawesome/free-solid-svg-icons";
+
 const khoahoc = () =>{
     return (
         <div>
@@ -39,7 +39,7 @@ const khoahoc = () =>{
                   
                  </span>
                  <span className="col">
-                  <FontAwesomeIcon icon={faChart}></FontAwesomeIcon>
+        
                  Cấp độ: Lớp 11
                  </span>
                  <span className="col">

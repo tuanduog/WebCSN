@@ -21,16 +21,16 @@ const Header = () => {
       <div className=" d-flex justify-content-center">
   <div className="dropdown dropdown-hover">
     <button data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init
-      className="btn btn-primary dropdown-toggle fw-bold fs-6" type="button" id="dropdownMenuButton"
+      className="btn btn-primary dropdown-toggle fw-bold fs-6 rounded" type="button" id="dropdownMenuButton"
       data-mdb-toggle="dropdown" aria-expanded="false">
       KHOÁ HỌC & SÁCH
     </button>
     <ul className="dropdown-menu dropdown-menu-hover " aria-labelledby="dropdownMenuButton">
       <li>
        <div id="sub1"className="dropdown dropdown-hover" >
-        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+        <a className="dropdown-item fw-bold pb-3 pt-3"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
       data-mdb-toggle="dropdown" aria-expanded="false" > KHÓA 2K7 - LUYỆN THI THPT QG 2024 &raquo; </a>
-        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+        <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
             <a className="dropdown-item" href="#">LIVE C - Luyện Thi Chuyên Đề</a>
           </li>
@@ -40,14 +40,12 @@ const Header = () => {
         </ul>
         </div>
       </li>
+      
       <li>
-        <a className="dropdown-item fw-bold" href="#">LIVE G - Tổng Ôn</a>
-      </li>
-      <li  >
         <div id="sub1"className="dropdown dropdown-hover" >
-        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+        <a className="dropdown-item fw-bold pb-3 pt-3"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
       data-mdb-toggle="dropdown" aria-expanded="false" > KHÓA ĐÁNH GIÁ NĂNG LỰC 2K7&raquo; </a>
-        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+        <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
             <a className="dropdown-item" href="#">Đánh giá năng lực ĐHQGHN</a>
           </li>
@@ -60,9 +58,9 @@ const Header = () => {
       </li>
       <li  >
         <div id="sub1"className="dropdown dropdown-hover" >
-        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+        <a className="dropdown-item fw-bold pb-3 pt-3"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
       data-mdb-toggle="dropdown" aria-expanded="false" > Chinh Phục lớp 11&raquo; </a>
-        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+        <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
             <a className="dropdown-item" href="#">Toán - Thầy Trần Lâm</a>
           </li>
@@ -90,9 +88,9 @@ const Header = () => {
       </li>
       <li  >
         <div id="sub1"className="dropdown dropdown-hover" >
-        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+        <a className="dropdown-item fw-bold pb-3 pt-3"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
       data-mdb-toggle="dropdown" aria-expanded="false" > Chinh Phục lớp 10&raquo; </a>
-        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+        <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
             <a className="dropdown-item" href="#">Toán</a>
           </li>
@@ -107,9 +105,9 @@ const Header = () => {
       </li>
       <li  >
         <div id="sub1"className="dropdown dropdown-hover" >
-        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+        <a className="dropdown-item fw-bold pb-3 pt-3"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
       data-mdb-toggle="dropdown" aria-expanded="false" >Bậc Đại Học&raquo; </a>
-        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+        <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
             <a className="dropdown-item" href="#">PRE TOEIC</a>
           </li>
@@ -124,9 +122,9 @@ const Header = () => {
       </li>
       <li  >
         <div id="sub1"className="dropdown dropdown-hover" >
-        <a className="dropdown-item fw-bold"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
+        <a className="dropdown-item fw-bold pb-3 pt-3"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
       data-mdb-toggle="dropdown" aria-expanded="false" > IELTS&raquo; </a>
-        <ul className=" dropdown-submenu"  aria-labelledby="sub1">
+        <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
             <a className="dropdown-item" href="#">Khóa LIVE</a>
           </li>
