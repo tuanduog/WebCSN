@@ -1,38 +1,41 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './cart.css'
+
 
 const Cart = () => {
   return (
+
     <div>
       <div className="container-fluid">
         <div className="card">
           <div className="row">
             <div className="col-md-8 cart">
-              <div className="title ">
+              <div className="title ">  
               </div>   
 
               <div className="row-2 " >
-              <div className="row-2 ">
+              <div className="row-2 " >
                   <div className="col border-0" ><h5><b>Sản phẩm</b></h5></div>
                   <div className="col align-self-center text-right text-muted">3 items</div>
                 </div>
-                <div className="row main align-items-center border-bottom border">
-                  <div className="col-3 ps-5 border-top-0">Hình ảnh</div>
+                <div className="row-2 ps-5 align-items-center border-1" style={{display:"flex",backgroundColor:"white "}}>
+                  <div className="col">Hình ảnh</div>
                   <div className="col" >
                     Tên sản phẩm
                   </div>
                   <div className="col">
                    Số lượng
                   </div>
-                  <div className="col-2">
-                    Giá
+                  <div className="col">
+                    Giá 
                   </div>
-                  <div className="col ps-5" >
+                  <div className="col" >
                     Chọn
                   </div>
                 </div>
               </div>  
 
-              <div className="roll border">
+              <div className="roll " style={{backgroundColor:"white"}}>
                 {/* List of items */}
                 {[1, 2, 3, 4, 5].map((item, index) => (
                   <div className="row border-top border-bottom " key={index}>
@@ -62,23 +65,23 @@ const Cart = () => {
             <div className="col-md-4 summary " >
               <h5><b>Summary</b></h5>
               <hr />
-              <div className="row">
+              <div className="row mb-3">
                 <div className="col" style={{ paddingLeft: 0 }}>ITEMS 3</div>
                 <div className="col text-right">&euro; 132.00</div>
               </div>
-              <form>
+              <form >
                 <p>SHIPPING</p>
-                <select>
+                <select className='sel'>
                   <option className="text-muted">Standard-Delivery- &euro;5.00</option>
                 </select>
                 <p>GIVE CODE</p>
-                <input id="code" placeholder="Enter your code" />
+                <input id="code" className= "inp" placeholder="Enter your code" />
               </form>
-              <div className="row" style={{ borderTop: '1px solid rgba(0,0,0,.1)', padding: '2vh 0' }}>
-                <div className="col">TOTAL PRICE</div>
+              <div className="row mt-5" style={{ borderTop: '1px solid rgba(0,0,0,.1)', padding: '2vh 0' }}>
+                <div className="col ">TOTAL PRICE</div>
                 <div className="col text-right">&euro; 137.00</div>
               </div>
-              <button className="btn btn-primary">THANH TOÁN</button>
+              <button className="btn btn-primary mt-5">THANH TOÁN</button>
             </div>
           </div>
         </div>
