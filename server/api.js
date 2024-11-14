@@ -35,14 +35,12 @@ const verifyUser = (req, res, next) => {
       return res.status(403).json({ Error: "Token verification failed" });
     } else {
       req.name = decoded.name;
-      req.userid = decoded.userid;  // Attach userid to the request
-      console.log("Decoded userid:", req.userid);  // Log for verification
+      req.userid = decoded.userid; 
+      console.log("Decoded userid:", req.userid);  // kiểm tra userid 
       next();
     }
   });
 };
-
-
 
 
 app.get('/', verifyUser, (req, res) => {
@@ -81,15 +79,15 @@ app.post('/login/login', (req, res) => {
   const sql = "SELECT * FROM users WHERE username = ?";
   db.query(sql, [req.body.name], (err, data) => {
     if (err) {
-      return res.json({ Error: "Login error in server" });
+      return res.json({ Error: "Lỗi server đăng nhập" });
     } 
     if (data.length > 0) {
       bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
-        if (err) return res.json({ Error: "Password compare fail" });
+        if (err) return res.json({ Error: "Lỗi password" });
         if (response) {
           const name = data[0].username;
           const userid = data[0].userid;
-          const token = jwt.sign({ name, userid }, "jwt-secret-key", { expiresIn: '1d' });  // Include userid in the token
+          const token = jwt.sign({ name, userid }, "jwt-secret-key", { expiresIn: '1d' }); 
 
           res.cookie('token', token, { httpOnly: true, secure: true });
           return res.json({ Status: "Đăng nhập thành công" });
@@ -114,7 +112,7 @@ app.post('/products', verifyUser, (req, res) => {
     req.body.anhsp,
     req.body.tensp,
     req.body.gia,
-    req.userid  // Assuming req.userid is set by verifyUser
+    req.userid  
   ];
 
   db.query(sql, values, (err, result) => {
@@ -122,12 +120,9 @@ app.post('/products', verifyUser, (req, res) => {
       console.error("Database error:", err);
       return res.json({ Error: "Database error", Details: err.message });
     }
-    res.json({ Status: "Product added successfully", ProductID: result.insertId });
+    res.json({ Status: "Thêm sản phẩm thành công", ProductID: result.insertId });
   });
 });
-
-
-
 
 
 app.listen(8081, ()=> {
