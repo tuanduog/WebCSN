@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 const cart = () => {
   return (
       <div style={{backgroundColor: 'white'}}>
@@ -112,12 +113,14 @@ const cart = () => {
 
             <div className="card">
               <div className="card-body">
+                <Link to="../Checkout/Checkout">
                 <button
                   type="button"
                   className="btn btn-primary btn-block btn-lg"
                 >
                   THANH TOÁN
                 </button>
+                </Link>
               </div>
             </div>
           </div>
