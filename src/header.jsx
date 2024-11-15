@@ -151,7 +151,9 @@ const Header = () => {
         </button>
       </div>
       
-        <FontAwesomeIcon className="carrt" icon={faCartShopping} onClick={handleCart} style={{cursor: 'pointer'}}></FontAwesomeIcon>
+      {auth ? (
+        <div/>
+      ):(<FontAwesomeIcon className="carrt" icon={faCartShopping} onClick={handleCart} style={{cursor: 'pointer'}}></FontAwesomeIcon>)}
 
       {auth ? (
         <div className="user-info">
