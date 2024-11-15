@@ -1,6 +1,5 @@
-import React from "react";
 import QRcode from "../assets/QR.png"
-import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
+
 const QR = () =>{
     return (
         <div className="row"> 

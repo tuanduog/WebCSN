@@ -3,18 +3,35 @@ import { Link} from "react-router-dom";
 // import logo from "./assets/logo-land.png";
 // import search from "./assets/search.png"
 // import dropdownIcon from "./assets/drop.png";
-import anh from "./assets/anh.jpg";
-import pnm from "./assets/pmn.jpg";
-import hoa from "./assets/hoa.jpg"
 // import { useEffect, useState } from "react";
 // // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // // import { faUserLarge } from '@fortawesome/free-solid-svg-icons';
 // // import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from 'react-router-dom';
 // import axios from "axios";
-
+import anh1 from './assets/1.jpg';
+import anh2 from './assets/2.jpg';
+import anh3 from './assets/3.jpg';
+import anh4 from './assets/4.jpg';
+import anh5 from './assets/5.jpg';
+import anh6 from './assets/6.jpg';
+import anh7 from './assets/7.png';
+import anh8 from './assets/8.png';
+import anh111 from './assets/111.jpg';
+import anh112 from './assets/112.jpg';
+import anh113 from './assets/113.jpg';
+import anh114 from './assets/114.jpg';
+import anh115 from './assets/115.jpg';
+import anh116 from './assets/116.jpg';
+import anh117 from './assets/117.jpg';
+import anh118 from './assets/118.jpg';
+import anh101 from './assets/101.png';
+import anh102 from './assets/102.png';
+import anh103 from './assets/103.png';
+import dh from './assets/dh.jpg';
 
 const Full = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const [name, setName] = useState('');
   // const [auth, setAuth] = useState(false);
 
@@ -37,19 +54,9 @@ const Full = () => {
   //     });
   // }, []); // it's key problem for call api just 1
 
-  // const handleLogout = () => {
-  //   axios.get("http://localhost:8081/logout")
-  //     .then(res => {
-  //       if (res.data.Status === "Success") {
-  //         setAuth(false);
-  //         setName('');
-  //         navigate('/'); 
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.error("Error logging out:", err);
-  //     });
-  // };
+  const handlePick = () => {
+    navigate('/khoahoc/khoahoc')
+  }
   
   return (
     <div id="main">
@@ -230,491 +237,317 @@ const Full = () => {
 </div>
         
       </div>
-      <div className="main-khoi">
-            <div className="khoi">
-                <h3 className="head"><a href="">Trung Học Phổ Thông</a></h3>
-                <div className="maint-containt-1">
-                    <div className="containt-1">
-                        <div className="body">
-                            <a href=""> <img
-                                    src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                    alt=""/></a>
-                            <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                            <div className="text">
-                                <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                </div>
-                                <div className="chuyende-baihoc">
-                                    <div>
-                                        <span className="chuyende">5 </span>Chuyên đề
-                                    </div>
-                                    <div>
-                                        <span className="baihoc">12 </span>Bài Học
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="body">
-                            <a href=""> <img
-                                    src={anh}
-                                    alt=""/></a>
-                            <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                            <div className="text">
-                                <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                </div>
-                                <div className="chuyende-baihoc">
-                                    <div>
-                                        <span className="chuyende">5 </span>Chuyên đề
-                                    </div>
-                                    <div>
-                                        <span className="baihoc">12 </span>Bài Học
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="body">
-                            <a href=""> <img
-                                    src={pnm}
-                                    alt=""/></a>
-                            <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                            <div className="text">
-                                <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                </div>
-                                <div className="chuyende-baihoc">
-                                    <div>
-                                        <span className="chuyende">5 </span>Chuyên đề
-                                    </div>
-                                    <div>
-                                        <span className="baihoc">12 </span>Bài Học
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="body">
-                            <a href=""> <img
-                                    src={hoa}
-                                    alt=""/></a>
-                            <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                            <div className="text">
-                                <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                </div>
-                                <div className="chuyende-baihoc">
-                                    <div>
-                                        <span className="chuyende">5 </span>Chuyên đề
-                                    </div>
-                                    <div>
-                                        <span className="baihoc">12 </span>Bài Học
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><br/>
-                    <div className="containt-1">
-                        <div className="body">
-                            <a href=""> <img
-                                    src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                    alt=""/></a>
-                            <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                            <div className="text">
-                                <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                </div>
-                                <div className="chuyende-baihoc">
-                                    <div>
-                                        <span className="chuyende">5 </span>Chuyên đề
-                                    </div>
-                                    <div>
-                                        <span className="baihoc">12 </span>Bài Học
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="body">
-                            <a href=""> <img
-                                    src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                    alt=""/></a>
-                            <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                            <div className="text">
-                                <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                </div>
-                                <div className="chuyende-baihoc">
-                                    <div>
-                                        <span className="chuyende">5 </span>Chuyên đề
-                                    </div>
-                                    <div>
-                                        <span className="baihoc">12 </span>Bài Học
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="body">
-                            <a href=""> <img
-                                    src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                    alt=""/></a>
-                            <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                            <div className="text">
-                                <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                </div>
-                                <div className="chuyende-baihoc">
-                                    <div>
-                                        <span className="chuyende">5 </span>Chuyên đề
-                                    </div>
-                                    <div>
-                                        <span className="baihoc">12 </span>Bài Học
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="body">
-                            <a href=""> <img
-                                    src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                    alt=""/></a>
-                            <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                            <div className="text">
-                                <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                </div>
-                                <div className="chuyende-baihoc">
-                                    <div>
-                                        <span className="chuyende">5 </span>Chuyên đề
-                                    </div>
-                                    <div>
-                                        <span className="baihoc">12 </span>Bài Học
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="khoi">
-                    <h3 className="head"><a href="">Lớp 11</a></h3>
-                    <div className="maint-containt-1">
-                        <div className="containt-1">
-                            <div className="body">
-                            <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                <div className="text">
-                                    <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                    </div>
-                                    <div className="chuyende-baihoc">
-                                        <div>
-                                            <span className="chuyende">5 </span>Chuyên đề
-                                        </div>
-                                        <div>
-                                            <span className="baihoc">12 </span>Bài Học
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="body">
-                            <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                <div className="text">
-                                    <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                    </div>
-                                    <div className="chuyende-baihoc">
-                                        <div>
-                                            <span className="chuyende">5 </span>Chuyên đề
-                                        </div>
-                                        <div>
-                                            <span className="baihoc">12 </span>Bài Học
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="body">
-                            <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                <div className="text">
-                                    <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                    </div>
-                                    <div className="chuyende-baihoc">
-                                        <div>
-                                            <span className="chuyende">5 </span>Chuyên đề
-                                        </div>
-                                        <div>
-                                            <span className="baihoc">12 </span>Bài Học
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="body">
-                            <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                <div className="text">
-                                    <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                    </div>
-                                    <div className="chuyende-baihoc">
-                                        <div>
-                                            <span className="chuyende">5 </span>Chuyên đề
-                                        </div>
-                                        <div>
-                                            <span className="baihoc">12 </span>Bài Học
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><br/>
-                        <div className="containt-1">
-                            <div className="body">
-                            <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                <div className="text">
-                                    <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                    </div>
-                                    <div className="chuyende-baihoc">
-                                        <div>
-                                            <span className="chuyende">5 </span>Chuyên đề
-                                        </div>
-                                        <div>
-                                            <span className="baihoc">12 </span>Bài Học
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="body">
-                            <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                <div className="text">
-                                    <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                    </div>
-                                    <div className="chuyende-baihoc">
-                                        <div>
-                                            <span className="chuyende">5 </span>Chuyên đề
-                                        </div>
-                                        <div>
-                                            <span className="baihoc">12 </span>Bài Học
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="body">
-                              <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                <div className="text">
-                                    <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                    </div>
-                                    <div className="chuyende-baihoc">
-                                        <div>
-                                            <span className="chuyende">5 </span>Chuyên đề
-                                        </div>
-                                        <div>
-                                            <span className="baihoc">12 </span>Bài Học
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="body">
-                            <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                <div className="text">
-                                    <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                    </div>
-                                    <div className="chuyende-baihoc">
-                                        <div>
-                                            <span className="chuyende">5 </span>Chuyên đề
-                                        </div>
-                                        <div>
-                                            <span className="baihoc">12 </span>Bài Học
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="khoi">
-                        <h3 className="head"><a href="">Lớp 10</a></h3>
-                        <div className="maint-containt-1">
-                            <div className="containt-1">
-                                <div className="body">
-                                <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                    <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                    <div className="text">
-                                        <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                        </div>
-                                        <div className="chuyende-baihoc">
-                                            <div>
-                                                <span className="chuyende">5 </span>Chuyên đề
-                                            </div>
-                                            <div>
-                                                <span className="baihoc">12 </span>Bài Học
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="body">
-                                <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                    <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                    <div className="text">
-                                        <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                        </div>
-                                        <div className="chuyende-baihoc">
-                                            <div>
-                                                <span className="chuyende">5 </span>Chuyên đề
-                                            </div>
-                                            <div>
-                                                <span className="baihoc">12 </span>Bài Học
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="body">
-                                <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                    <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                    <div className="text">
-                                        <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                        </div>
-                                        <div className="chuyende-baihoc">
-                                            <div>
-                                                <span className="chuyende">5 </span>Chuyên đề
-                                            </div>
-                                            <div>
-                                                <span className="baihoc">12 </span>Bài Học
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="body">
-                                 <Link to='/khoahoc/khoahoc'>
-                                <a href=""> <img
-                                        src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                        alt=""/></a>
-                                        </Link>
-                                    <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                    <div className="text">
-                                        <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                        </div>
-                                        <div className="chuyende-baihoc">
-                                            <div>
-                                                <span className="chuyende">5 </span>Chuyên đề
-                                            </div>
-                                            <div>
-                                                <span className="baihoc">12 </span>Bài Học
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><br/>
-                            <div className="containt-1">
-                                <div className="body">
-                                    <a href=""> <img
-                                            src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                            alt=""/></a>
-                                    <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                    <div className="text">
-                                        <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                        </div>
-                                        <div className="chuyende-baihoc">
-                                            <div>
-                                                <span className="chuyende">5 </span>Chuyên đề
-                                            </div>
-                                            <div>
-                                                <span className="baihoc">12 </span>Bài Học
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="body">
-                                    <a href=""> <img
-                                            src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                            alt=""/></a>
-                                    <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                    <div className="text">
-                                        <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                        </div>
-                                        <div className="chuyende-baihoc">
-                                            <div>
-                                                <span className="chuyende">5 </span>Chuyên đề
-                                            </div>
-                                            <div>
-                                                <span className="baihoc">12 </span>Bài Học
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="body">
-                                    <a href=""> <img
-                                            src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                            alt=""/></a>
-                                    <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                    <div className="text">
-                                        <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                        </div>
-                                        <div className="chuyende-baihoc">
-                                            <div>
-                                                <span className="chuyende">5 </span>Chuyên đề
-                                            </div>
-                                            <div>
-                                                <span className="baihoc">12 </span>Bài Học
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="body">
-                                    <a href=""> <img
-                                            src="https://d3484gt1o8rlzm.cloudfront.net/mclass/course/G2K6G01/G2K6G01_1676286538.jpg"
-                                            alt=""/></a>
-                                    <h5><a href="">LIVE G -Tổng ôn - Toán học 2K6 - HTT</a></h5>
-                                    <div className="text">
-                                        <div className="giangvien"> Giảng Viên: <a href=""> Hồ Thức Thuận</a>
-                                        </div>
-                                        <div className="chuyende-baihoc">
-                                            <div>
-                                                <span className="chuyende">5 </span>Chuyên đề
-                                            </div>
-                                            <div>
-                                                <span className="baihoc">12 </span>Bài Học
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><br/><br/>
-                </div>
-                </div>
-                </div>
+      <div className="section">
+      <div className="container">
+        <h2 className="title">| Trung Học Phổ Thông</h2>
+
+        <div className="courses">
+     
+          <div className="box" onClick={handlePick}>
+            
+            <img src={anh1} alt="" />
+      
+          <div className="bottom">
+            <p className="name">LIVE G - Tổng ôn - Toán học 2K7 - HTT</p>
+            <p className="teacher">Giảng viên: <span>Hồ Thức Thuận</span></p>
+            <div className="content">
+              <p><span>0</span> Chuyên đề</p>
+              <p><span>0</span> Bài học</p>
+            </div>
+          </div>
         </div>
+
+          <div className="box">
+       
+              <img src={anh2} alt=""/>
+    
+            <div className="bottom">
+              <p className="name">COMBO CTG VẬT LÝ 2K7 - VTA</p>
+              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+      
+              <img src={anh3} alt="" />
+    
+            <div className="bottom">
+              <p className="name">COMBO CTG HÓA HỌC 2K7 - PVT</p>
+              <p className="teacher">Giảng viên: <span>Phạm Văn Thuận</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+    
+              <img src={anh4} alt="" />
+        
+            <div className="bottom">
+              <p className="name">COMBO CTG VĂN 2K7 - PMN</p>
+              <p className="teacher">Giảng viên: <span>Phạm Minh Ngọc</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+      
+              <img src={anh5} alt="" />
+   
+            <div className="bottom">
+              <p className="name">COMBO CTG SỬ 2K7 - NHS</p>
+              <p className="teacher">Giảng viên: <span>Nguyễn Hương Sen</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+      
+              <img src={anh6} alt="" />
+   
+            <div className="bottom">
+              <p className="name">COMBO CTG ĐỊA LÝ 2K7 - VTNP</p>
+              <p className="teacher">Giảng viên: <span>Vũ Thị Ngọc Phước</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+
+              <img src={anh7} alt="" />
+
+            <div className="bottom">
+              <p className="name">COMBO CTG SINH 2K7 - NTHT</p>
+              <p className="teacher">Giảng viên: <span>Nguyễn Thị Huyền Trang</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+       
+              <img src={anh8} alt="" />
+ 
+            <div className="bottom">
+              <p className="name">COMBO 4 KHÓA SUPER 1,2,3,4 - THPT</p>
+              <p className="teacher">Giảng viên: <span>Trương Thị Phương Thảo</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="section">
+      <div className="container">
+        <h2 className="title">| Lớp 11</h2>
+
+        <div className="courses">
+          <div className="box">
+
+              <img src={anh111} alt="" />
+ 
+            <div className="bottom">
+              <p className="name">LỚP VIP TOÁN LỚP 11 HỌC KỲ 1 2K8 HỒ THỨC THUẬN</p>
+              <p className="teacher">Giảng viên: <span>Hồ Thức Thuận</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+    
+              <img src={anh112} alt="" />
+ 
+            <div className="bottom">
+              <p className="name">COMBO LIVE VIP LỚP 11 - KHÓA 2K8 THẦY HỒ THỨC THUẬN</p>
+              <p className="teacher">Giảng viên: <span>Hồ Thức Thuận</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+    
+              <img src={anh113} alt="" />
+       
+            <div className="bottom">
+              <p className="name">LIVE VIP VẬT LÝ 11 HỌC KỲ 2 2K8 THẦY VŨ TUẤN ANH</p>
+              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+   
+              <img src={anh114} alt="" />
+    
+            <div className="bottom">
+              <p className="name">LIVE VIP HÓA HỌC 11 HỌC KỲ 1 2K8 THẦY PHẠM VĂN THUẬN</p>
+              <p className="teacher">Giảng viên: <span>Phạm Văn Thuận</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+      
+              <img src={anh115} alt="" />
+    
+            <div className="bottom">
+              <p className="name">LIVE VIP TOÁN LỚP 11 HỌC KỲ 2 2K8 THẦY HỒ THỨC THUẬN</p>
+              <p className="teacher">Giảng viên: <span>Hồ Thức Thuận</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+         
+              <img src={anh116} alt="" />
+        
+            <div className="bottom">
+              <p className="name">LIVE VIP VẬT LÝ 11 HỌC KỲ 1 2K8 THẦY VŨ TUẤN ANH</p>
+              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+       
+              <img src={anh117} alt="" />
+     
+            <div className="bottom">
+              <p className="name">COMBO LIVE VIP VẬT LÝ 11 - Khoá 2K8 THẦY VŨ TUẤN ANH</p>
+              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box">
+          
+              <img src={anh118} alt="" />
+       
+            <div className="bottom">
+              <p className="name">LIVE VIP HÓA HỌC 11 HỌC KỲ 2 2K8 THẦY PHẠM VĂN THUẬN</p>
+              <p className="teacher">Giảng viên: <span>Phạm Văn Thuận</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="section">
+      <div className="container">
+        <h2 className="title">| Lớp 10</h2>
+
+        <div className="courses" style={{display: 'flex', justifyContent:'center'}}>
+          <div className="box">
+   
+              <img src={anh101} alt="" />
+
+            <div className="bottom">
+              <p className="name">LIVE VIP VẬT LÝ 10 HỌC KỲ 1 2K9 THẦY VŨ TUẤN ANH</p>
+              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box" style={{marginLeft: '15px'}}>
+            <a className="top" href="./page-course-1.html">
+              <img src={anh102} alt="" />
+            </a>
+            <div className="bottom">
+              <p className="name">LIVE VIP VẬT LÝ 10 HỌC KỲ 2 2K9 THẦY VŨ TUẤN ANH</p>
+              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="box" style={{marginLeft: '15px'}}>
+       
+              <img src={anh103} alt="" />
+       
+            <div className="bottom">
+              <p className="name">COMBO LIVE VIP VẬT LÝ 10 - Khoá 2K9 THẦY VŨ TUẤN ANH</p>
+              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      </div>
+      <div className="section">
+      <div className="container">
+        <h2 className="title">| Đại học</h2>
+
+        <div className="courses" style={{display: 'flex', justifyContent: 'center'}}>
+          <div className="box">
+            <a className="top" href="./page-course-1.html">
+              <img src={dh} alt="" />
+            </a>
+            <div className="bottom">
+              <p className="name">TTOÁN CAO CẤP</p>
+              <p className="teacher">Giảng viên: <span>Đào Tuấn Anh</span></p>
+              <div className="content">
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <br/><br/>
         <div className="row flex flex-row justify-content-between">
     <div className="col col-lg-5 pb-1 pt-3 ps-5 ms-5">
       <h5>

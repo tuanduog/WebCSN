@@ -14,16 +14,15 @@ const Khoahoc = () => {
     const productData = {
       anhsp: product.anh,
       tensp: product.tensp,
+      tengv: product.tengv,
       gia: product.gia,
       soluong: product.soluong
     };
   
     axios.post('http://localhost:8081/products', productData)
       .then(res => {
-        if (res.data.Status === "Product added successfully") {
-          alert('Product added to the cart successfully!');
-        } else {
-          alert('Error: ' + (res.data.Error || 'Unknown error'));
+        if (res.data.Status === "sucess") {
+          alert('Thêm sản phẩm vào giỏ hàng thành công!');
         }
       })
       .catch(err => {
@@ -33,16 +32,16 @@ const Khoahoc = () => {
   };
   
     return (
-        <div>
-        <div className="row ">
-         <div className="col">
-             <img  src={product.anh} alt="COMBO 3 SACH" width="450px" height="320px" />
+        <div >
+        <div className="row">
+         <div className="col" style={{ display: 'flex', justifyContent: 'center'}}>
+             <img  src={product.anh} alt="COMBO 3 SACH" width="330px" height="auto"/>
        
          </div>
-         <div className="col">
+         <div className="col" >
              <h2 className="fw-bold" style={{color:'black'} }>{product.tensp}</h2>
             
-             <p style={{fontWeight:"bold"}}>Giảng viên: Hồ Đức Thuận</p>
+             <p style={{fontWeight:"bold"}}>Giảng viên: {product.tengv}</p>
              <p>Tình trạng: Còn hàng</p>
              <div className="p-3 mt-3 mb-3 col-12 bg-light d-flex align-items-center justify-content-start pricing">
                 <span className="p-2 old-price fw-bold">
@@ -84,7 +83,7 @@ const Khoahoc = () => {
          <div className="row " style={{border:"none"}}>
           <div className="col-8 ">
 
-  <div className="card text-center "  >
+  <div className="card text-center ">
   <div className="card-header">
     <ul className="nav nav-tabs card-header-tabs">
       <li className="nav-item">

@@ -9,9 +9,12 @@ import { useAuth } from "./authContext";
 import "./Full.css";    
 import "../node_modules/mdb-ui-kit/css/mdb.min.css"
 import "../node_modules/mdb-ui-kit/js/mdb.es.min.js"
-
+import { useNavigate } from "react-router-dom";
 const Header = () => {
-  
+  const navigate = useNavigate();
+  const handleCart = () => {
+    navigate('cart/cart');
+  }
 
   const {auth, name, logout} = useAuth();
 
@@ -147,14 +150,9 @@ const Header = () => {
           <img src={search} alt="Search" className="srch" />
         </button>
       </div>
-      <a href="cart/cart">cart</a>
-      {auth ? (
-          <FontAwesomeIcon className="carrt" icon={faCartShopping}></FontAwesomeIcon>
-      ) : (
-        <Link to='/login/login'>
-        <FontAwesomeIcon className="carrt1" icon={faCartShopping}></FontAwesomeIcon>
-        </Link>
-      )}
+      
+        <FontAwesomeIcon className="carrt" icon={faCartShopping} onClick={handleCart} style={{cursor: 'pointer'}}></FontAwesomeIcon>
+
       {auth ? (
         <div className="user-info">
           

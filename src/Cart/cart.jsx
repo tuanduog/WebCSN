@@ -83,7 +83,7 @@ const cart = () => {
                     </div>
                     <div className="col-md-1 col-lg-1 col-xl-1 text-end">
                         <input type='checkbox' style={{cursor: 'pointer'}}></input>
-                        <FontAwesomeIcon icon={faTrash} style={{fontSize: '1.5rem', marginLeft: '23px', cursor: 'pointer'}}></FontAwesomeIcon>
+                        <FontAwesomeIcon icon={faTrash} style={{fontSize: '1.5rem', marginLeft: '25px', cursor: 'pointer'}}></FontAwesomeIcon>
                     </div>
                   </div>
                 </div>

@@ -107,10 +107,11 @@ app.post('/products', verifyUser, (req, res) => {
     return res.status(400).json({ Error: "Missing required fields" });
   }
 
-  const sql = "INSERT INTO products (`anhsp`, `tensp`, `gia`, `userid`) VALUES (?, ?, ?, ?)";
+  const sql = "INSERT INTO products (`anhsp`, `tensp`, 'tengv', `gia`, `userid`) VALUES (?, ?, ?, ?, ?)";
   const values = [
     req.body.anhsp,
     req.body.tensp,
+    res.body.tengv,
     req.body.gia,
     req.userid  
   ];
@@ -120,7 +121,7 @@ app.post('/products', verifyUser, (req, res) => {
       console.error("Database error:", err);
       return res.json({ Error: "Database error", Details: err.message });
     }
-    res.json({ Status: "Thêm sản phẩm thành công", ProductID: result.insertId });
+    res.json({ Status: "sucess", ProductID: result.insertId });
   });
 });
 
