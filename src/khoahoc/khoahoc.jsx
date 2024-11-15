@@ -78,7 +78,8 @@ const Khoahoc = () => {
               <button className="btn btn-primary p-2 fw-bold" onClick={handleAddToCart}>Mua khóa học</button>     {/* test*/}
               <a className="btn btn-primary p-2 mx-4 fw-bold">Thêm vào giỏ</a>
          </div>
-
+         <div className="row">
+         <div className="col">
          <div className="row " style={{border:"none"}}>
           <div className="col-8 ">
 
@@ -96,7 +97,9 @@ const Khoahoc = () => {
       </li>
     </ul>
   </div>
+  
   <div className="card-body" style={{backgroundColor:"#edf1f4"}}>
+    
       <div className="card " >
         <div className="row" >
           <div className="col-2" >
@@ -112,6 +115,7 @@ const Khoahoc = () => {
         </div>
       </div>
       <div className="card " >
+        
         <div className="row">
           <div className="col-2" >
             <img src={avatar} alt="" />
@@ -149,8 +153,79 @@ const Khoahoc = () => {
   </div>
 </div>
          </div>
-         
+         <div className="col">
+            <div className="row bg-danger" >
+              <h4 className="border-0 text-light ms-0">KHOÁ HỌC LIÊN QUAN</h4>
+            </div>
+            <div className="row bg-light">
+             
+              <a className="col-3 m-0" href=""> 
+                <img src="	https://d3484gt1o8rlzm.cloudfront.net/mclass/course/CB2K8T10/CB2K8T10_1687925927.jpg" alt="" style={{width:"150%"}}/>
+
+              </a>
+              <div className="col-1 "></div>
+              <div className="col">
+                
+              <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
+                <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
+                <span class=""><strike>400,000đ</strike>
+                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                </span></li>
+              </div>
+            </div>
+            <div className="row bg-light">
+             
+              <a className="col-3 m-0" href=""> 
+                <img src="	https://d3484gt1o8rlzm.cloudfront.net/mclass/course/CB2K8T10/CB2K8T10_1687925927.jpg" alt="" style={{width:"150%"}}/>
+
+              </a>
+              <div className="col-1 "></div>
+              <div className="col">
+                
+              <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
+                <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
+                <span class=""><strike>400,000đ</strike>
+                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                </span></li>
+              </div>
+            </div>
+            <div className="row bg-light">
+             
+              <a className="col-3 m-0" href=""> 
+                <img src="	https://d3484gt1o8rlzm.cloudfront.net/mclass/course/CB2K8T10/CB2K8T10_1687925927.jpg" alt="" style={{width:"150%"}}/>
+
+              </a>
+              <div className="col-1 "></div>
+              <div className="col">
+                
+              <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
+                <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
+                <span class=""><strike>400,000đ</strike>
+                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                </span></li>
+              </div>
+            </div>
+            <div className="row bg-light">
+             
+              <a className="col-3 m-0" href=""> 
+                <img src="	https://d3484gt1o8rlzm.cloudfront.net/mclass/course/CB2K8T10/CB2K8T10_1687925927.jpg" alt="" style={{width:"150%"}}/>
+
+              </a>
+              <div className="col-1 "></div>
+              <div className="col">
+                
+              <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
+                <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
+                <span class=""><strike>400,000đ</strike>
+                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                </span></li>
+              </div>
+            </div>
+         </div>
+         </div>
      </div>
+     </div>
+     <div className="col"></div>
      </div>
      <div className="row flex flex-row justify-content-between mt-5">
  <div className="col col-lg-5 pb-1 pt-3 ps-5 ms-5">
