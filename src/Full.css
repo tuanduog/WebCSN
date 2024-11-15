@@ -235,10 +235,8 @@ img.dropdown{
     display: none;
     left: 167px;
     top: 65px;
-    z-index: 1000;
-    
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for aesthetics */
-    border-radius: 8px; /* Optional: Rounds the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
 }
 
 #course-books:hover+.sub-header-menu,
@@ -322,8 +320,7 @@ img.dropdown{
     position: absolute !important;
     width: 950px;
     display: none;
-    height: 513px;
-    z-index: 1000;
+    height: 513px; 
 }
 
 .sub-menu-side a {

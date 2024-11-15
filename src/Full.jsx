@@ -248,7 +248,7 @@ const Full = () => {
             <img src={anh1} alt="" />
       
           <div className="bottom">
-            <p className="name">COMBO CTG SINH 2K7 - HTT</p>
+            <p className="name">LIVE G - Tổng ôn - Toán học 2K7 - HTT</p>
             <p className="teacher">Giảng viên: <span>Hồ Thức Thuận</span></p>
             <div className="content">
               <p><span>0</span> Chuyên đề</p>
