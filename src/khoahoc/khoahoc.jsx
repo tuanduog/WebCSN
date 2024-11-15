@@ -36,7 +36,7 @@ const Khoahoc = () => {
         <div>
         <div className="row ">
          <div className="col">
-             <img  src={product.anh} alt="COMBO 3 SACH" width="450px" height="320px" />
+             <img  src={product.anh} alt="COMBO 3 SACH" width="300px" height="auto"/>
        
          </div>
          <div className="col">
@@ -83,7 +83,7 @@ const Khoahoc = () => {
          <div className="row " style={{border:"none"}}>
           <div className="col-8 ">
 
-  <div className="card text-center "  >
+  <div className="card text-center ">
   <div className="card-header">
     <ul className="nav nav-tabs card-header-tabs">
       <li className="nav-item">
@@ -150,9 +150,7 @@ const Khoahoc = () => {
   </div>
 </div>
          </div>
-         <div className="col">
-          
-         </div>
+         
      </div>
      </div>
      <div className="row flex flex-row justify-content-between mt-5">

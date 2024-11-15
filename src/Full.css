@@ -277,23 +277,8 @@ img.dropdown{
 
 }
 
-.containt {
-    display: flex;
-    justify-content: center;
-    padding-top: 10px;
-    padding-bottom: 35px;
-    background-color: #ebeff9;
-}
 
-.containt p {
-    font-size: 16px;
-    line-height: 36px;
-    border-radius: 10px 10px 0 0;
-    margin-bottom: 0;
-    background-color: #cbd5e3;
-    font-weight: 700;
-    padding-left: 1rem !important;
-}
+
 
 .menu-side {
     list-style: none;           /* Removes default bullets for the <ul> */
@@ -424,11 +409,6 @@ img.dropdown{
     height: 70px;
 }
 
-.main-khoi {
-    width: 100%;
-    background-color:
-        #f6f6fc !important;
-}
 
 .head {
 
@@ -444,12 +424,7 @@ img.dropdown{
     font-weight: 600;
     padding-left: 29px;
 }
-.containt-1 {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    gap: 10px;
-}
+
 
 .body img {
     padding-top: 9px;
@@ -537,9 +512,7 @@ img.dropdown{
 }
 
 @media (max-width: 768px) {
-    .containt {
-        flex-direction: column;
-    }
+
 
     .menu-side,
     .sub-menu-side {
@@ -573,3 +546,61 @@ img.dropdown{
     }
 }
 
+/* new */
+
+  .container {
+    width: 100%;
+    padding-top: 70px;
+  }
+  
+  .section .title {
+    color: blue;
+    margin-bottom: 40px;
+  }
+  
+  .section .courses {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .section .courses .box {
+    width: 24.3%;
+    border: 1px solid #d3d3d3;
+    margin: 10px 0;
+  }
+  
+  .section .courses .box img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    object-position: top;
+    cursor: pointer;
+  }
+  
+  .section .courses .box .bottom {
+    padding: 10px;
+  }
+  
+  .section .courses .box .name {
+    font-size: large;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .section .courses .box span {
+    color: blue;
+  }
+  
+  .section .courses .box .teacher {
+    margin-bottom: 10px;
+  }
+  
+  .section .courses .box .content {
+    display: flex;
+    justify-content: space-between;
+  }
+  .content {
+    background-color: transparent !important;
+  }

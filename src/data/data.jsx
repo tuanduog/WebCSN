@@ -1,4 +1,4 @@
-import img from '../assets/htt.jpg';
+import img from '../assets/1.jpg';
 
 const data = {
     product_data:[
