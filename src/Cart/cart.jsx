@@ -1,100 +1,129 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-const Cart = () => {
+import 'bootstrap/dist/css/bootstrap.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+const cart = () => {
   return (
-    <div>
-      <div className="container-fluid">
-        <div className="card">
-          <div className="row">
-            <div className="col-md-8 cart">
-              <div className="title ">
-              </div>   
-
-              <div className="row-2 " >
-              <div className="row-2 ">
-                  <div className="col border-0" ><h5><b>Sản phẩm</b></h5></div>
-                  <div className="col align-self-center text-right text-muted">3 items</div>
-                </div>
-                <div className="row main align-items-center border-bottom border">
-                  <div className="col-3 ps-5 border-top-0">Hình ảnh</div>
-                  <div className="col" >
-                    Tên sản phẩm
-                  </div>
-                  <div className="col">
-                   Số lượng
-                  </div>
-                  <div className="col-2">
-                    Giá
-                  </div>
-                  <div className="col ps-5" >
-                    Chọn
-                  </div>
-                </div>
-              </div>  
-
-              <div className="roll border">
-                {/* List of items */}
-                {[1, 2, 3, 4, 5].map((item, index) => (
-                  <div className="row border-top border-bottom " key={index}>
-                    <div className="row main align-items-center border-top-0">
-                      <div className="col-2"><img className="img-fluid" src="https://i.imgur.com/1GrakTl.jpg" alt="Shirt" /></div>
-                      <div className="col">
-                        <div className="row text-muted border-top-0">Shirt</div>
-                        <div className="row border-top-0">Cotton T-shirt</div>
-                      </div>
-                      <div className="col">
-                        <a href="#">-</a><a href="#" className="border">1</a><a href="#">+</a>
-                      </div>
-                      <div className="col">&euro; 44.00 <span className="close">&#10005;</span></div>
-                      <div className="col d-flex align-items-center">
-                        <div className="row ml-2 mt-4 border-top-0"><input type="checkbox" aria-label="select" /></div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="back-to-shop">
-                <a href="#">&larr;</a><span className="text-muted">Back to shop</span>
+      <div style={{backgroundColor: 'white'}}>
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-10">
+            <div className="d-flex justify-content-between align-items-center mb-4">
+              <h3 className="fw-normal mb-0">Sản phẩm</h3>
+              <div>
+                <p className="mb-0">
+                  <span className="text-muted">Sắp xếp theo:</span>{" "}
+                  <a href="#!" className="text-body">
+                    giá <i className="fas fa-angle-down mt-1"></i>
+                  </a>
+                </p>
               </div>
             </div>
-            
-            <div className="col-md-4 summary " >
-              <h5><b>Summary</b></h5>
-              <hr />
-              <div className="row">
-                <div className="col" style={{ paddingLeft: 0 }}>ITEMS 3</div>
-                <div className="col text-right">&euro; 132.00</div>
+            <div className='bg-primary' style={{border: '1px solid black', height: '40px', color: 'white'}}>
+            <div className='d-flex justify-content-between align-items-center mx-auto' style={{width: "83%"}}>
+                <h5 style={{lineHeight: '40px'}}>Hình ảnh</h5>
+                <h5 style={{lineHeight: '40px'}}>Tên sản phẩm</h5>
+                <h5 style={{lineHeight: '40px'}}>Số lượng</h5>
+                <h5 style={{lineHeight: '40px'}}>Giá</h5>
+                <h5 style={{lineHeight: '40px'}}>Chọn</h5>
+            </div>
+            </div>
+            {[...Array(4)].map((_, index) => (
+              <div className="card rounded-3 mb-4" key={index}>
+                <div className="card-body p-4" style={{backgroundColor: 'white', width: '96%'}}>
+                  <div className="row d-flex justify-content-between align-items-center" style={{backgroundColor: 'white'}}>
+                    <div className="col-md-2 col-lg-2 col-xl-2">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                        className="img-fluid rounded-3"
+                        alt="Cotton T-shirt"
+                      />
+                    </div>
+                    <div className="col-md-3 col-lg-3 col-xl-3" style={{paddingLeft: '80px'}}>
+                      <p className="lead fw-normal mb-2">Basic T-shirt</p>
+                      <p>
+                        <span className="text-muted">Size: </span>M{" "}
+                        <span className="text-muted">Color: </span>Grey
+                      </p>
+                    </div>
+                    <div className="col-md-3 col-lg-3 col-xl-2 d-flex" style={{paddingLeft: '60px'}}>
+                      <button
+                        className="btn btn-link px-2"
+                        onClick={(e) =>
+                          e.currentTarget.parentNode.querySelector(
+                            "input[type=number]"
+                          ).stepDown()
+                        }
+                      >
+                        <i className="fas fa-minus"></i>
+                      </button>
+
+                      <input
+                        id={`form-${index}`}
+                        min="0"
+                        name="quantity"
+                        defaultValue="1"
+                        type="number"
+                        className="form-control form-control-sm"
+                        style={{textAlign: 'center'}}
+                      />
+
+                      <button
+                        className="btn btn-link px-2"
+                        onClick={(e) =>
+                          e.currentTarget.parentNode.querySelector(
+                            "input[type=number]"
+                          ).stepUp()
+                        }
+                      >
+                        <i className="fas fa-plus"></i>
+                      </button>
+                    </div>
+                    <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1 d-flex" style={{paddingLeft: '-30px'}}>
+                      <h5 className="mb-0">1.350.000</h5>
+                    </div>
+                    <div className="col-md-1 col-lg-1 col-xl-1 text-end">
+                        <input type='checkbox' style={{cursor: 'pointer'}}></input>
+                        <FontAwesomeIcon icon={faTrash} style={{fontSize: '1.5rem', marginLeft: '23px', cursor: 'pointer'}}></FontAwesomeIcon>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <form>
-                <p>SHIPPING</p>
-                <select>
-                  <option className="text-muted">Standard-Delivery- &euro;5.00</option>
-                </select>
-                <p>GIVE CODE</p>
-                <input id="code" placeholder="Enter your code" />
-              </form>
-              <div className="row" style={{ borderTop: '1px solid rgba(0,0,0,.1)', padding: '2vh 0' }}>
-                <div className="col">TOTAL PRICE</div>
-                <div className="col text-right">&euro; 137.00</div>
+            ))}
+
+            <div className="card mb-4">
+              <div className="card-body p-4 d-flex flex-row">
+                <div className="form-outline flex-fill">
+                  <input
+                    type="text"
+                    id="discount-code"
+                    className="form-control form-control-lg"
+                  />
+                  <label className="form-label" htmlFor="discount-code">
+                    Discount code
+                  </label>
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-warning btn-lg ms-3"
+                >
+                  Apply
+                </button>
               </div>
-              <button className="btn btn-primary">THANH TOÁN</button>
+            </div>
+
+            <div className="card">
+              <div className="card-body">
+                <button
+                  type="button"
+                  className="btn btn-primary btn-block btn-lg"
+                >
+                  THANH TOÁN
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+  )
 }
 
-export default Cart;
-
-
-// id
-// name
-// image
-// gv
-// price
-// discount price
-// description
-
+export default cart

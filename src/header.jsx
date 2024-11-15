@@ -147,7 +147,7 @@ const Header = () => {
           <img src={search} alt="Search" className="srch" />
         </button>
       </div>
-      <a href="Cart/cart">cart</a>
+      <a href="cart/cart">cart</a>
       {auth ? (
           <FontAwesomeIcon className="carrt" icon={faCartShopping}></FontAwesomeIcon>
       ) : (

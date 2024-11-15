@@ -8,8 +8,8 @@ import Login from './login/login';
 import Register from './register/register';
 import Ctietsach from './sach/ctietsach/ctietsach';
 import Khoahoc from './khoahoc/khoahoc';
-import Cart from './Cart/cart';
 import Header from './header';
+import Cart from './cart/cart';
 import { AuthProvider } from './authContext';  
 
 const AppContent = () => {
@@ -28,7 +28,7 @@ const AppContent = () => {
         <Route path="/luyende/luyende" element={<LuyenDe />} />
         <Route path="/ctietsach" element={<Ctietsach />} />
         <Route path="/sach/sach" element={<Sach />} />
-        <Route path="/Cart/cart" element={<Cart />} />
+        <Route path="/cart/cart" element={<Cart />} />
         <Route path="/khoahoc/khoahoc" element={<Khoahoc />} />
       </Routes>
     </>
