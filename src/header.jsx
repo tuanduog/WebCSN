@@ -15,7 +15,9 @@ const Header = () => {
   const handleCart = () => {
     navigate('cart/cart');
   }
-
+   const handleBeforeLogin = () => {
+    navigate('login/login');
+  }
   const {auth, name, logout} = useAuth();
 
   return (
@@ -152,8 +154,10 @@ const Header = () => {
       </div>
       
       {auth ? (
-        <div/>
-      ):(<FontAwesomeIcon className="carrt" icon={faCartShopping} onClick={handleCart} style={{cursor: 'pointer'}}></FontAwesomeIcon>)}
+       <FontAwesomeIcon className="carrt" icon={faCartShopping} onClick={handleCart} style={{cursor: 'pointer'}}></FontAwesomeIcon>)
+      : (
+        <FontAwesomeIcon className="carrt1" icon={faCartShopping} onClick={handleBeforeLogin} style={{cursor: 'pointer'}}></FontAwesomeIcon>
+      )}
 
       {auth ? (
         <div className="user-info">

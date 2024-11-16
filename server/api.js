@@ -90,6 +90,7 @@ app.post('/login/login', (req, res) => {
           const token = jwt.sign({ name, userid }, "jwt-secret-key", { expiresIn: '1d' }); 
 
           res.cookie('token', token, { httpOnly: true, secure: true });
+
           return res.json({ Status: "Đăng nhập thành công" });
         } else {
           return res.json({ Error: "Sai mật khẩu" });
@@ -102,26 +103,52 @@ app.post('/login/login', (req, res) => {
 });
 
 
+// POST endpoint: Add a product
 app.post('/products', verifyUser, (req, res) => {
-  if (!req.body.anhsp || !req.body.tensp || !req.body.gia) {
-    return res.status(400).json({ Error: "Missing required fields" });
+  console.log('Request body received for adding product:', req.body);
+
+  const { anhsp, tensp, tengv, gia } = req.body;
+
+  // Check for missing fields
+  if (!anhsp || !tensp || !tengv || !gia) {
+    console.error('Missing fields:', req.body);
+    return res.status(400).json({ Error: "Missing required fields", MissingFields: { anhsp, tensp, tengv, gia } });
   }
 
-  const sql = "INSERT INTO products (`anhsp`, `tensp`, 'tengv', `gia`, `userid`) VALUES (?, ?, ?, ?, ?)";
-  const values = [
-    req.body.anhsp,
-    req.body.tensp,
-    res.body.tengv,
-    req.body.gia,
-    req.userid  
-  ];
+  const sql = "INSERT INTO products (anhsp, tensp, tengv, gia, userid) VALUES (?, ?, ?, ?, ?)";
+  const values = [anhsp, tensp, tengv, gia, req.userid];
 
   db.query(sql, values, (err, result) => {
     if (err) {
-      console.error("Database error:", err);
-      return res.json({ Error: "Database error", Details: err.message });
+      console.error('Database error while adding product:', err.message);
+      return res.status(500).json({ Error: "Database error", Details: err.message });
     }
-    res.json({ Status: "sucess", ProductID: result.insertId });
+
+    console.log('Product successfully added with ID:', result.insertId);
+    res.json({ Status: "success", Message: "Product added successfully", ProductID: result.insertId });
+  });
+});
+
+// GET endpoint: Retrieve all products for a user
+// Endpoint GET /products
+app.get('/products', verifyUser, (req, res) => {
+  console.log('UserID:', req.userid); // Kiểm tra UserID đã lấy từ middleware
+
+  const userId = req.userid;
+
+  const sql = "SELECT * FROM products WHERE userid = ?";
+  
+  db.query(sql, [userId], (err, results) => {
+    if (err) {
+      console.error('Lỗi cơ sở dữ liệu:', err.message);
+      return res.status(500).json({ Error: "Lỗi cơ sở dữ liệu", Details: err.message });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ Status: "Không tìm thấy sản phẩm nào", Products: [] });
+    }
+
+    res.json({ Status: "success", Products: results });
   });
 });
 

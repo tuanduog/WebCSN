@@ -8,15 +8,7 @@ import { Link} from "react-router-dom";
 // // import { faUserLarge } from '@fortawesome/free-solid-svg-icons';
 // // import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from 'react-router-dom';
-// import axios from "axios";
-import anh1 from './assets/1.jpg';
-import anh2 from './assets/2.jpg';
-import anh3 from './assets/3.jpg';
-import anh4 from './assets/4.jpg';
-import anh5 from './assets/5.jpg';
-import anh6 from './assets/6.jpg';
-import anh7 from './assets/7.png';
-import anh8 from './assets/8.png';
+import data from './data/data';
 import anh111 from './assets/111.jpg';
 import anh112 from './assets/112.jpg';
 import anh113 from './assets/113.jpg';
@@ -32,32 +24,10 @@ import dh from './assets/dh.jpg';
 
 const Full = () => {
   const navigate = useNavigate();
-  // const [name, setName] = useState('');
-  // const [auth, setAuth] = useState(false);
 
-  // axios.defaults.withCredentials = true;
-  // useEffect(() => {
-  //   // call api once
-  //   axios.get("http://localhost:8081")
-  //     .then(res => {
-  //       if (res.data.Status === "Success") {
-  //         setAuth(true);
-  //         setName(res.data.name);
-  //         navigate('/' , {state: {auth}}); 
-  //       } else {
-  //         setAuth(false);
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.error("Error fetching data:", err);
-  //       setAuth(false);
-  //     });
-  // }, []); // it's key problem for call api just 1
-
-  const handlePick = () => {
-    navigate('/khoahoc/khoahoc')
+  const handlePick = (productid) => {
+    navigate('/khoahoc/khoahoc', {state: {productid}});
   }
-  
   return (
     <div id="main">
       
@@ -242,118 +212,26 @@ const Full = () => {
         <h2 className="title">| Trung Học Phổ Thông</h2>
 
         <div className="courses">
-     
-          <div className="box" onClick={handlePick}>
+          {data.product_data.map((product) => (
             
-            <img src={anh1} alt="" />
-      
+          <div
+            className="box"
+            key={product.id}
+            onClick={() => handlePick(product.id)}
+          >
+          <img src={product.anh} alt={product.tensp} />
           <div className="bottom">
-            <p className="name">LIVE G - Tổng ôn - Toán học 2K7 - HTT</p>
-            <p className="teacher">Giảng viên: <span>Hồ Thức Thuận</span></p>
+            <p className="name">{product.tensp}</p>
+            <p className="teacher">
+              Giảng viên: <span>{product.tengv}</span>
+            </p>
             <div className="content">
-              <p><span>0</span> Chuyên đề</p>
-              <p><span>0</span> Bài học</p>
-            </div>
+                <p><span>0</span> Chuyên đề</p>
+                <p><span>0</span> Bài học</p>
+              </div>
           </div>
         </div>
-
-          <div className="box">
-       
-              <img src={anh2} alt=""/>
-    
-            <div className="bottom">
-              <p className="name">COMBO CTG VẬT LÝ 2K7 - VTA</p>
-              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-      
-              <img src={anh3} alt="" />
-    
-            <div className="bottom">
-              <p className="name">COMBO CTG HÓA HỌC 2K7 - PVT</p>
-              <p className="teacher">Giảng viên: <span>Phạm Văn Thuận</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-    
-              <img src={anh4} alt="" />
-        
-            <div className="bottom">
-              <p className="name">COMBO CTG VĂN 2K7 - PMN</p>
-              <p className="teacher">Giảng viên: <span>Phạm Minh Ngọc</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-      
-              <img src={anh5} alt="" />
-   
-            <div className="bottom">
-              <p className="name">COMBO CTG SỬ 2K7 - NHS</p>
-              <p className="teacher">Giảng viên: <span>Nguyễn Hương Sen</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-      
-              <img src={anh6} alt="" />
-   
-            <div className="bottom">
-              <p className="name">COMBO CTG ĐỊA LÝ 2K7 - VTNP</p>
-              <p className="teacher">Giảng viên: <span>Vũ Thị Ngọc Phước</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-
-              <img src={anh7} alt="" />
-
-            <div className="bottom">
-              <p className="name">COMBO CTG SINH 2K7 - NTHT</p>
-              <p className="teacher">Giảng viên: <span>Nguyễn Thị Huyền Trang</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-       
-              <img src={anh8} alt="" />
- 
-            <div className="bottom">
-              <p className="name">COMBO 4 KHÓA SUPER 1,2,3,4 - THPT</p>
-              <p className="teacher">Giảng viên: <span>Trương Thị Phương Thảo</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
+        ))}
         </div>
       </div>
     </div>

@@ -13,3 +13,15 @@
     height: 100%; /* Makes the image span the height of the container */
     object-fit: cover; /* Ensures the image covers the container (cropping may occur) */
   }
+  .lienquan{
+    margin-left: 25px;
+    background-color: white;
+    width:400px;
+    border:1px solid rgb(209, 205, 205);
+    
+}
+.lienquan1{
+    padding:10px;
+    list-style-type: none;
+    border-bottom: 1px solid rgb(209, 205, 205);
+}

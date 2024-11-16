@@ -3,33 +3,54 @@ import 'bootstrap/dist/css/bootstrap.css';
 import avatar from "../assets/avatar.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faChartLine, faCirclePlay, faClock } from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "react-router-dom";
 import data from "../data/data";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../authContext";
 
 const Khoahoc = () => {
+  const navigate = useNavigate();
   // Access the first product in your product_data array
-  const product = data.product_data[0];
+  const location = useLocation();
+  const productid = location.state?.productid;
+  const product = data.product_data.find((item) => item.id === productid);
+  const {auth} = useAuth();
 
+  const handleBefortLog = () => {
+    alert('Bạn cần đăng nhập trước khi thực hiện các chức năng của hệ thống');
+    navigate('/login/login');
+  }
   const handleAddToCart = () => {
+    if (!product) {
+      alert('Product not found!');
+      return;
+    }
+  
     const productData = {
       anhsp: product.anh,
       tensp: product.tensp,
-      tengv: product.tengv,
+      tengv: product.tengv, 
       gia: product.gia,
-      soluong: product.soluong
     };
   
-    axios.post('http://localhost:8081/products', productData)
-      .then(res => {
-        if (res.data.Status === "sucess") {
+    console.log('Sending product data:', productData);
+  
+    axios.post('http://localhost:8081/products', productData, { withCredentials: true })
+      .then((res) => {
+        console.log('Server response:', res.data);
+        if (res.data.Status === "success") {
           alert('Thêm sản phẩm vào giỏ hàng thành công!');
+        } else {
+          alert('Error: ' + res.data.Error);
         }
       })
-      .catch(err => {
-        console.error('Error adding to cart:', err);
+      .catch((err) => {
+        console.error('Error adding to cart:', err.response?.data || err.message);
         alert('An error occurred while adding the product to the cart.');
       });
   };
+  const formattedGia = new Intl.NumberFormat('de-DE').format(product.gia);
   
     return (
         <div >
@@ -41,14 +62,14 @@ const Khoahoc = () => {
          <div className="col" >
              <h2 className="fw-bold" style={{color:'black'} }>{product.tensp}</h2>
             
-             <p style={{fontWeight:"bold"}}>Giảng viên: {product.tengv}</p>
+             <p style={{fontWeight:"bold"}}> Giảng viên: {product.tengv}</p>
              <p>Tình trạng: Còn hàng</p>
              <div className="p-3 mt-3 mb-3 col-12 bg-light d-flex align-items-center justify-content-start pricing">
                 <span className="p-2 old-price fw-bold">
-                    <del>2,700,000 đ</del>
+                    <del>2.700.000 đ</del>
                 </span>
                 <span className="p-2 final-price fw-bold">
-                    {product.gia}
+                    {formattedGia} đ
                     
                     <span className="badge badge-danger ms-4 pb-1 mb-2" style={{backgroundColor:'red',color:"white"}}> - 50%</span>
                 </span>
@@ -75,10 +96,20 @@ const Khoahoc = () => {
                  </span>
               </div>
               <p className="fw-bold text-danger">Hotline: 0934.556.247 </p>
-              <button className="btn btn-primary p-2 fw-bold" onClick={handleAddToCart}>Mua khóa học</button>     {/* test*/}
-              <a className="btn btn-primary p-2 mx-4 fw-bold">Thêm vào giỏ</a>
+              {auth ? (
+                <a className="btn btn-primary p-2 mx-4 fw-bold">Mua khóa học</a>
+              ) : (
+                <a className="btn btn-primary p-2 mx-4 fw-bold" onClick={handleBefortLog}>Mua khóa học</a>
+              )}
+              {auth ? (
+                <button className="btn btn-primary p-2 fw-bold" onClick={handleAddToCart}>Thêm vào giỏ</button>
+              ) : (
+                <button className="btn btn-primary p-2 fw-bold" onClick={handleBefortLog}>Thêm vào giỏ</button>
+              )}
+              
          </div>
-
+         <div className="row">
+         <div className="col">
          <div className="row " style={{border:"none"}}>
           <div className="col-8 ">
 
@@ -96,7 +127,9 @@ const Khoahoc = () => {
       </li>
     </ul>
   </div>
+  
   <div className="card-body" style={{backgroundColor:"#edf1f4"}}>
+    
       <div className="card " >
         <div className="row" >
           <div className="col-2" >
@@ -112,6 +145,7 @@ const Khoahoc = () => {
         </div>
       </div>
       <div className="card " >
+        
         <div className="row">
           <div className="col-2" >
             <img src={avatar} alt="" />
@@ -149,8 +183,79 @@ const Khoahoc = () => {
   </div>
 </div>
          </div>
-         
+         <div className="col">
+            <div className="row bg-danger" >
+              <h4 className="border-0 text-light ms-0">KHOÁ HỌC LIÊN QUAN</h4>
+            </div>
+            <div className="row bg-light">
+             
+              <a className="col-3 m-0" href=""> 
+                <img src="	https://d3484gt1o8rlzm.cloudfront.net/mclass/course/CB2K8T10/CB2K8T10_1687925927.jpg" alt="" style={{width:"150%"}}/>
+
+              </a>
+              <div className="col-1 "></div>
+              <div className="col">
+                
+              <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
+                <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
+                <span><strike>400,000đ</strike>
+                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                </span></li>
+              </div>
+            </div>
+            <div className="row bg-light">
+             
+              <a className="col-3 m-0" href=""> 
+                <img src="	https://d3484gt1o8rlzm.cloudfront.net/mclass/course/CB2K8T10/CB2K8T10_1687925927.jpg" alt="" style={{width:"150%"}}/>
+
+              </a>
+              <div className="col-1 "></div>
+              <div className="col">
+                
+              <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
+                <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
+                <span><strike>400,000đ</strike>
+                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                </span></li>
+              </div>
+            </div>
+            <div className="row bg-light">
+             
+              <a className="col-3 m-0" href=""> 
+                <img src="	https://d3484gt1o8rlzm.cloudfront.net/mclass/course/CB2K8T10/CB2K8T10_1687925927.jpg" alt="" style={{width:"150%"}}/>
+
+              </a>
+              <div className="col-1 "></div>
+              <div className="col">
+                
+              <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
+                <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
+                <span><strike>400,000đ</strike>
+                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                </span></li>
+              </div>
+            </div>
+            <div className="row bg-light">
+             
+              <a className="col-3 m-0" href=""> 
+                <img src="	https://d3484gt1o8rlzm.cloudfront.net/mclass/course/CB2K8T10/CB2K8T10_1687925927.jpg" alt="" style={{width:"150%"}}/>
+
+              </a>
+              <div className="col-1 "></div>
+              <div className="col">
+                
+              <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
+                <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
+                <span><strike>400,000đ</strike>
+                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                </span></li>
+              </div>
+            </div>
+         </div>
+         </div>
      </div>
+     </div>
+     <div className="col"></div>
      </div>
      <div className="row flex flex-row justify-content-between mt-5">
  <div className="col col-lg-5 pb-1 pt-3 ps-5 ms-5">
