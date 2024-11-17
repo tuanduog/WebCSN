@@ -46,7 +46,7 @@ const Cart = () => {
         updatedProducts[existingProductIndex].soluong -= 1;
       }
     } 
-    axios.put(`http://localhost:8081/products/${currentProduct.productId}`, {
+    axios.put(`http://localhost:8081/products/${currentProduct.productid}`, {
       soluong: updatedProducts[existingProductIndex].soluong
     }, { withCredentials: true })
     .then(response => {
@@ -60,17 +60,43 @@ const Cart = () => {
   };
   
 
-  const handleDeleteProduct = (productId) => {
-    // Send a DELETE request to the backend with the correct productId
-    axios.delete(`http://localhost:8081/products/${productId}`, { withCredentials: true })
-      .then(response => {
-        console.log('Product deleted:', response.data);
+  const handleDeleteProduct = (productid) => {
+    if (!productid) {
+      console.error('Invalid product ID provided for deletion');
+      alert('Invalid product ID provided');
+      return;
+    }
+
+    const productToDelete = products.find((product) => product.productid === productid);
+    if (!productToDelete) {
+      console.error('Product not found');
+      alert('Product not found');
+      return;
+    }
   
-        // Update the products state to remove the deleted product
-        setProducts(prevProducts => prevProducts.filter(product => product.productId !== productId));
+    const { userid } = productToDelete;
+    axios.delete(`http://localhost:8081/products/${productid}`, {
+      withCredentials: true, 
+      data: { userid }, 
+    })
+      .then((response) => {
+        if (response.data.Status === "success") {
+          console.log('Product deleted successfully:', response.data);
+  
+          setProducts((prevProducts) =>
+            prevProducts.filter((product) => product.productid !== productid)
+          );
+  
+          alert('Xóa sản phẩm thành công!');
+        } else {
+          console.error('Failed to delete product:', response.data.Message);
+          alert(`Failed to delete product: ${response.data.Message}`);
+        }
       })
-      .catch(error => {
-        console.error('Error deleting product:', error.response?.data || error.message);
+      .catch((error) => {
+        const errorMessage = error.response?.data?.Message || error.message;
+        console.error('Error deleting product:', errorMessage);
+        alert(`Error deleting product: ${errorMessage}`);
       });
   };
   
@@ -145,7 +171,7 @@ const Cart = () => {
                     <FontAwesomeIcon 
                       icon={faTrash} 
                       style={{ fontSize: '1.5rem', marginLeft: '25px', cursor: 'pointer' }} 
-                      onClick={() => handleDeleteProduct(product.productId)} // Delete product
+                      onClick={() => handleDeleteProduct(product.productid)} // Delete product
                     />
                   </div>
                 </div>

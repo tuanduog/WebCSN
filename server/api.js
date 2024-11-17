@@ -113,7 +113,7 @@ app.post('/products', verifyUser, (req, res) => {
     return res.status(400).json({ Error: "Missing required fields", MissingFields: { anhsp, tensp, tengv, soluong, gia } });
   }
 
-  // Check to increase quantity based on tensp and userid
+  // check để tăng sl sản phẩm
   const checkProductSql = "SELECT * FROM products WHERE tensp = ? AND userid = ?";
   db.query(checkProductSql, [tensp, req.userid], (err, result) => {
     if (err) {
@@ -134,7 +134,7 @@ app.post('/products', verifyUser, (req, res) => {
         res.json({ Status: "success", Message: "Product quantity updated successfully", ProductID: result[0].id });
       });
     } else {
-      // If no product exists, add a new product
+      // Nếu chưa có sp thì add mới
       const sql = "INSERT INTO products (anhsp, tensp, tengv, soluong, gia, userid) VALUES (?, ?, ?, ?, ?, ?)";
       const values = [anhsp, tensp, tengv, soluong, gia, req.userid];
 
@@ -153,16 +153,17 @@ app.post('/products', verifyUser, (req, res) => {
 
 
 // Update product quantity
-app.put('/products/:productId', verifyUser, (req, res) => {
-  const { productId } = req.params;
+app.put('/products/:productid', verifyUser, (req, res) => {
+
+  const { productid } = req.params;
   const { soluong } = req.body;
 
   if (soluong < 0) {
     return res.status(400).json({ Error: 'Quantity cannot be negative' });
   }
 
-  const sql = "UPDATE products SET soluong = ? WHERE productId = ?";
-  db.query(sql, [soluong, productId], (err, result) => {
+  const sql = "UPDATE products SET soluong = ? WHERE productid = ?";
+  db.query(sql, [soluong, productid], (err, result) => {
     if (err) {
       console.error('Database error while updating quantity:', err.message);
       return res.status(500).json({ Error: 'Database error', Details: err.message });
@@ -202,17 +203,16 @@ app.get('/products', verifyUser, (req, res) => {
 });
 
 app.delete('/products/:productid', verifyUser, (req, res) => {
-  console.log('URL Params:', req.params);
-  const productId = parseInt(req.params.productid, 10);
-  const userId = req.userid;
+  const { productid } = req.params;
+  const { userid } = req.body;
   
-  if (isNaN(productId)) {
+  if (isNaN(productid)) {
     return res.status(400).json({ Error: "Invalid product ID" });
   }
 
   const sql = "DELETE FROM products WHERE productid = ? AND userid = ?";
 
-  db.query(sql, [productId, userId], (err, result) => {
+  db.query(sql, [productid, userid], (err, result) => {
     if (err) {
       console.error('Database error during product deletion:', err.message);
       return res.status(500).json({ Status: "error", Message: "Database error", Details: err.message });
@@ -220,7 +220,7 @@ app.delete('/products/:productid', verifyUser, (req, res) => {
 
     if (result.affectedRows === 0) {
   
-      console.log(`No rows affected. Product ID: ${productId}, User ID: ${userId}`);
+      console.log(`No rows affected. Product ID: ${productid}, User ID: ${userid}`);
 
       return res.status(404).json({ Status: "error", Message: "Không tìm thấy sản phẩm hoặc sản phẩm" });
     }
@@ -229,9 +229,6 @@ app.delete('/products/:productid', verifyUser, (req, res) => {
     res.json({ Status: "success", Message: "Xóa sản phẩm thành công" });
   });
 });
-
-
-
 
 
 app.listen(8081, ()=> {
