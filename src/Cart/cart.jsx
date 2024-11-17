@@ -2,34 +2,23 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
+
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 const Cart = () => {
-  const [products, setProducts] = useState([]); // State to store fetched products
+  const [products, setProducts] = useState([]); 
 
-  // Fetch products when the component mounts
+
   useEffect(() => {
     const fetchProducts = async () => {
-      const token = Cookies.get('token'); // Get the token from cookies
-      console.log('Token:', token);
-
-      if (!token) {
-        console.error('No token found');
-        return;
-      }
-
       try {
         const response = await axios.get('http://localhost:8081/products', {
-          headers: {
-            'Authorization': `Bearer ${token}`, // Pass token in Authorization header
-          },
-          withCredentials: true, // Include cookies in the request
+          withCredentials: true, 
         });
-
+  
         if (response.data.Status === "success") {
-          setProducts(response.data.Products); // Set products state
+          setProducts(response.data.Products);
         } else {
           console.error('No products found');
         }
@@ -37,25 +26,55 @@ const Cart = () => {
         console.error('Error fetching products:', error.response?.data || error.message);
       }
     };
-
-    fetchProducts(); // Call the function to fetch products
+  
+    fetchProducts();
   }, []);
+  
 
-  // Handle quantity change (increment/decrement)
+
   const handleQuantityChange = (index, type) => {
     const updatedProducts = [...products];
-    if (type === 'increment') {
-      updatedProducts[index].quantity += 1;
-    } else if (type === 'decrement' && updatedProducts[index].quantity > 0) {
-      updatedProducts[index].quantity -= 1;
-    }
+    const currentProduct = updatedProducts[index];
+  
+    // Check if the product already exists in the cart by name
+    const existingProductIndex = updatedProducts.findIndex(product => product.tensp === currentProduct.tensp);
+  
+    if (existingProductIndex !== -1) {
+      if (type === 'increment') {
+        updatedProducts[existingProductIndex].soluong += 1;
+      } else if (type === 'decrement' && updatedProducts[existingProductIndex].soluong > 0) {
+        updatedProducts[existingProductIndex].soluong -= 1;
+      }
+    } 
+    axios.put(`http://localhost:8081/products/${currentProduct.productId}`, {
+      soluong: updatedProducts[existingProductIndex].soluong
+    }, { withCredentials: true })
+    .then(response => {
+      console.log('Product quantity updated:', response.data);
+    })
+    .catch(error => {
+      console.error('Error updating product quantity:', error.response?.data || error.message);
+    });
+  
     setProducts(updatedProducts); 
   };
+  
 
-  // Handle delete product
   const handleDeleteProduct = (productId) => {
-    setProducts(products.filter(product => product.productId !== productId));
+    // Send a DELETE request to the backend with the correct productId
+    axios.delete(`http://localhost:8081/products/${productId}`, { withCredentials: true })
+      .then(response => {
+        console.log('Product deleted:', response.data);
+  
+        // Update the products state to remove the deleted product
+        setProducts(prevProducts => prevProducts.filter(product => product.productId !== productId));
+      })
+      .catch(error => {
+        console.error('Error deleting product:', error.response?.data || error.message);
+      });
   };
+  
+  
 
   return (
     <div style={{ backgroundColor: 'white' }}>
@@ -65,7 +84,7 @@ const Cart = () => {
             <h3 className="fw-normal mb-0">Sản phẩm</h3>
             <div>
               <p className="mb-0">
-                <span className="text-muted">Sắp xếp theo:</span>
+                <span className="text-muted">Sắp xếp theo: </span>
                 <a href="#!" className="text-body">
                   giá <i className="fas fa-angle-down mt-1"></i>
                 </a>
@@ -89,10 +108,10 @@ const Cart = () => {
                   <div className="col-md-2 col-lg-2 col-xl-2">
                     <img src={product.anhsp} alt={product.tensp} />
                   </div>
-                  <div className="col-md-3 col-lg-3 col-xl-3" style={{ paddingLeft: '80px' }}>
+                  <div className="col-md-3 col-lg-3 col-xl-3" style={{width: '220px' }}>
                     <p className="lead fw-normal mb-2">{product.tensp}</p>
                   </div>
-                  <div className="col-md-3 col-lg-3 col-xl-2 d-flex" style={{ paddingLeft: '60px' }}>
+                  <div className="col-md-3 col-lg-3 col-xl-2 d-flex" style={{ paddingRight: '20px' }}>
                     <button
                       className="btn btn-link px-2"
                       onClick={() => handleQuantityChange(index, 'decrement')}
@@ -103,12 +122,12 @@ const Cart = () => {
                     <input
                       id={`form-${index}`}
                       min="0"
-                      name="quantity"
-                      value={product.quantity || 1} // Controlled value
+                      name="soluong"
+                      value={product.soluong}
                       type="number"
                       className="form-control form-control-sm"
                       style={{ textAlign: 'center' }}
-                      onChange={(e) => handleQuantityChange(index, e.target.value > product.quantity ? 'increment' : 'decrement')}
+                      onChange={(e) => handleQuantityChange(index, e.target.value > product.soluong ? 'increment' : 'decrement')}
                     />
 
                     <button
@@ -118,8 +137,8 @@ const Cart = () => {
                       <i className="fas fa-plus"></i>
                     </button>
                   </div>
-                  <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1 d-flex" style={{ paddingLeft: '-30px' }}>
-                    <h5 className="mb-0">{product.gia} VND</h5>
+                  <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1 d-flex" style={{ marginLeft: '-20px'}}>
+                    <h5 className="mb-0">{Intl.NumberFormat('de-DE').format(product.gia)} VNĐ</h5>
                   </div>
                   <div className="col-md-1 col-lg-1 col-xl-1 text-end">
                     <input type="checkbox" style={{ cursor: 'pointer' }} />

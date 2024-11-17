@@ -32,6 +32,7 @@ const Khoahoc = () => {
       tensp: product.tensp,
       tengv: product.tengv, 
       gia: product.gia,
+      soluong: product.soluong
     };
   
     console.log('Sending product data:', productData);

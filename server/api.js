@@ -10,7 +10,7 @@ const app = express()
 app.use(cors(
   {
     origin: ["http://localhost:5173"],
-    methods: ["POST, GET"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true
   }
 ));
@@ -25,7 +25,6 @@ app.use(cookieParser());
 
 const verifyUser = (req, res, next) => {
   const token = req.cookies.token;
-
   if (!token) {
     return res.status(401).json({ Error: "Token not provided" });
   }
@@ -89,8 +88,8 @@ app.post('/login/login', (req, res) => {
           const userid = data[0].userid;
           const token = jwt.sign({ name, userid }, "jwt-secret-key", { expiresIn: '1d' }); 
 
-          res.cookie('token', token, { httpOnly: true, secure: true });
-
+          res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none' });
+ 
           return res.json({ Status: "Đăng nhập thành công" });
         } else {
           return res.json({ Error: "Sai mật khẩu" });
@@ -103,36 +102,86 @@ app.post('/login/login', (req, res) => {
 });
 
 
-// POST endpoint: Add a product
+// POST endpoint
 app.post('/products', verifyUser, (req, res) => {
   console.log('Request body received for adding product:', req.body);
 
-  const { anhsp, tensp, tengv, gia } = req.body;
+  const { anhsp, tensp, tengv, soluong, gia } = req.body;
 
-  // Check for missing fields
-  if (!anhsp || !tensp || !tengv || !gia) {
+  if (!anhsp || !tensp || !tengv || !soluong || !gia) {
     console.error('Missing fields:', req.body);
-    return res.status(400).json({ Error: "Missing required fields", MissingFields: { anhsp, tensp, tengv, gia } });
+    return res.status(400).json({ Error: "Missing required fields", MissingFields: { anhsp, tensp, tengv, soluong, gia } });
   }
 
-  const sql = "INSERT INTO products (anhsp, tensp, tengv, gia, userid) VALUES (?, ?, ?, ?, ?)";
-  const values = [anhsp, tensp, tengv, gia, req.userid];
-
-  db.query(sql, values, (err, result) => {
+  // Check to increase quantity based on tensp and userid
+  const checkProductSql = "SELECT * FROM products WHERE tensp = ? AND userid = ?";
+  db.query(checkProductSql, [tensp, req.userid], (err, result) => {
     if (err) {
-      console.error('Database error while adding product:', err.message);
+      console.error('Database error while checking product:', err.message);
       return res.status(500).json({ Error: "Database error", Details: err.message });
     }
 
-    console.log('Product successfully added with ID:', result.insertId);
-    res.json({ Status: "success", Message: "Product added successfully", ProductID: result.insertId });
+    if (result.length > 0) {
+      const newQuantity = result[0].soluong + soluong;
+      const updateQuantitySql = "UPDATE products SET soluong = ? WHERE tensp = ? AND userid = ?";
+      db.query(updateQuantitySql, [newQuantity, tensp, req.userid], (err, updateResult) => {
+        if (err) {
+          console.error('Database error while updating quantity:', err.message);
+          return res.status(500).json({ Error: "Database error", Details: err.message });
+        }
+
+        console.log('Product quantity updated successfully.');
+        res.json({ Status: "success", Message: "Product quantity updated successfully", ProductID: result[0].id });
+      });
+    } else {
+      // If no product exists, add a new product
+      const sql = "INSERT INTO products (anhsp, tensp, tengv, soluong, gia, userid) VALUES (?, ?, ?, ?, ?, ?)";
+      const values = [anhsp, tensp, tengv, soluong, gia, req.userid];
+
+      db.query(sql, values, (err, insertResult) => {
+        if (err) {
+          console.error('Database error while adding product:', err.message);
+          return res.status(500).json({ Error: "Database error", Details: err.message });
+        }
+
+        console.log('Product successfully added with ID:', insertResult.insertId);
+        res.json({ Status: "success", Message: "Product added successfully", ProductID: insertResult.insertId });
+      });
+    }
   });
 });
 
-// GET endpoint: Retrieve all products for a user
-// Endpoint GET /products
+
+// Update product quantity
+app.put('/products/:productId', verifyUser, (req, res) => {
+  const { productId } = req.params;
+  const { soluong } = req.body;
+
+  if (soluong < 0) {
+    return res.status(400).json({ Error: 'Quantity cannot be negative' });
+  }
+
+  const sql = "UPDATE products SET soluong = ? WHERE productId = ?";
+  db.query(sql, [soluong, productId], (err, result) => {
+    if (err) {
+      console.error('Database error while updating quantity:', err.message);
+      return res.status(500).json({ Error: 'Database error', Details: err.message });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ Error: 'Product not found' });
+    }
+
+    console.log('Product quantity updated successfully');
+    res.json({ Status: 'success', Message: 'Product quantity updated successfully' });
+  });
+});
+
+
+
+// get  endpoint
 app.get('/products', verifyUser, (req, res) => {
-  console.log('UserID:', req.userid); // Kiểm tra UserID đã lấy từ middleware
+  console.log('UserID:', req.userid); 
 
   const userId = req.userid;
 
@@ -151,6 +200,38 @@ app.get('/products', verifyUser, (req, res) => {
     res.json({ Status: "success", Products: results });
   });
 });
+
+app.delete('/products/:productid', verifyUser, (req, res) => {
+  console.log('URL Params:', req.params);
+  const productId = parseInt(req.params.productid, 10);
+  const userId = req.userid;
+  
+  if (isNaN(productId)) {
+    return res.status(400).json({ Error: "Invalid product ID" });
+  }
+
+  const sql = "DELETE FROM products WHERE productid = ? AND userid = ?";
+
+  db.query(sql, [productId, userId], (err, result) => {
+    if (err) {
+      console.error('Database error during product deletion:', err.message);
+      return res.status(500).json({ Status: "error", Message: "Database error", Details: err.message });
+    }
+
+    if (result.affectedRows === 0) {
+  
+      console.log(`No rows affected. Product ID: ${productId}, User ID: ${userId}`);
+
+      return res.status(404).json({ Status: "error", Message: "Không tìm thấy sản phẩm hoặc sản phẩm" });
+    }
+
+    // If deletion is successful
+    res.json({ Status: "success", Message: "Xóa sản phẩm thành công" });
+  });
+});
+
+
+
 
 
 app.listen(8081, ()=> {
