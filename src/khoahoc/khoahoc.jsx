@@ -11,7 +11,6 @@ import { useAuth } from "../authContext";
 
 const Khoahoc = () => {
   const navigate = useNavigate();
-  // Access the first product in your product_data array
   const location = useLocation();
   const productid = location.state?.productid;
   const product = data.product_data.find((item) => item.id === productid);
@@ -20,6 +19,9 @@ const Khoahoc = () => {
   const handleBefortLog = () => {
     alert('Bạn cần đăng nhập trước khi thực hiện các chức năng của hệ thống');
     navigate('/login/login');
+  }
+  const handleCheckOut = () => {
+    navigate('/Checkout/Checkout');
   }
   const handleAddToCart = () => {
     if (!product) {
@@ -85,7 +87,7 @@ const Khoahoc = () => {
                  </span>
                  <span className="col">
                   <FontAwesomeIcon icon={faChartLine}></FontAwesomeIcon>
-                 <span>  Cấp độ: Lớp 11</span>
+                 <span>  Cấp độ: Lớp 12</span>
                  </span>
                  <span className="col">
                  <FontAwesomeIcon icon={faCirclePlay}></FontAwesomeIcon>
@@ -98,7 +100,7 @@ const Khoahoc = () => {
               </div>
               <p className="fw-bold text-danger">Hotline: 0934.556.247 </p>
               {auth ? (
-                <a className="btn btn-primary p-2 mx-4 fw-bold">Mua khóa học</a>
+                <a className="btn btn-primary p-2 mx-4 fw-bold" onClick={handleCheckOut}>Mua khóa học</a>
               ) : (
                 <a className="btn btn-primary p-2 mx-4 fw-bold" onClick={handleBefortLog}>Mua khóa học</a>
               )}

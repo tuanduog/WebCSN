@@ -1,7 +1,13 @@
 import '../sach/sach.css';
+import { useNavigate } from 'react-router-dom';
+import data_sach from '../data/data_sach';
 
-import { Link } from "react-router-dom";
-const sach = () => {
+const Sach = () => {
+  const navigate = useNavigate();
+  const handlePick = (sachid) => {
+    navigate('/ctietsach', {state: {sachid}});
+  }
+
   return (
     <div>
         <div id="main">
@@ -29,235 +35,103 @@ const sach = () => {
       </ul>
       <div className="s">
         <ul className="sach">
-          <li>
-            <div className="card" style={{ width: "16rem" }}>
-              <img
-                className="card-img-top"
-                src="https://d3484gt1o8rlzm.cloudfront.net/mclass/books/book_CBS41667989721.png"
-                alt="Card image cap"
-              />
-              <div className="card-body">
-                <h5 className="card-title">COMBO SÁCH 3 MÔN BẤT KỲ</h5>
-                <p className="card-text" style={{ marginBottom: "0.1rem" }}>
-                  <span>
-                    Tác giả: <strong>MCLASS</strong>
-                  </span>
-                </p>
-                <p style={{ marginBottom: "0.1rem" }}>
-                  <strike>400,000đ</strike>
-                </p>
-                <Link to='/ctietsach'>
-                <a href="#" className="btn btn-primary">
-                  Tham khảo thêm
-                </a>
-                </Link>
-              </div>
+        {data_sach.sach_data
+        .filter((book) => book.id >= 1 && book.id <= 3)
+        .map((book) => (
+        <li key={book.id}>
+          <div
+            className="card"
+            style={{ width: "16rem" }} 
+          >
+        <img
+          className="card-img-top"
+          src={book.anhsach}
+          alt="Card image cap"
+        />
+        <div className="card-body">
+          <h5 className="card-title">{book.tensach}</h5>
+          <p className="card-text" style={{ marginBottom: "0.1rem" }}>
+            <span>
+              Tác giả: <strong>{book.tacgia}</strong>
+            </span>
+          </p>
+          <p style={{ marginBottom: "0.1rem" }}>
+            <strike>{Intl.NumberFormat('de-DE').format(book.gia)} đ</strike>
+          </p>
+         
+            <div className="btn btn-primary" onClick={() => handlePick(book.id)} >Tham khảo thêm</div>
+
             </div>
-          </li>
-          <li>
-            <div className="card" style={{ width: "16rem" }}>
-              <img
-                className="card-img-top"
-                src="https://d3484gt1o8rlzm.cloudfront.net/mclass/books/book_CBS41667989721.png"
-                alt="Card image cap"
-              />
-              <div className="card-body">
-                <h5 className="card-title">COMBO SÁCH 3 MÔN BẤT KỲ</h5>
-                <p className="card-text" style={{ marginBottom: "0.1rem" }}>
-                  <span>
-                    Tác giả: <strong>MCLASS</strong>
-                  </span>
-                </p>
-                <p style={{ marginBottom: "0.1rem" }}>
-                  <strike>400,000đ</strike>
-                </p>
-                <Link to='/ctietsach'>
-                <a href="#" className="btn btn-primary">
-                  Tham khảo thêm
-                </a>
-                </Link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div className="card" style={{ width: "16rem" }}>
-              <img
-                className="card-img-top"
-                src="https://d3484gt1o8rlzm.cloudfront.net/mclass/books/book_CBS41667989721.png"
-                alt="Card image cap"
-              />
-              <div className="card-body">
-                <h5 className="card-title">COMBO SÁCH 3 MÔN BẤT KỲ</h5>
-                <p className="card-text" style={{ marginBottom: "0.1rem" }}>
-                  <span>
-                    Tác giả: <strong>MCLASS</strong>
-                  </span>
-                </p>
-                <p style={{ marginBottom: "0.1rem" }}>
-                  <strike>400,000đ</strike>
-                </p>
-                <Link to='/ctietsach'>
-                <a href="#" className="btn btn-primary">
-                  Tham khảo thêm
-                </a>
-                </Link>
-              </div>
-            </div>
-          </li>
+          </div>
+        </li>
+          ))}
+
+          
         </ul>
         <ul className='sach'>
-        <li>
-            <div className="card" style={{ width: "16rem" }}>
-              <img
-                className="card-img-top"
-                src="https://d3484gt1o8rlzm.cloudfront.net/mclass/books/book_CBS41667989721.png"
-                alt="Card image cap"
-              />
-              <div className="card-body">
-                <h5 className="card-title">COMBO SÁCH 3 MÔN BẤT KỲ</h5>
-                <p className="card-text" style={{ marginBottom: "0.1rem" }}>
-                  <span>
-                    Tác giả: <strong>MCLASS</strong>
-                  </span>
-                </p>
-                <p style={{ marginBottom: "0.1rem" }}>
-                  <strike>400,000đ</strike>
-                </p>
-                <Link to='/ctietsach'>
-                <a href="#" className="btn btn-primary">
-                  Tham khảo thêm
-                </a>
-                </Link>
-              </div>
+        {data_sach.sach_data
+        .filter((book) => book.id >= 1 && book.id <= 3)
+        .map((book) => (
+        <li key={book.id}>
+          <div
+            className="card"
+            style={{ width: "16rem" }}
+        
+          >
+        <img
+          className="card-img-top"
+          src={book.anhsach}
+          alt="Card image cap"
+        />
+        <div className="card-body">
+          <h5 className="card-title">{book.tensach}</h5>
+          <p className="card-text" style={{ marginBottom: "0.1rem" }}>
+            <span>
+              Tác giả: <strong>{book.tacgia}</strong>
+            </span>
+          </p>
+          <p style={{ marginBottom: "0.1rem" }}>
+            <strike>{Intl.NumberFormat('de-DE').format(book.gia)} đ</strike>
+          </p>
+    
+            <div className="btn btn-primary" onClick={() => handlePick(book.id)} >Tham khảo thêm</div>
+   
             </div>
-          </li>
-          <li>
-            <div className="card" style={{ width: "16rem" }}>
-              <img
-                className="card-img-top"
-                src="https://d3484gt1o8rlzm.cloudfront.net/mclass/books/book_CBS41667989721.png"
-                alt="Card image cap"
-              />
-              <div className="card-body">
-                <h5 className="card-title">COMBO SÁCH 3 MÔN BẤT KỲ</h5>
-                <p className="card-text" style={{ marginBottom: "0.1rem" }}>
-                  <span>
-                    Tác giả: <strong>MCLASS</strong>
-                  </span>
-                </p>
-                <p style={{ marginBottom: "0.1rem" }}>
-                  <strike>400,000đ</strike>
-                </p>
-                <Link to='/ctietsach'>
-                <a href="#" className="btn btn-primary">
-                  Tham khảo thêm
-                </a>
-                </Link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div className="card" style={{ width: "16rem" }}>
-              <img
-                className="card-img-top"
-                src="https://d3484gt1o8rlzm.cloudfront.net/mclass/books/book_CBS41667989721.png"
-                alt="Card image cap"
-              />
-              <div className="card-body">
-                <h5 className="card-title">COMBO SÁCH 3 MÔN BẤT KỲ</h5>
-                <p className="card-text" style={{ marginBottom: "0.1rem" }}>
-                  <span>
-                    Tác giả: <strong>MCLASS</strong>
-                  </span>
-                </p>
-                <p style={{ marginBottom: "0.1rem" }}>
-                  <strike>400,000đ</strike>
-                </p>
-                <Link to='/ctietsach'>
-                <a href="#" className="btn btn-primary">
-                  Tham khảo thêm
-                </a>
-                </Link>
-              </div>
-            </div>
-          </li>
+          </div>
+        </li>
+          ))}
         </ul>
         <ul className='sach'>
-        <li>
-            <div className="card" style={{ width: "16rem" }}>
-              <img
-                className="card-img-top"
-                src="https://d3484gt1o8rlzm.cloudfront.net/mclass/books/book_CBS41667989721.png"
-                alt="Card image cap"
-              />
-              <div className="card-body">
-                <h5 className="card-title">COMBO SÁCH 3 MÔN BẤT KỲ</h5>
-                <p className="card-text" style={{ marginBottom: "0.1rem" }}>
-                  <span>
-                    Tác giả: <strong>MCLASS</strong>
-                  </span>
-                </p>
-                <p style={{ marginBottom: "0.1rem" }}>
-                  <strike>400,000đ</strike>
-                </p>
-                <Link to='/ctietsach'>
-                <a href="#" className="btn btn-primary">
-                  Tham khảo thêm
-                </a>
-                </Link>
-              </div>
+        {data_sach.sach_data
+        .filter((book) => book.id >= 1 && book.id <= 3)
+        .map((book) => (
+        <li key={book.id}>
+          <div
+            className="card"
+            style={{ width: "16rem" }}
+          >
+        <img
+          className="card-img-top"
+          src={book.anhsach}
+          alt="Card image cap"
+        />
+        <div className="card-body">
+          <h5 className="card-title">{book.tensach}</h5>
+          <p className="card-text" style={{ marginBottom: "0.1rem" }}>
+            <span>
+              Tác giả: <strong>{book.tacgia}</strong>
+            </span>
+          </p>
+          <p style={{ marginBottom: "0.1rem" }}>
+            <strike>{Intl.NumberFormat('de-DE').format(book.gia)} đ</strike>
+          </p>
+
+            <div className="btn btn-primary" onClick={() => handlePick(book.id)} >Tham khảo thêm</div>
+
             </div>
-          </li>
-          <li>
-            <div className="card" style={{ width: "16rem" }}>
-              <img
-                className="card-img-top"
-                src="https://d3484gt1o8rlzm.cloudfront.net/mclass/books/book_CBS41667989721.png"
-                alt="Card image cap"
-              />
-              <div className="card-body">
-                <h5 className="card-title">COMBO SÁCH 3 MÔN BẤT KỲ</h5>
-                <p className="card-text" style={{ marginBottom: "0.1rem" }}>
-                  <span>
-                    Tác giả: <strong>MCLASS</strong>
-                  </span>
-                </p>
-                <p style={{ marginBottom: "0.1rem" }}>
-                  <strike>400,000đ</strike>
-                </p>
-                <Link to='/ctietsach'>
-                <a href="#" className="btn btn-primary">
-                  Tham khảo thêm
-                </a>
-                </Link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div className="card" style={{ width: "16rem" }}>
-              <img
-                className="card-img-top"
-                src="https://d3484gt1o8rlzm.cloudfront.net/mclass/books/book_CBS41667989721.png"
-                alt="Card image cap"
-              />
-              <div className="card-body">
-                <h5 className="card-title">COMBO SÁCH 3 MÔN BẤT KỲ</h5>
-                <p className="card-text" style={{ marginBottom: "0.1rem" }}>
-                  <span>
-                    Tác giả: <strong>MCLASS</strong>
-                  </span>
-                </p>
-                <p style={{ marginBottom: "0.1rem" }}>
-                  <strike>400,000đ</strike>
-                </p>
-                <Link to='/ctietsach'>
-                <a href="#" className="btn btn-primary">
-                  Tham khảo thêm
-                </a>
-                </Link>
-              </div>
-            </div>
-          </li>
+          </div>
+        </li>
+          ))}
         </ul>
       </div>
     </div>
@@ -298,4 +172,4 @@ const sach = () => {
   )
 }
 
-export default sach
+export default Sach

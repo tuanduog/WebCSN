@@ -73,6 +73,36 @@ app.post('/register/register', (req, res) => {
     });
   });
 });
+// kiểm tra user and email đã có chưa
+app.post('/register/checkUser', (req, res) => {
+  const { email, username } = req.body;
+
+  const checkUserSql = "SELECT * FROM users WHERE email = ? OR username = ?";
+  db.query(checkUserSql, [email, username], (err, result) => {
+    if (err) {
+      console.error("Database error:", err.message);
+      return res.status(500).json({ Status: "error", Message: "Database error" });
+    }
+
+    let response = {
+      email: { exists: false },
+      username: { exists: false }
+    };
+
+    result.forEach(user => {
+      if (user.username === username) {
+        response.username.exists = true;
+      }
+      if (user.email === email) {
+        response.email.exists = true;
+      }
+    });
+
+    return res.json(response); 
+  });
+});
+
+
 
 app.post('/login/login', (req, res) => {
   const sql = "SELECT * FROM users WHERE username = ?";
@@ -230,6 +260,143 @@ app.delete('/products/:productid', verifyUser, (req, res) => {
   });
 });
 
+// Route to add a book or update the quantity if it already exists
+app.post('/books', verifyUser, (req, res) => {
+  console.log('Request body received for adding book:', req.body);
+
+  const { anhsach, tensach, tacgia, soluong, gia } = req.body;
+
+  // Validate input fields
+  if (!anhsach || !tensach || !tacgia || !soluong || !gia) {
+    console.error('Missing fields:', req.body);
+    return res.status(400).json({
+      Error: "Missing required fields",
+      MissingFields: { anhsach: !!anhsach, tensach: !!tensach, tacgia: !!tacgia, soluong: !!soluong, gia: !!gia }
+    });
+  }
+
+  const userId = req.userid;
+
+  const checkBookSql = "SELECT * FROM sach WHERE tensach = ? AND userid = ?";
+  db.query(checkBookSql, [tensach, userId], (err, result) => {
+    if (err) {
+      console.error('Database error while checking product:', err.message);
+      return res.status(500).json({ Error: "Database error", Details: err.message });
+    }
+
+    if (result.length > 0) {
+
+      const newQuantity = result[0].soluong + parseInt(soluong, 10);
+      const updateQuantitySql = "UPDATE sach SET soluong = ? WHERE tensach = ? AND userid = ?";
+      db.query(updateQuantitySql, [newQuantity, tensach, userId], (err) => {
+        if (err) {
+          console.error('Database error while updating quantity:', err.message);
+          return res.status(500).json({ Error: "Database error", Details: err.message });
+        }
+
+        console.log('Book quantity updated successfully.');
+        return res.json({
+          Status: "success",
+          Message: "Book quantity updated successfully",
+          BookID: result[0].id,
+        });
+      });
+    } else {
+      // Insert new book if it doesn't exist
+      const sql = "INSERT INTO sach (anhsach, tensach, tacgia, soluong, gia, userid) VALUES (?, ?, ?, ?, ?, ?)";
+      const values = [anhsach, tensach, tacgia, soluong, gia, userId];
+
+      db.query(sql, values, (err, insertResult) => {
+        if (err) {
+          console.error('Database error while adding book:', err.message);
+          return res.status(500).json({ Error: "Database error", Details: err.message });
+        }
+
+        console.log('Book successfully added with ID:', insertResult.insertId);
+        return res.json({
+          Status: "success",
+          Message: "Book added successfully",
+          BookID: insertResult.insertId,
+        });
+      });
+    }
+  });
+});
+
+
+app.get('/books', verifyUser, (req, res) => {
+  console.log('UserID:', req.userid); 
+
+  const userId = req.userid;
+
+  const sql = "SELECT * FROM sach WHERE userid = ?";
+  
+  db.query(sql, [userId], (err, results) => {
+    if (err) {
+      console.error('Lỗi cơ sở dữ liệu:', err.message);
+      return res.status(500).json({ Error: "Lỗi cơ sở dữ liệu", Details: err.message });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ Status: "Không tìm thấy sản phẩm nào", Books: [] });
+    }
+
+    res.json({ Status: "success", Books: results });
+  });
+});
+
+app.put('/books/:sachid', verifyUser, (req, res) => {
+
+  const { sachid } = req.params;
+  const { soluong } = req.body;
+
+  if (soluong < 0) {
+    return res.status(400).json({ Error: 'Quantity cannot be negative' });
+  }
+
+  const sql = "UPDATE sach SET soluong = ? WHERE sachid = ?";
+  db.query(sql, [soluong, sachid], (err, result) => {
+    if (err) {
+      console.error('Database error while updating quantity:', err.message);
+      return res.status(500).json({ Error: 'Database error', Details: err.message });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ Error: 'Product not found' });
+    }
+
+    console.log('Product quantity updated successfully');
+    res.json({ Status: 'success', Message: 'Product quantity updated successfully' });
+  });
+});
+
+app.delete('/books/:sachid', verifyUser, (req, res) => {
+  const { sachid } = req.params;
+  const { userid } = req.body;
+  
+  if (isNaN(sachid)) {
+    return res.status(400).json({ Error: "Invalid product ID" });
+  }
+
+  const sql = "DELETE FROM sach WHERE sachid = ? AND userid = ?";
+
+  db.query(sql, [sachid, userid], (err, result) => {
+    if (err) {
+      console.error('Database error during product deletion:', err.message);
+      return res.status(500).json({ Status: "error", Message: "Database error", Details: err.message });
+    }
+
+    if (result.affectedRows === 0) {
+  
+      console.log(`No rows affected. Product ID: ${sachid}, User ID: ${userid}`);
+
+      return res.status(404).json({ Status: "error", Message: "Không tìm thấy sản phẩm hoặc sản phẩm" });
+    }
+
+    // If deletion is successful
+    res.json({ Status: "success", Message: "Xóa sản phẩm thành công" });
+  });
+});
 
 app.listen(8081, ()=> {
   console.log("Server running")

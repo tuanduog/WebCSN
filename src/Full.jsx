@@ -9,18 +9,6 @@ import { Link} from "react-router-dom";
 // // import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from 'react-router-dom';
 import data from './data/data';
-import anh111 from './assets/111.jpg';
-import anh112 from './assets/112.jpg';
-import anh113 from './assets/113.jpg';
-import anh114 from './assets/114.jpg';
-import anh115 from './assets/115.jpg';
-import anh116 from './assets/116.jpg';
-import anh117 from './assets/117.jpg';
-import anh118 from './assets/118.jpg';
-import anh101 from './assets/101.png';
-import anh102 from './assets/102.png';
-import anh103 from './assets/103.png';
-import dh from './assets/dh.jpg';
 
 const Full = () => {
   const navigate = useNavigate();
@@ -212,7 +200,8 @@ const Full = () => {
         <h2 className="title">| Trung Học Phổ Thông</h2>
 
         <div className="courses">
-          {data.product_data.map((product) => (
+          {data.product_data.filter((product) => product.id >= 1 && product.id <= 8)
+          .map((product) => (
             
           <div
             className="box"
@@ -240,117 +229,26 @@ const Full = () => {
         <h2 className="title">| Lớp 11</h2>
 
         <div className="courses">
-          <div className="box">
-
-              <img src={anh111} alt="" />
- 
-            <div className="bottom">
-              <p className="name">LỚP VIP TOÁN LỚP 11 HỌC KỲ 1 2K8 HỒ THỨC THUẬN</p>
-              <p className="teacher">Giảng viên: <span>Hồ Thức Thuận</span></p>
-              <div className="content">
+          {data.product_data.filter((product) => product.id >= 9 && product.id <= 16)
+          .map((product) => (
+            <div
+            className="box"
+            key={product.id}
+            onClick={() => handlePick(product.id)}
+          >
+          <img src={product.anh} alt={product.tensp} />
+          <div className="bottom">
+            <p className="name">{product.tensp}</p>
+            <p className="teacher">
+              Giảng viên: <span>{product.tengv}</span>
+            </p>
+            <div className="content">
                 <p><span>0</span> Chuyên đề</p>
                 <p><span>0</span> Bài học</p>
               </div>
-            </div>
           </div>
-
-          <div className="box">
-    
-              <img src={anh112} alt="" />
- 
-            <div className="bottom">
-              <p className="name">COMBO LIVE VIP LỚP 11 - KHÓA 2K8 THẦY HỒ THỨC THUẬN</p>
-              <p className="teacher">Giảng viên: <span>Hồ Thức Thuận</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-    
-              <img src={anh113} alt="" />
-       
-            <div className="bottom">
-              <p className="name">LIVE VIP VẬT LÝ 11 HỌC KỲ 2 2K8 THẦY VŨ TUẤN ANH</p>
-              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-   
-              <img src={anh114} alt="" />
-    
-            <div className="bottom">
-              <p className="name">LIVE VIP HÓA HỌC 11 HỌC KỲ 1 2K8 THẦY PHẠM VĂN THUẬN</p>
-              <p className="teacher">Giảng viên: <span>Phạm Văn Thuận</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-      
-              <img src={anh115} alt="" />
-    
-            <div className="bottom">
-              <p className="name">LIVE VIP TOÁN LỚP 11 HỌC KỲ 2 2K8 THẦY HỒ THỨC THUẬN</p>
-              <p className="teacher">Giảng viên: <span>Hồ Thức Thuận</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-         
-              <img src={anh116} alt="" />
-        
-            <div className="bottom">
-              <p className="name">LIVE VIP VẬT LÝ 11 HỌC KỲ 1 2K8 THẦY VŨ TUẤN ANH</p>
-              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-       
-              <img src={anh117} alt="" />
-     
-            <div className="bottom">
-              <p className="name">COMBO LIVE VIP VẬT LÝ 11 - Khoá 2K8 THẦY VŨ TUẤN ANH</p>
-              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box">
-          
-              <img src={anh118} alt="" />
-       
-            <div className="bottom">
-              <p className="name">LIVE VIP HÓA HỌC 11 HỌC KỲ 2 2K8 THẦY PHẠM VĂN THUẬN</p>
-              <p className="teacher">Giảng viên: <span>Phạm Văn Thuận</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
+        </div>
+          ))}
         </div>
       </div>
     </div>
@@ -359,48 +257,27 @@ const Full = () => {
         <h2 className="title">| Lớp 10</h2>
 
         <div className="courses" style={{display: 'flex', justifyContent:'center'}}>
-          <div className="box">
-   
-              <img src={anh101} alt="" />
-
-            <div className="bottom">
-              <p className="name">LIVE VIP VẬT LÝ 10 HỌC KỲ 1 2K9 THẦY VŨ TUẤN ANH</p>
-              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
-              <div className="content">
+            {data.product_data.filter((product) => product.id >= 17 && product.id <= 19)
+            .map((product) => (
+              <div
+            className="box"
+            key={product.id}
+            onClick={() => handlePick(product.id)}
+            style={{marginLeft: '15px'}}
+          >
+          <img src={product.anh} alt={product.tensp} />
+          <div className="bottom">
+            <p className="name">{product.tensp}</p>
+            <p className="teacher">
+              Giảng viên: <span>{product.tengv}</span>
+            </p>
+            <div className="content">
                 <p><span>0</span> Chuyên đề</p>
                 <p><span>0</span> Bài học</p>
               </div>
-            </div>
           </div>
-
-          <div className="box" style={{marginLeft: '15px'}}>
-            <a className="top" href="./page-course-1.html">
-              <img src={anh102} alt="" />
-            </a>
-            <div className="bottom">
-              <p className="name">LIVE VIP VẬT LÝ 10 HỌC KỲ 2 2K9 THẦY VŨ TUẤN ANH</p>
-              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="box" style={{marginLeft: '15px'}}>
-       
-              <img src={anh103} alt="" />
-       
-            <div className="bottom">
-              <p className="name">COMBO LIVE VIP VẬT LÝ 10 - Khoá 2K9 THẦY VŨ TUẤN ANH</p>
-              <p className="teacher">Giảng viên: <span>Vũ Tuấn Anh</span></p>
-              <div className="content">
-                <p><span>0</span> Chuyên đề</p>
-                <p><span>0</span> Bài học</p>
-              </div>
-            </div>
-          </div>
-
+        </div>
+            ))}
         </div>
       </div>
       </div>
@@ -409,19 +286,26 @@ const Full = () => {
         <h2 className="title">| Đại học</h2>
 
         <div className="courses" style={{display: 'flex', justifyContent: 'center'}}>
-          <div className="box">
-            <a className="top" href="./page-course-1.html">
-              <img src={dh} alt="" />
-            </a>
-            <div className="bottom">
-              <p className="name">TTOÁN CAO CẤP</p>
-              <p className="teacher">Giảng viên: <span>Đào Tuấn Anh</span></p>
-              <div className="content">
+          {data.product_data.filter((product) => product.id == 20)
+          .map((product) => (
+            <div
+            className="box"
+            key={product.id}
+            onClick={() => handlePick(product.id)}
+          >
+          <img src={product.anh} alt={product.tensp} />
+          <div className="bottom">
+            <p className="name">{product.tensp}</p>
+            <p className="teacher">
+              Giảng viên: <span>{product.tengv}</span>
+            </p>
+            <div className="content">
                 <p><span>0</span> Chuyên đề</p>
                 <p><span>0</span> Bài học</p>
               </div>
-            </div>
           </div>
+        </div>
+          ))}
         </div>
       </div>
       </div>

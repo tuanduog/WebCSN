@@ -23,22 +23,6 @@ const Login = () => {
   });
   axios.defaults.withCredentials = true;
   const navigate = useNavigate();
-  // useEffect(() => {
-    
-  //   if (isModalOpen) {
-  //     document.body.style.overflow = 'hidden';
-  //   } else {
-  //     document.body.style.overflow = 'auto';
-  //   }
-
-  //   return () => {
-  //     document.body.style.overflow = 'auto';
-  //   };
-  // }, [isModalOpen]);
-  // const handleRegisterClick = ()=> {
-  //   setShowRegisterForm(false);
-  //   setShowLoginForm(true);
-  // };
   
   const handleSubmit = (e) => {
     e.preventDefault();

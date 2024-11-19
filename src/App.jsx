@@ -6,7 +6,7 @@ import LuyenDe from './luyende/luyende';
 import Sach from './sach/sach';
 import Login from './login/login';
 import Register from './register/register';
-import Ctietsach from './sach/ctietsach/ctietsach';
+import Ctietsach from './ctietsach';
 import Khoahoc from './khoahoc/khoahoc';
 import Header from './header';
 import Cart from './cart/cart';
@@ -32,7 +32,7 @@ const AppContent = () => {
         <Route path="/cart/cart" element={<Cart />} />
         <Route path="/khoahoc/khoahoc" element={<Khoahoc />} />
         <Route path="Checkout/Checkout" element={<Checkout />} />
-        <Route path="Checkout/QR" element={<QR/>} />
+        <Route path="Checkout/QR" element={<QR />} />
         
       </Routes>
     </>

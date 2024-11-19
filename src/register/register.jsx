@@ -8,16 +8,6 @@ import axios from 'axios';
 
 
 const Register = () => {
-  // function xemMK(){
-  //   var x = document.getElementById("logpass");
-  //   if(x.type === "password"){
-  //     x.type = "text";
-  //   } else {
-  //     x.type = "password";
-  //   }
-  // }
-  // const [showRegisterForm, setShowRegisterForm] = useState(true);
-  // const [showLoginForm, setShowLoginForm] = useState(true);
 
   const [values, setValues] = useState({
     name: '',
@@ -26,39 +16,52 @@ const Register = () => {
     confirmpassword: ''
   });
   const navigate = useNavigate();
-  // useEffect(() => {
-    
-  //   if (isModalOpen) {
-  //     document.body.style.overflow = 'hidden';
-  //   } else {
-  //     document.body.style.overflow = 'auto';
-  //   }
-
-  //   return () => {
-  //     document.body.style.overflow = 'auto';
-  //   };
-  // }, [isModalOpen]);
-  // const handleRegisterClick = ()=> {
-  //   setShowRegisterForm(false);
-  //   setShowLoginForm(true);
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(values.confirmpassword != values.password){
-      alert("Vui lòng xác nhận lại đúng mật khẩu");
-      return;
-    }
-    axios.post('http://localhost:8081/register/register', values)
-      .then(res => {
-        if(res.data.Status === "Success"){
-          navigate('/login/login', {state: {username: values.name}});
-          
-        } else alert("Error");
-        //handleRegisterClick();
-      })
-      .catch(err => {
-        console.error("Error during registration:", err);
-      });
+
+    // Check if email or username already exists
+    axios.post('http://localhost:8081/register/checkUser', { 
+      email: values.email, 
+      username: values.name 
+    })
+    .then(response => {
+      if (response.data.username.exists ) {
+        alert("Tên đăng nhập đã tồn tại");
+        return;
+      } else
+      if (response.data.email.exists) {
+        alert("Email đã được sử dụng rồi");
+        return;
+      } 
+
+      const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
+      if (!passwordRegex.test(values.password)) {
+        alert("Mật khẩu phải có ít nhất 8 ký tự, chứa ít nhất 1 ký tự đặc biệt và 1 số.");
+        return;
+      }
+      // check mật khẩu
+      if (values.confirmpassword !== values.password) {
+          alert("Vui lòng xác nhận lại đúng mật khẩu");
+          return;
+      }
+
+      // nếu chưa có
+      axios.post('http://localhost:8081/register/register', values)
+        .then(res => {
+          if (res.data.Status === "Success") {
+            navigate('/login/login', { state: { username: values.name } });
+          } else {
+            alert("Error during registration");
+          }
+        })
+        .catch(err => {
+          console.error("Error during registration:", err);
+        });
+    })
+    .catch(err => {
+      console.error("Error checking user:", err);
+      alert("Error checking user. Please try again later.");
+    });
   };
   
 
