@@ -55,11 +55,11 @@ const Sach = () => {
               Tác giả: <strong>{book.tacgia}</strong>
             </span>
           </p>
-          <p style={{ marginBottom: "0.1rem" }}>
-            <strike>{Intl.NumberFormat('de-DE').format(book.gia)} đ</strike>
-          </p>
+          <strong style={{ marginBottom: "0.1rem", stroke: 'none', color: 'red'}}>
+            {Intl.NumberFormat('de-DE').format(book.gia)} đ
+          </strong>
          
-            <div className="btn btn-primary" onClick={() => handlePick(book.id)} >Tham khảo thêm</div>
+            <div className="btn btn-primary d-flex" style={{justifyContent: 'center'}} onClick={() => handlePick(book.id)} >Tham khảo thêm</div>
 
             </div>
           </div>
@@ -90,11 +90,11 @@ const Sach = () => {
               Tác giả: <strong>{book.tacgia}</strong>
             </span>
           </p>
-          <p style={{ marginBottom: "0.1rem" }}>
-            <strike>{Intl.NumberFormat('de-DE').format(book.gia)} đ</strike>
-          </p>
+          <strong style={{ marginBottom: "0.1rem", stroke: 'none', color: 'red'}}>
+            {Intl.NumberFormat('de-DE').format(book.gia)} đ
+          </strong>
     
-            <div className="btn btn-primary" onClick={() => handlePick(book.id)} >Tham khảo thêm</div>
+          <div className="btn btn-primary d-flex" style={{justifyContent: 'center'}} onClick={() => handlePick(book.id)} >Tham khảo thêm</div>
    
             </div>
           </div>
@@ -122,11 +122,11 @@ const Sach = () => {
               Tác giả: <strong>{book.tacgia}</strong>
             </span>
           </p>
-          <p style={{ marginBottom: "0.1rem" }}>
-            <strike>{Intl.NumberFormat('de-DE').format(book.gia)} đ</strike>
-          </p>
+          <strong style={{ marginBottom: "0.1rem", stroke: 'none', color: 'red'}}>
+            {Intl.NumberFormat('de-DE').format(book.gia)} đ
+          </strong>
 
-            <div className="btn btn-primary" onClick={() => handlePick(book.id)} >Tham khảo thêm</div>
+          <div className="btn btn-primary d-flex" style={{justifyContent: 'center'}} onClick={() => handlePick(book.id)} >Tham khảo thêm</div>
 
             </div>
           </div>

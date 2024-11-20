@@ -136,11 +136,11 @@ app.post('/login/login', (req, res) => {
 app.post('/products', verifyUser, (req, res) => {
   console.log('Request body received for adding product:', req.body);
 
-  const { anhsp, tensp, tengv, soluong, gia } = req.body;
+  const { anhsp, tensp, tengv, soluong, gia, lop, mon } = req.body;
 
-  if (!anhsp || !tensp || !tengv || !soluong || !gia) {
+  if (!anhsp || !tensp || !tengv || !soluong || !gia || !lop || !mon) {
     console.error('Missing fields:', req.body);
-    return res.status(400).json({ Error: "Missing required fields", MissingFields: { anhsp, tensp, tengv, soluong, gia } });
+    return res.status(400).json({ Error: "Missing required fields", MissingFields: { anhsp, tensp, tengv, soluong, gia, lop, mon } });
   }
 
   // check để tăng sl sản phẩm
@@ -165,8 +165,8 @@ app.post('/products', verifyUser, (req, res) => {
       });
     } else {
       // Nếu chưa có sp thì add mới
-      const sql = "INSERT INTO products (anhsp, tensp, tengv, soluong, gia, userid) VALUES (?, ?, ?, ?, ?, ?)";
-      const values = [anhsp, tensp, tengv, soluong, gia, req.userid];
+      const sql = "INSERT INTO products (anhsp, tensp, tengv, soluong, gia, lop, mon, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      const values = [anhsp, tensp, tengv, soluong, gia, lop, mon, req.userid];
 
       db.query(sql, values, (err, insertResult) => {
         if (err) {
@@ -383,6 +383,7 @@ app.delete('/books/:sachid', verifyUser, (req, res) => {
   db.query(sql, [sachid, userid], (err, result) => {
     if (err) {
       console.error('Database error during product deletion:', err.message);
+      
       return res.status(500).json({ Status: "error", Message: "Database error", Details: err.message });
     }
 

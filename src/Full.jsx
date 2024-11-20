@@ -48,11 +48,12 @@ const Full = () => {
                 <strong>KHOA ĐÁNH GIÁ NĂNG LỰC 2K7</strong>
               </li>
               <li>
-                <a href="#">Đánh giá năng lực ĐHQGHN</a>
+                <a href="" onClick={() => handlePick(21)}>Đánh giá năng lực ĐHQGHN</a>
               </li>
               <li>
-                <a href="#">Đánh giá năng lực ĐHQG TP Hồ Chí Minh</a>
+                <a href="" onClick={() => handlePick(22)}>Đánh giá năng lực ĐHQG TP Hồ Chí Minh</a>
               </li>
+
             </ul>
           </li>
 
@@ -62,26 +63,15 @@ const Full = () => {
               <li>
                 <strong>Chinh Phục Lớp 11</strong>
               </li>
+              
               <li>
-                <a href="#">Toán - Thầy Trần Lâm</a>
+                <a href="" onClick={() => handlePick(23)}>Toán - Thầy Hồ Thức Thuận</a>
               </li>
               <li>
-                <a href="#">Vật Lý - Thầy Kiêu</a>
+                <a href="" onClick={() => handlePick(24)}>Vật Lý - Thầy Vũ Tuấn Anh</a>
               </li>
               <li>
-                <a href="#">Hóa - Thầy Ngọc</a>
-              </li>
-              <li>
-                <a href="#">Ngữ Văn - Cô Bình</a>
-              </li>
-              <li>
-                <a href="#">Toán - Thầy Hồ Đức Thuận</a>
-              </li>
-              <li>
-                <a href="#">Vật Lý - Thầy Vũ Tuấn Anh</a>
-              </li>
-              <li>
-                <a href="#">Hóa - Thầy Phạm Văn Thuận</a>
+                <a href="" onClick={() => handlePick(25)}>Hóa - Thầy Phạm Văn Thuận</a>
               </li>
             </ul>
           </li>
@@ -93,14 +83,9 @@ const Full = () => {
                 <strong>Chinh Phục Lớp 10</strong>
               </li>
               <li>
-                <a href="#">Toán</a>
+                <a href="" onClick={() => handlePick(19)}>Vật lý - Thầy Vũ Tuấn Anh</a>
               </li>
-              <li>
-                <a href="#">Ngữ Văn - Cô Bình</a>
-              </li>
-              <li>
-                <a href="#">Hóa Học - Cô Hằng</a>
-              </li>
+              
             </ul>
           </li>
 
@@ -117,7 +102,7 @@ const Full = () => {
                 <a href="#">VẬT LÝ ĐẠI CƯƠNG</a>
               </li>
               <li>
-                <a href="#">TOÁN CAO CẤP</a>
+                <a href="" onClick={() => handlePick(20)}>TOÁN CAO CẤP</a>
               </li>
             </ul>
           </li>

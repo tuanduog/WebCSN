@@ -19,7 +19,16 @@ const Header = () => {
     navigate('login/login');
   }
   const {auth, name, logout} = useAuth();
+  const handlePick = (productid) => {
+    navigate('/khoahoc/khoahoc', {state: {productid}});
+  }
+  const handleBlank = () => {
+    alert('Hiện tại không co khóa học nào');
+    navigate('/blank')
+  }
+  // const handleFind = () => {
 
+  // }
   return (
     <div id="header">
       <Link to="/"><img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} /></Link>
@@ -38,10 +47,10 @@ const Header = () => {
       data-mdb-toggle="dropdown" aria-expanded="false" > KHÓA 2K7 - LUYỆN THI THPT QG 2024 &raquo; </a>
         <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
-            <a className="dropdown-item" href="#">LIVE C - Luyện Thi Chuyên Đề</a>
+            <a className="dropdown-item" href="">LIVE C - Luyện Thi Chuyên Đề</a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">SLIVE T - Luyện Đề</a>
+            <a className="dropdown-item" href="">SLIVE T - Luyện Đề</a>
           </li>
         </ul>
         </div>
@@ -53,10 +62,10 @@ const Header = () => {
       data-mdb-toggle="dropdown" aria-expanded="false" > KHÓA ĐÁNH GIÁ NĂNG LỰC 2K7&raquo; </a>
         <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
-            <a className="dropdown-item" href="#">Đánh giá năng lực ĐHQGHN</a>
+            <a className="dropdown-item" href="" onClick={() => handlePick(21)}>Đánh giá năng lực ĐHQGHN</a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">Đánh giá năng lực ĐHQG TP Hồ Chí Minh</a>
+            <a className="dropdown-item" href="" onClick={() => handlePick(22)}>Đánh giá năng lực ĐHQG TP Hồ Chí Minh</a>
           </li>
 
         </ul>
@@ -67,26 +76,15 @@ const Header = () => {
         <a className="dropdown-item fw-bold pb-3 pt-3"  data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init id="sub1"  href="#"  type="button"
       data-mdb-toggle="dropdown" aria-expanded="false" > Chinh Phục lớp 11&raquo; </a>
         <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
+  
           <li>
-            <a className="dropdown-item" href="#">Toán - Thầy Trần Lâm</a>
+            <a className="dropdown-item" href="" onClick={() => handlePick(23)}>Toán - Thầy Hồ Thức Thuận</a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">Vật Lý - Thầy Kiêu</a>
+            <a className="dropdown-item" href="" onClick={() => handlePick(24)}>Vật Lý - Thầy Vũ Tuấn Anh</a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">Hóa - Thầy Ngọc</a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">Ngữ Văn - Cô Bình</a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">Toán - Thầy Hồ Đức Thuận</a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">Vật Lý - Thầy Vũ Tuấn Anh</a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">Hóa - Thầy Phạm Văn Thuận</a>
+            <a className="dropdown-item" href="" onClick={() => handlePick(25)}>Hóa - Thầy Phạm Văn Thuận</a>
           </li>
 
         </ul>
@@ -98,13 +96,7 @@ const Header = () => {
       data-mdb-toggle="dropdown" aria-expanded="false" > Chinh Phục lớp 10&raquo; </a>
         <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
-            <a className="dropdown-item" href="#">Toán</a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">Ngữ Văn - Cô Bình</a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">Hóa Học - Cô Hằng</a>
+            <a className="dropdown-item" href="" onClick={() => handlePick(19)}>Vật lý - Thầy Vũ Tuấn Anh</a>
           </li>
         </ul>
         </div>
@@ -115,13 +107,13 @@ const Header = () => {
       data-mdb-toggle="dropdown" aria-expanded="false" >Bậc Đại Học&raquo; </a>
         <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
-            <a className="dropdown-item" href="#">PRE TOEIC</a>
+            <a className="dropdown-item" href=""  onClick={() => handleBlank()}>PRE TOEIC</a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">VẬT LÝ ĐẠI CƯƠNG</a>
+            <a className="dropdown-item" href="" onClick={() => handleBlank()}>VẬT LÝ ĐẠI CƯƠNG</a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">TOÁN CAO CẤP</a>
+            <a className="dropdown-item" href="" onClick={() => handlePick(20)}>TOÁN CAO CẤP</a>
           </li>
         </ul>
         </div>
@@ -132,10 +124,10 @@ const Header = () => {
       data-mdb-toggle="dropdown" aria-expanded="false" > IELTS&raquo; </a>
         <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
-            <a className="dropdown-item" href="#">Khóa LIVE</a>
+            <a className="dropdown-item" href="" onClick={() => handleBlank()}>Khóa LIVE</a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">Khóa IELTS CLC</a>
+            <a className="dropdown-item" href="" onClick={() => handleBlank()}>Khóa IELTS CLC</a>
           </li>
 
         </ul>

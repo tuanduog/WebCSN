@@ -59,7 +59,7 @@ const Khoahoc = () => {
         <div >
         <div className="row">
          <div className="col" style={{ display: 'flex', justifyContent: 'center'}}>
-             <img  src={product.anh} alt="COMBO 3 SACH" width="330px" height="auto"/>
+             <img  src={product.anh} alt="COMBO 3 SACH" width="auto" height="350px"/>
        
          </div>
          <div className="col" >
@@ -69,12 +69,12 @@ const Khoahoc = () => {
              <p>Tình trạng: Còn hàng</p>
              <div className="p-3 mt-3 mb-3 col-12 bg-light d-flex align-items-center justify-content-start pricing">
                 <span className="p-2 old-price fw-bold">
-                    <del>2.700.000 đ</del>
+                    <del>{(product.id === 20 || product.id === 21 || product.id === 22) ? "4.800.000 đ" : "2.000.000 đ"}</del>
                 </span>
                 <span className="p-2 final-price fw-bold">
                     {formattedGia} đ
                     
-                    <span className="badge badge-danger ms-4 pb-1 mb-2" style={{backgroundColor:'red',color:"white"}}> - 50%</span>
+                    <span className="badge badge-danger ms-4 pb-1 mb-2" style={{backgroundColor:'red',color:"white"}}> {(product.id === 20 || product.id === 21 || product.id === 22) ? "- 25%" : "- 50%"}</span>
                 </span>
                 </div>
 
@@ -82,12 +82,12 @@ const Khoahoc = () => {
 
                  <span className="col">
                   <FontAwesomeIcon icon={faBook}></FontAwesomeIcon>
-                 <span>  Môn: Toán học</span>
+                 <span>  Môn: {product.mon}</span>
                   
                  </span>
                  <span className="col">
                   <FontAwesomeIcon icon={faChartLine}></FontAwesomeIcon>
-                 <span>  Cấp độ: Lớp 12</span>
+                 <span>  Cấp độ: {product.lop === 13 ? "Đại học" : product.lop}</span>
                  </span>
                  <span className="col">
                  <FontAwesomeIcon icon={faCirclePlay}></FontAwesomeIcon>
@@ -126,69 +126,135 @@ const Khoahoc = () => {
         <a className="nav-link " href="#">Thông tin khoá học</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+        <a className="nav-link " href="#">Lợi ích của khóa học</a>
       </li>
     </ul>
   </div>
-  
-  <div className="card-body" style={{backgroundColor:"#edf1f4"}}>
-    
-      <div className="card " >
-        <div className="row" >
-          <div className="col-2" >
-            <img src={avatar} alt="" />
-          </div>
-          <div className="col" >
-          <div className="card-body" style={{backgroundColor:"white",border:"none"} } >
-        
-        <p className="card-text" >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
+  <div className="card-body" style={{ backgroundColor: "#edf1f4", padding: "10px" }}>
+  <div className="card mb-3">
+    <div className="row align-items-center" style={{ margin: "5px 0" }}>
+      <div className="col-2">
+        <img
+          src={avatar}
+          alt=""
+          style={{
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
+            objectFit: "cover",
+          }}
+        />
       </div>
-          </div>
+      <div className="col">
+        <div
+          className="card-body"
+          style={{
+            backgroundColor: "white",
+            border: "none",
+            padding: "10px",
+          }}
+        >
+          <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
+            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+          </p>
+          <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
+            <small className="text-body-secondary">Last updated 3 mins ago</small>
+          </p>
         </div>
       </div>
-      <div className="card " >
-        
-        <div className="row">
-          <div className="col-2" >
-            <img src={avatar} alt="" />
-          </div>
-          <div className="col" >
-          
-          <div className="card-body " style={{backgroundColor:"white"}}>
-        
-        <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
-      </div>
-          </div>
-        </div>
-      </div>
-      <div className="card ">
-        <div className="row">
-          <div className="col-2">
-            <img src={avatar} alt="" />
-          </div>
-          <div className="col">
-          <div className="card-body" style={{backgroundColor:"white"}}>
-        
-        <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
-      </div>
-          </div>
-        </div>
-      </div>
-      <div className="form-floating" style={{backgroundColor:"white"}}>
-  <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{height:"100px"}}></textarea>
-  <label htmlFor="floatingTextarea2">Comments</label>
-  <a href="" className="btn btn-primary float-end p-2 m-2">Gửi bình luận </a>
-</div>
-          
+    </div>
   </div>
+
+  <div className="card mb-3">
+    <div className="row align-items-center" style={{ margin: "5px 0" }}>
+      <div className="col-2">
+        <img
+          src={avatar}
+          alt=""
+          style={{
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
+            objectFit: "cover",
+          }}
+        />
+      </div>
+      <div className="col">
+        <div
+          className="card-body"
+          style={{
+            backgroundColor: "white",
+            border: "none",
+            padding: "10px",
+          }}
+        >
+          <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
+            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+          </p>
+          <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
+            <small className="text-body-secondary">Last updated 3 mins ago</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="card mb-3">
+    <div className="row align-items-center" style={{ margin: "5px 0" }}>
+      <div className="col-2">
+        <img
+          src={avatar}
+          alt=""
+          style={{
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
+            objectFit: "cover",
+          }}
+        />
+      </div>
+      <div className="col">
+        <div
+          className="card-body"
+          style={{
+            backgroundColor: "white",
+            border: "none",
+            padding: "10px",
+          }}
+        >
+          <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
+            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+          </p>
+          <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
+            <small className="text-body-secondary">Last updated 3 mins ago</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="form-floating" style={{ backgroundColor: "white", marginTop: "10px" }}>
+    <textarea
+      className="form-control"
+      placeholder="Leave a comment here"
+      id="floatingTextarea2"
+      style={{ height: "80px", fontSize: "0.85rem" }}
+    ></textarea>
+    <label htmlFor="floatingTextarea2" style={{ fontSize: "0.85rem" }}>
+      Comments
+    </label>
+    <a href="#" className="btn btn-primary float-end p-2 m-2" style={{ fontSize: "0.85rem" }}>
+      Gửi bình luận
+    </a>
+  </div>
+</div>
+
+
 </div>
          </div>
          <div className="col">
             <div className="row bg-danger" >
-              <h4 className="border-0 text-light ms-0">KHOÁ HỌC LIÊN QUAN</h4>
+              <h4 className="border-0 text-light ms-0 pt-2">KHOÁ HỌC LIÊN QUAN</h4>
             </div>
             <div className="row bg-light">
              
@@ -201,8 +267,8 @@ const Khoahoc = () => {
                 
               <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
                 <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
-                <span><strike>400,000đ</strike>
-                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                <span><strike>400,000đ </strike>
+                <span style={{color:"red",fontSize:"15px",fontWeight:"700"}}>1,600,000đ</span>
                 </span></li>
               </div>
             </div>
@@ -217,8 +283,8 @@ const Khoahoc = () => {
                 
               <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
                 <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
-                <span><strike>400,000đ</strike>
-                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                <span><strike>400,000đ </strike>
+                <span style={{color:"red",fontSize:"15px",fontWeight:"700"}}>1,600,000đ</span>
                 </span></li>
               </div>
             </div>
@@ -233,8 +299,8 @@ const Khoahoc = () => {
                 
               <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
                 <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
-                <span><strike>400,000đ</strike>
-                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                <span><strike>400,000đ </strike>
+                <span style={{color:"red",fontSize:"15px",fontWeight:"700"}}>1,600,000đ</span>
                 </span></li>
               </div>
             </div>
@@ -249,8 +315,8 @@ const Khoahoc = () => {
                 
               <li ><a className= "fw-bold" style={{fontSize:"15px",color:"black"}} href="">COMBO LIVE VIP TOÁN 10 - Khóa 2K8 THẦY LÂM</a>
                 <p>Giảng viên: <a href=""><img id="poster1" src="https://d3484gt1o8rlzm.cloudfront.net/mclass/images/lecturers/GT1001.jpg?v=20220228140420" alt="" style={{width:"5%"}}/><strong>Trần Lâm</strong></a></p>  
-                <span><strike>400,000đ</strike>
-                <span style={{color:"red",fontSize:"10px",fontWeight:"700"}}>1,600,000đ</span>
+                <span><strike>400,000đ  </strike>
+                <span style={{color:"red",fontSize:"15px",fontWeight:"700"}}> 1,600,000đ</span>
                 </span></li>
               </div>
             </div>
