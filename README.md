@@ -10,5 +10,6 @@
 note: clear sau khi logout (chưa xử lý)
 
 22/11
-full find + 1 số db
-...
+full find
+
+set blank cho 1 số cái ko tồn tại
