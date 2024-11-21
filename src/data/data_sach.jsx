@@ -7,7 +7,7 @@ const data_sach =  {
             id: 1,
             anhsach: sach,
             tensach: 'COMBO SÁCH 3 MÔN BẤT KỲ',
-            tacgia: 'MCLASS',
+            tacgia: 'Dương Anh Tuấn',
             soluong: 1,
             gia: 350000
         },

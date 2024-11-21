@@ -13,6 +13,8 @@ import Cart from './cart/cart';
 import { AuthProvider } from './authContext';  
 import Checkout from './Checkout/Checkout';
 import QR from './Checkout/QRPay';
+import Blank from './blank';
+import Test from './test';
 const AppContent = () => {
   const location = useLocation(); 
   
@@ -33,7 +35,8 @@ const AppContent = () => {
         <Route path="/khoahoc/khoahoc" element={<Khoahoc />} />
         <Route path="Checkout/Checkout" element={<Checkout />} />
         <Route path="Checkout/QR" element={<QR />} />
-        
+        <Route path="/blank" element={<Blank/>}></Route>
+        <Route path="/test" element={<Test/>}></Route>
       </Routes>
     </>
   );

@@ -10,6 +10,9 @@ import "./Full.css";
 import "../node_modules/mdb-ui-kit/css/mdb.min.css"
 import "../node_modules/mdb-ui-kit/js/mdb.es.min.js"
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import data from "./data/data.jsx";
+import data_sach from "./data/data_sach.jsx";
 const Header = () => {
   const navigate = useNavigate();
   const handleCart = () => {
@@ -23,12 +26,28 @@ const Header = () => {
     navigate('/khoahoc/khoahoc', {state: {productid}});
   }
   const handleBlank = () => {
-    alert('Hiện tại không co khóa học nào');
     navigate('/blank')
   }
-  // const handleFind = () => {
+  // handle find
+  const [query, setQuery] = useState('');
 
-  // }
+  const { sach_data = [] } = data_sach || {};
+  const { product_data = [] } = data || {};
+
+  const fitBooks = sach_data
+    .filter((book) => book.tensach.toLowerCase().includes(query.toLowerCase()))
+    .slice(0, 3); 
+
+  const fitProducts = product_data
+    .filter((product) => product.tensp.toLowerCase().includes(query.toLowerCase()))
+    .slice(0, 3); 
+
+  const handleClickBook = (bookid) => {
+    navigate('/ctietsach', { state: { sachid: bookid } });
+  }
+  const handleClickProduct = (productid) => {
+    navigate('/khoahoc/khoahoc', { state: {productid}})
+  }
   return (
     <div id="header">
       <Link to="/"><img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} /></Link>
@@ -138,13 +157,94 @@ const Header = () => {
 </div>
 
       
-      <div className="search-container">
-        <input type="text" placeholder="Tìm kiếm khóa học" style={{fontSize: '16px'}}/>
-        <button type="submit">
-          <img src={search} alt="Search" className="srch" />
-        </button>
-      </div>
-      
+<div className="search-container" style={{ width: '450px', border: 'none', backgroundColor: 'none'}}>
+  <input 
+    type="text" 
+    placeholder="Tìm kiếm khóa học" 
+    style={{ 
+      marginTop: '-5px',
+      fontSize: '16px',  
+      width: '102%', 
+      marginBottom: '10px',
+      border: '1px solid black',
+      borderRadius: '20px',
+      padding: '24px',
+      position: 'relative'
+    }} 
+    value={query} 
+    onChange={(e) => setQuery(e.target.value)} 
+  />
+  <button type="submit" style={{border: 'none', background: 'transparent', position: 'absolute', marginLeft: '400px', marginTop: '3px'}}>
+    <img src={search} alt="Search" className="srch" style={{ width: '24px', height: '24px' }} />
+  </button>
+
+  {query && (
+    <div style={{ width: '100%', backgroundColor: 'white' ,borderRadius: '3px' }}>
+      {fitBooks.length > 0 && (
+        <ul style={{ listStyleType: 'none', padding: '0', margin: '0' }}>
+          {fitBooks.map((book) => (
+            <li
+              key={book.id}
+              style={{
+                padding: '5px',
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '5px',
+                cursor: 'pointer',
+                borderBottom: '1px solid #ddd',
+                paddingBottom: '10px',
+                
+              }}
+              onClick={() => handleClickBook(book.id)}
+            >
+              <img
+                src={book.anhsach}
+                alt={book.tensach}
+                style={{ width: '50px', height: '50px', marginRight: '10px' }}
+              />
+              <div>
+                <h4 style={{ margin: 0, fontSize: '15px' }}>{book.tensach}</h4>
+                <p style={{ margin: 0, color: 'gray', fontSize: '10px' }}>{book.tacgia}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {fitProducts.length > 0 && (
+        <ul style={{ listStyleType: 'none', padding: '0', margin: '0' }}>
+          {fitProducts.map((product) => (
+            <li
+              key={product.id}
+              style={{
+                display: 'flex',
+                padding: '5px',
+                alignItems: 'center',
+                marginBottom: '5px',
+                cursor: 'pointer',
+                borderBottom: '1px solid #ddd',
+                paddingBottom: '10px',
+              }}
+              onClick={() => handleClickProduct(product.id)}
+            >
+              <img
+                src={product.anh}
+                alt={product.tensp}
+                style={{ width: '50px',height: '50px',marginRight: '10px'}}
+              />
+              <div>
+                <h4 style={{ margin: 0, fontSize: '15px' }}>{product.tensp}</h4>
+                <p style={{ margin: 0,color: 'gray',fontSize: '10px'}}>{product.tengv}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )}
+
+</div>
+
       {auth ? (
        <FontAwesomeIcon className="carrt" icon={faCartShopping} onClick={handleCart} style={{cursor: 'pointer'}}></FontAwesomeIcon>)
       : (
@@ -169,7 +269,7 @@ const Header = () => {
             <a className="dropdown-item" href="#" style={{textAlign: 'center'}}>
               {name} {/* Displays the user's name */}
             </a>
-            <a className="dropdown-item" href="#" onClick={logout} style={{textAlign: 'center'}}>
+            <a className="dropdown-item" href="" onClick={logout} style={{textAlign: 'center'}}>
               <FontAwesomeIcon icon={faRightFromBracket} /> Đăng xuất
             </a>
           </div>

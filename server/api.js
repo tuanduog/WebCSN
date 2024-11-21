@@ -399,6 +399,50 @@ app.delete('/books/:sachid', verifyUser, (req, res) => {
   });
 });
 
+app.post('/comments', verifyUser, (req, res) => {
+  console.log('Request body received for adding comment:', req.body);
+
+  const { cmttext, time } = req.body;
+
+  // Validate input fields
+  if (!cmttext || !time) {
+    console.error('Missing fields:', req.body);
+    return res.status(400).json({
+      Error: "Missing required fields",
+      MissingFields: { cmttext: !!cmttext, time: !!time }
+    });
+  }
+
+  const userId = req.userid;
+  const productId = req.productid;
+
+  const checkCommentSql = "SELECT * FROM comments WHERE cmttext = ? AND userid = ? AND productid = ?";
+  db.query(checkCommentSql, [cmttext, userId, productId], (err, result) => {
+    if (err) {
+      console.error('Database error while checking comment:', err.message);
+      return res.status(500).json({ Error: "Database error", Details: err.message });
+    }
+
+    
+      const sql = "INSERT INTO comments (cmttext, time, productid, userid) VALUES (?, ?, ?, ?)";
+      const values = [cmttext, time, productId, userId];
+
+      db.query(sql, values, (err, insertResult) => {
+        if (err) {
+          console.error('Database error while adding comment:', err.message);
+          return res.status(500).json({ Error: "Database error", Details: err.message });
+        }
+
+        console.log('Comment successfully added with ID:', insertResult.insertId);
+        return res.json({
+          Status: "success",
+          Message: "Comment added successfully",
+          BookID: insertResult.insertId,
+        });
+      });
+  });
+});
+
 app.listen(8081, ()=> {
   console.log("Server running")
 })

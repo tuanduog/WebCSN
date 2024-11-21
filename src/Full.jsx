@@ -16,6 +16,9 @@ const Full = () => {
   const handlePick = (productid) => {
     navigate('/khoahoc/khoahoc', {state: {productid}});
   }
+  const handleBlank = () => {
+    navigate('/blank');
+  }
   return (
     <div id="main">
       
@@ -96,10 +99,10 @@ const Full = () => {
                 <strong>BẬC ĐẠI HỌC</strong>
               </li>
               <li>
-                <a href="#">PRE TOEIC</a>
+                <a href="" onClick={() => handleBlank()}>PRE TOEIC</a>
               </li>
               <li>
-                <a href="#">VẬT LÝ ĐẠI CƯƠNG</a>
+                <a href="" onClick={() => handleBlank()}>VẬT LÝ ĐẠI CƯƠNG</a>
               </li>
               <li>
                 <a href="" onClick={() => handlePick(20)}>TOÁN CAO CẤP</a>
@@ -114,10 +117,10 @@ const Full = () => {
                 <strong>IELTS</strong>
               </li>
               <li>
-                <a href="#">Khóa LIVE</a>
+                <a href="" onClick={() => handleBlank()}>Khóa LIVE</a>
               </li>
               <li>
-                <a href="#">Khóa IELTS CLC</a>
+                <a href="" onClick={() => handleBlank()}>Khóa IELTS CLC</a>
               </li>
             </ul>
           </li>

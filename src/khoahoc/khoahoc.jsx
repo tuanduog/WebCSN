@@ -8,12 +8,14 @@ import data from "../data/data";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../authContext";
+// import { useState } from "react";
 
 const Khoahoc = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const productid = location.state?.productid;
   const product = data.product_data.find((item) => item.id === productid);
+  // const [comment, setComment] = useState();
   const {auth} = useAuth();
 
   const handleBefortLog = () => {
@@ -34,7 +36,9 @@ const Khoahoc = () => {
       tensp: product.tensp,
       tengv: product.tengv, 
       gia: product.gia,
-      soluong: product.soluong
+      soluong: product.soluong,
+      lop: product.lop,
+      mon: product.mon
     };
   
     console.log('Sending product data:', productData);
@@ -142,6 +146,43 @@ const Khoahoc = () => {
             height: "50px",
             borderRadius: "50%",
             objectFit: "cover",
+            marginTop: '5px'
+          }}
+        />
+        <p>name</p>
+      </div>
+      <div className="col">
+        <div
+          className="card-body"
+          style={{
+            backgroundColor: "white",
+            border: "none",
+            padding: "10px",
+          }}
+        >
+          <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
+            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+          </p>
+          <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
+            <small className="text-body-secondary">Last updated 3 mins ago</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="card mb-3">
+    <div className="row align-items-center" style={{ margin: "5px 0" }}>
+      <div className="col-2">
+        <img
+          src={avatar}
+          alt=""
+          style={{
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
+            objectFit: "cover",
+            marginTop: '5px'
           }}
         />
       </div>
@@ -176,40 +217,7 @@ const Khoahoc = () => {
             height: "50px",
             borderRadius: "50%",
             objectFit: "cover",
-          }}
-        />
-      </div>
-      <div className="col">
-        <div
-          className="card-body"
-          style={{
-            backgroundColor: "white",
-            border: "none",
-            padding: "10px",
-          }}
-        >
-          <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
-            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-          </p>
-          <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
-            <small className="text-body-secondary">Last updated 3 mins ago</small>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div className="card mb-3">
-    <div className="row align-items-center" style={{ margin: "5px 0" }}>
-      <div className="col-2">
-        <img
-          src={avatar}
-          alt=""
-          style={{
-            width: "50px",
-            height: "50px",
-            borderRadius: "50%",
-            objectFit: "cover",
+            marginTop: '5px'
           }}
         />
       </div>
