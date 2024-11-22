@@ -398,7 +398,7 @@ app.delete('/books/:sachid', verifyUser, (req, res) => {
     res.json({ Status: "success", Message: "Xóa sản phẩm thành công" });
   });
 });
-
+// pót cmt
 app.post('/comments', verifyUser, (req, res) => {
   console.log('Request body received for adding comment:', req.body);
 

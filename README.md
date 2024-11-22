@@ -7,4 +7,11 @@
 20/11
 + full chức năng sách + db
 
-note: clear sau khi logout
+note: clear sau khi logout (chưa xử lý)
+
+22/11
+full find
+
+set blank cho 1 số cái ko tồn tại
+
+thêm 1 số db
