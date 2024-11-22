@@ -16,7 +16,7 @@ set blank cho 1 số cái ko tồn tại
 
 thêm 1 số db
 
-navigate book find
+navigate book + product find
 
 find successful
 
