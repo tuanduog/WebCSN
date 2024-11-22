@@ -57,8 +57,8 @@ const Checkout = () =>{
               <span className="text-success">-$5</span>
             </li>
             <li className="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
+              <span>Tổng tiền (VNĐ)</span>
+              <strong>VNĐ</strong>
             </li>
           </ul>
           <form className="card p-2">
@@ -72,18 +72,20 @@ const Checkout = () =>{
         </div>
         
           <div className="col-md-8 order-md-1">
-          <h4 className="mb-3 ms-1">Địa Chỉ</h4>
+          <h4 className="mb-3 ms-1">Thông tin người nhận</h4>
           <form className="needs-validation" noValidate>
             <div className="row ps-0">
               <div className="col mb-3">
-                <label htmlFor="firstName">First name</label>
+                <label htmlFor="firstName">Họ đệm</label>
+                <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
                 <input type="text" className="form-control" id="firstName" placeholder="" value="" required/>
                 <div className="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               <div className="col mb-3">
-                <label htmlFor="lastName">Last name</label>
+                <label htmlFor="lastName">Tên</label>
+                <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
                 <input type="text" className="form-control" id="lastName" placeholder="" value="" required/>
                 <div className="invalid-feedback">
                   Valid last name is required.
@@ -92,12 +94,13 @@ const Checkout = () =>{
             </div>
 
             <div className="mb-3">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username">Tên đăng nhập</label>
+              <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
               <div className="input-group">
                 <div className="input-group-prepend">
                   <span className="input-group-text">@</span>
                 </div>
-                <input type="text" className="form-control" id="username" placeholder="Username" required/>
+                <input type="text" className="form-control" id="username" placeholder="Tên đăng nhập" required/>
                 <div className="invalid-feedback" style={{width:"100%"}}>
                   Your username is required.
                 </div>
@@ -105,35 +108,35 @@ const Checkout = () =>{
             </div>
 
             <div className="mb-3">
-              <label htmlFor="email">Email <span className="text-muted">(Optional)</span></label>
+              <label htmlFor="email">Email</label>
+              <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
               <input type="email" className="form-control" id="email" placeholder="you@example.com"/>
               <div className="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
             </div>
-
+            <div className='mb-3'>
+              <label style={{color: 'red'}}>Mục dành cho sách</label>
+            </div>
             <div className="mb-3">
-              <label htmlFor="address">Address</label>
-              <input type="text" className="form-control" id="address" placeholder="1234 Main St" required/>
+              <label htmlFor="address">Địa chỉ</label>
+              <input type="text" className="form-control" id="address" placeholder="ex: Số nhà 1 - Xóm Trung Tâm - Xã Nghĩa Phúc - Huyện Tân Kỳ - Tỉnh Nghệ An" required/>
               <div className="invalid-feedback">
                 Please enter your shipping address.
               </div>
             </div>
 
             <div className="mb-3">
-              <label htmlFor="address2">Address 2 <span className="text-muted">(Optional)</span></label>
-              <input type="text" className="form-control" id="address2" placeholder="Apartment or suite"/>
+              <label htmlFor="address2">Số điện thoại </label>
+              <input type="text" className="form-control" id="address2" placeholder="ex: 0123456789"/>
             </div>
 
            
             <hr className="mb-4"/>
-            <div className="custom-control custom-checkbox">
-              <input type="checkbox" className="custom-control-input" id="same-address"/>
-              <label className="custom-control-label" htmlFor="same-address">Shipping address is the same as my billing address</label>
-            </div>
+          
             <div className="custom-control custom-checkbox">
               <input type="checkbox" className="custom-control-input" id="save-info"/>
-              <label className="custom-control-label" htmlFor="save-info">Save this information for next time</label>
+              <label className="custom-control-label" htmlFor="save-info" style={{paddingLeft: '3px'}}>Lưu thông tin cho lần tới</label>
             </div>
             <hr className="mb-4"/>
 
@@ -142,11 +145,11 @@ const Checkout = () =>{
             <div className="d-block my-3">
               <div className="custom-control custom-radio">
                 <input id="QR" name="paymentMethod" type="radio" className="custom-control-input" checked required/>
-                <label className="custom-control-label" htmlFor="QR">QR Pay</label>
+                <label className="custom-control-label" htmlFor="QR" style={{paddingLeft: '3px'}}>QR Pay</label>
               </div>
               <div className="custom-control custom-radio">
                 <input id="COD" name="paymentMethod" type="radio" className="custom-control-input" required/>
-                <label className="custom-control-label" htmlFor="COD">COD</label>
+                <label className="custom-control-label" htmlFor="COD" style={{paddingLeft: '3px'}}>Thanh toán khi nhận hàng (<span style={{color: 'red'}}>Chỉ áp dụng với sách</span>)</label>
               </div>
             </div>
 

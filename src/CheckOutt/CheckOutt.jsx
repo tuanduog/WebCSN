@@ -72,11 +72,11 @@ const Checkout = () =>{
         </div>
         
           <div className="col-md-8 order-md-1">
-          <h4 className="mb-3 ms-1">Địa Chỉ</h4>
+          <h4 className="mb-3 ms-1">Thông tin người nhận</h4>
           <form className="needs-validation" noValidate>
             <div className="row ps-0">
               <div className="col mb-3">
-                <label htmlFor="firstName">First name</label>
+                <label htmlFor="firstName">Họ đệm</label>
                 <input type="text" className="form-control" id="firstName" placeholder="" value="" required/>
                 <div className="invalid-feedback">
                   Valid first name is required.

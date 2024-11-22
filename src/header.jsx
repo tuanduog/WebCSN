@@ -55,7 +55,7 @@ const Header = () => {
       navigate('/find_result/find_result', { state: { query } });
       setQuery('');
     } else {
-      alert('Please enter a search term.');
+      alert('Vui lòng nhập thông tin mà bạn muốn tìm!');
     }
   };
   return (
@@ -179,7 +179,8 @@ const Header = () => {
       border: '1px solid black',
       borderRadius: '20px',
       padding: '24px',
-      position: 'relative'
+      position: 'relative',
+      marginLeft: '-3px'
     }} 
     value={query} 
     onChange={(e) => setQuery(e.target.value)} 
