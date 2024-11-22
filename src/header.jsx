@@ -183,6 +183,11 @@ const Header = () => {
     }} 
     value={query} 
     onChange={(e) => setQuery(e.target.value)} 
+    onKeyDown={(e) => {
+      if(e.key == 'Enter'){
+        handleSearch();
+      }
+    }}
   />
   <button type="submit" onClick={() => {handleSearch()}} style={{border: 'none', background: 'transparent', position: 'absolute', marginLeft: '400px', marginTop: '3px'}}>
     <img src={search} alt="Search" className="srch" style={{ width: '24px', height: '24px' }} />

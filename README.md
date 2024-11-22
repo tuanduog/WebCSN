@@ -10,8 +10,15 @@
 note: clear sau khi logout (chưa xử lý)
 
 22/11
-full find
+find hint
 
 set blank cho 1 số cái ko tồn tại
 
 thêm 1 số db
+
+navigate book find
+
+find ok
+
+
+
