@@ -43,10 +43,7 @@ const FindResult = () => {
                 <p className="teacher">
                   Tác giả: <span>{book.tacgia}</span>
                 </p>
-                <div className="content">
-                  <p><span>0</span> Chuyên đề</p>
-                  <p><span>0</span> Bài học</p>
-                </div>
+                
               </div>
             </div>
           ))}
