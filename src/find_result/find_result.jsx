@@ -29,12 +29,12 @@ const FindResult = () => {
         <h2 className="title">| {query ? `Kết quả tìm kiếm cho "${query}"` : 'Tất cả sản phẩm'}</h2>
         <h2>Sách:</h2>
         {fitBooks.length > 0 ? (
-        <div className="courses">
+        <div className="courses" style={fitBooks.length < 4 ? {display: 'flex', justifyContent: 'center'}:{}}>
           {fitBooks.map((book) => (
               <div
               className="box"
               key={book.id}
-              style={{ cursor: 'pointer', padding: '5px'}}
+              style={fitBooks.length < 4 ? { cursor: 'pointer', padding: '5px', marginLeft: '10px'}:{ cursor: 'pointer', padding: '5px'}}
               onClick={() => handlePickBook(book.id)}
             >
               <img src={book.anhsach} alt={book.tensach} className="box-img" />
@@ -53,12 +53,13 @@ const FindResult = () => {
         )} 
         <h2>Khóa học:</h2>
         {fitProducts.length > 0 ? (
-        <div className="courses">
+        <div className="courses" style={fitProducts.length < 4 ? {display: 'flex', justifyContent: 'center'} : {}}>
           {fitProducts.map((product) => (
               <div
               className="box"
               key={product.id}
-              style={{ cursor: 'pointer', padding: '5px'}}
+              style={fitProducts.length < 4 ? { cursor: 'pointer', padding: '5px', marginLeft: '10px'
+              }:{cursor: 'pointer', padding: '5px'}}
             >
               <img src={product.anh} alt={product.tensp} className="box-img" />
               <div className="bottom">
