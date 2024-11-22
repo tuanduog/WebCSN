@@ -18,7 +18,7 @@ thêm 1 số db
 
 navigate book find
 
-find ok
+find successful
 
 
 
