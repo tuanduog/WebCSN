@@ -44,10 +44,20 @@ const Header = () => {
 
   const handleClickBook = (bookid) => {
     navigate('/ctietsach', { state: { sachid: bookid } });
+    setQuery('');
   }
   const handleClickProduct = (productid) => {
-    navigate('/khoahoc/khoahoc', { state: {productid}})
+    navigate('/khoahoc/khoahoc', { state: {productid} });
+    setQuery('');
   }
+  const handleSearch = () => {
+    if (query.trim() !== '') {
+      navigate('/find_result/find_result', { state: { query } });
+      setQuery('');
+    } else {
+      alert('Please enter a search term.');
+    }
+  };
   return (
     <div id="header">
       <Link to="/"><img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} /></Link>
@@ -174,7 +184,7 @@ const Header = () => {
     value={query} 
     onChange={(e) => setQuery(e.target.value)} 
   />
-  <button type="submit" style={{border: 'none', background: 'transparent', position: 'absolute', marginLeft: '400px', marginTop: '3px'}}>
+  <button type="submit" onClick={() => {handleSearch()}} style={{border: 'none', background: 'transparent', position: 'absolute', marginLeft: '400px', marginTop: '3px'}}>
     <img src={search} alt="Search" className="srch" style={{ width: '24px', height: '24px' }} />
   </button>
 

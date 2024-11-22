@@ -70,7 +70,7 @@ const Sach = () => {
         </ul>
         <ul className='sach'>
         {data_sach.sach_data
-        .filter((book) => book.id >= 1 && book.id <= 3)
+        .filter((book) => book.id >= 2 && book.id <= 4)
         .map((book) => (
         <li key={book.id}>
           <div

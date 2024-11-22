@@ -8,7 +8,6 @@ const Ctietsach = () => {
   const location = useLocation();
   const sachid = location.state?.sachid;
 
-
   const sach = data_sach.sach_data.find((item) => item.id === sachid);
 
   const { auth } = useAuth();

@@ -14,7 +14,7 @@ import { AuthProvider } from './authContext';
 import Checkout from './Checkout/Checkout';
 import QR from './Checkout/QRPay';
 import Blank from './blank';
-import Test from './test';
+import Find from './find_result/find_result';
 const AppContent = () => {
   const location = useLocation(); 
   
@@ -36,7 +36,7 @@ const AppContent = () => {
         <Route path="Checkout/Checkout" element={<Checkout />} />
         <Route path="Checkout/QR" element={<QR />} />
         <Route path="/blank" element={<Blank/>}></Route>
-        <Route path="/test" element={<Test/>}></Route>
+        <Route path="/find_result/find_result" element={<Find/>}></Route>
       </Routes>
     </>
   );
