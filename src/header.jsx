@@ -10,11 +10,13 @@ import "./Full.css";
 import "../node_modules/mdb-ui-kit/css/mdb.min.css"
 import "../node_modules/mdb-ui-kit/js/mdb.es.min.js"
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import data from "./data/data.jsx";
 import data_sach from "./data/data_sach.jsx";
 const Header = () => {
   const navigate = useNavigate();
+  const [showResults, setShowResults] = useState(false);
+  const searchRef = useRef(null);
   const handleCart = () => {
     navigate('cart/cart');
   }
@@ -44,20 +46,32 @@ const Header = () => {
 
   const handleClickBook = (bookid) => {
     navigate('/ctietsach', { state: { sachid: bookid } });
-    setQuery('');
+    setShowResults(false);
   }
   const handleClickProduct = (productid) => {
     navigate('/khoahoc/khoahoc', { state: {productid} });
-    setQuery('');
+    setShowResults(false);
   }
   const handleSearch = () => {
     if (query.trim() !== '') {
       navigate('/find_result/find_result', { state: { query } });
-      setQuery('');
+      setShowResults(false);
     } else {
       alert('Vui lòng nhập thông tin mà bạn muốn tìm!');
     }
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowResults(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   return (
     <div id="header">
       <Link to="/"><img src={logo} alt="Logo" style={{ width: "90px", height: "45px" }} /></Link>
@@ -167,7 +181,7 @@ const Header = () => {
 </div>
 
       
-<div className="search-container" style={{ width: '450px', border: 'none', backgroundColor: 'none'}}>
+<div className="search-container" style={{ width: '450px', border: 'none', backgroundColor: 'none'}} ref={searchRef}>
   <input 
     type="text" 
     placeholder="Tìm kiếm khóa học" 
@@ -183,7 +197,7 @@ const Header = () => {
       marginLeft: '-3px'
     }} 
     value={query} 
-    onChange={(e) => setQuery(e.target.value)} 
+    onChange={(e) => {setQuery(e.target.value); setShowResults(true);}} 
     onKeyDown={(e) => {
       if(e.key == 'Enter'){
         handleSearch();
@@ -196,11 +210,12 @@ const Header = () => {
 
   {query && (
     <div style={{ width: '100%', backgroundColor: 'white' ,borderRadius: '3px' }}>
-      {fitBooks.length > 0 && (
+      {showResults && fitBooks.length > 0 && (
         <ul style={{ listStyleType: 'none', padding: '0', margin: '0' }}>
           {fitBooks.map((book) => (
-            <li
+            <li 
               key={book.id}
+              className="hovere"
               style={{
                 padding: '5px',
                 display: 'flex',
@@ -209,7 +224,7 @@ const Header = () => {
                 cursor: 'pointer',
                 borderBottom: '1px solid #ddd',
                 paddingBottom: '10px',
-                
+  
               }}
               onClick={() => handleClickBook(book.id)}
             >
@@ -227,11 +242,12 @@ const Header = () => {
         </ul>
       )}
 
-      {fitProducts.length > 0 && (
+      {showResults && fitProducts.length > 0 && (
         <ul style={{ listStyleType: 'none', padding: '0', margin: '0' }}>
           {fitProducts.map((product) => (
             <li
               key={product.id}
+              className="hovere"
               style={{
                 display: 'flex',
                 padding: '5px',

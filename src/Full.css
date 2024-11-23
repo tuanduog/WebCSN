@@ -37,10 +37,13 @@
     background-color: none !important;
     font-size: 16 !important;
 }
+.hovere:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
 .dropdown {
     position: relative;
 }
-/* cmt */
 .dropdown-hover:hover .dropdown-menu {
     display: flex !important;
     position: absolute;
