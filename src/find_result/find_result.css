@@ -520,13 +520,15 @@ img.dropdown{
   .section .courses {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    width: 100%;
   }
   
   .section .courses .box {
-    width: 24.3%;
+    width: 24%;
+    margin-left: 11px;
     border: 1px solid #d3d3d3;
-    margin: 10px 0;
+
   }
   
   .section .courses .box img {
