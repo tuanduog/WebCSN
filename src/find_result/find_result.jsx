@@ -37,7 +37,7 @@ const FindResult = () => {
               <div
               className="box"
               key={book.id}
-              style={fitBooks.length < 4 ? { cursor: 'pointer', padding: '5px', marginLeft: '10px'}:{ cursor: 'pointer', padding: '5px'}}
+              style={{ cursor: 'pointer', padding: '5px'}}
               onClick={() => handlePickBook(book.id)}
             >
               <img src={book.anhsach} alt={book.tensach} className="box-img" />

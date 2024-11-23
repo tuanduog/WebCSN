@@ -23,7 +23,7 @@ const Khoahoc = () => {
     navigate('/login/login');
   }
   const handleCheckOut = () => {
-    navigate('/Checkout/Checkout');
+    navigate('/Checkout/Checkout', {state: {productid}});
   }
   const handleAddToCart = () => {
     if (!product) {
