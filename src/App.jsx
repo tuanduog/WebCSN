@@ -15,6 +15,7 @@ import Checkout from './Checkout/Checkout';
 import QR from './Checkout/QRPay';
 import Blank from './blank';
 import Find from './find_result/find_result';
+import Test from './test';
 const AppContent = () => {
   const location = useLocation(); 
   
@@ -37,6 +38,7 @@ const AppContent = () => {
         <Route path="Checkout/QR" element={<QR />} />
         <Route path="/blank" element={<Blank/>}></Route>
         <Route path="/find_result/find_result" element={<Find/>}></Route>
+        <Route path="/test" element={<Test/>}></Route>
       </Routes>
     </>
   );

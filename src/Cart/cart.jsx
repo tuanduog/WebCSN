@@ -1,14 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const [products, setProducts] = useState([]); 
   const [books, setBooks] = useState([]);
+  const navigate = useNavigate();
+  const [selectedBooks, setSelectedBooks] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
+  
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -59,7 +63,7 @@ const Cart = () => {
     if (existingProductIndex !== -1) {
       if (type === 'increment') {
         updatedProducts[existingProductIndex].soluong += 1;
-      } else if (type === 'decrement' && updatedProducts[existingProductIndex].soluong > 0) {
+      } else if (type === 'decrement' && updatedProducts[existingProductIndex].soluong > 1) {
         updatedProducts[existingProductIndex].soluong -= 1;
       }
     } 
@@ -78,14 +82,13 @@ const Cart = () => {
   const handleQuantityChanges = (index, type) => {
     const updatedBooks = [...books];
     const currentBook = updatedBooks[index];
-  
-    // Check if the product already exists in the cart by name
+
     const existingBookIndex = updatedBooks.findIndex(book => book.tensach === currentBook.tensach);
   
     if (existingBookIndex !== -1) {
       if (type === 'increment') {
         updatedBooks[existingBookIndex].soluong += 1;
-      } else if (type === 'decrement' && updatedBooks[existingBookIndex].soluong > 0) {
+      } else if (type === 'decrement' && updatedBooks[existingBookIndex].soluong > 1) {
         updatedBooks[existingBookIndex].soluong -= 1;
       }
     } 
@@ -181,6 +184,32 @@ const Cart = () => {
       });
   };
 
+  const handleToCheckOut = () => {
+    const chosenBooks = books.filter((book) => selectedBooks.includes(book.sachid));
+    const chosenProducts = products.filter((product) =>
+      selectedProducts.includes(product.productid)
+    );
+    navigate("/Checkout/Checkout", { state: { chosenBooks, chosenProducts } });
+  };
+  
+
+  const handlePickProduct = (productId) => {
+    setSelectedProducts((prevSelected) =>
+      prevSelected.includes(productId)
+        ? prevSelected.filter((id) => id !== productId)
+        : [...prevSelected, productId]
+    );
+  };
+  
+  const handlePickBook = (bookId) => {
+    setSelectedBooks((prevSelected) =>
+      prevSelected.includes(bookId)
+        ? prevSelected.filter((id) => id !== bookId)
+        : [...prevSelected, bookId]
+    );
+  };
+  
+
   return (
     <div style={{ backgroundColor: 'white' }}>
       <div className="row d-flex justify-content-center align-items-center h-100">
@@ -207,7 +236,7 @@ const Cart = () => {
           </div>
 
           {products.map((product, index) => (
-            <div className="card rounded-3 mb-4" key={product.productId}>
+            <div className="card rounded-3 mb-4" key={product.productid}>
               <div className="card-body p-4" style={{ backgroundColor: 'white', width: '96%' }}>
                 <div className="row d-flex justify-content-between align-items-center" style={{ backgroundColor: 'white' }}>
                   <div className="col-md-2 col-lg-2 col-xl-2">
@@ -246,11 +275,12 @@ const Cart = () => {
                     <h5 className="mb-0">{Intl.NumberFormat('de-DE').format(product.gia)} VNĐ</h5>
                   </div>
                   <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                    <input type="checkbox" style={{ cursor: 'pointer' }} />
+                    <input type="checkbox" style={{ cursor: 'pointer' }} onChange={() => handlePickProduct(product.productid)}
+                     />
                     <FontAwesomeIcon 
                       icon={faTrash} 
                       style={{ fontSize: '1.5rem', marginLeft: '25px', cursor: 'pointer' }} 
-                      onClick={() => handleDeleteProduct(product.productid)} // Delete product
+                      onClick={() => handleDeleteProduct(product.productid)}
                     />
                   </div>
                 </div>
@@ -297,7 +327,7 @@ const Cart = () => {
                     <h5 className="mb-0">{Intl.NumberFormat('de-DE').format(book.gia)} VNĐ</h5>
                   </div>
                   <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                    <input type="checkbox" style={{ cursor: 'pointer' }} />
+                    <input type="checkbox" style={{ cursor: 'pointer' }} onChange={() => handlePickBook(book.sachid)} />
                     <FontAwesomeIcon 
                       icon={faTrash} 
                       style={{ fontSize: '1.5rem', marginLeft: '25px', cursor: 'pointer' }} 
@@ -312,14 +342,15 @@ const Cart = () => {
           {/* Checkout Button */}
           <div className="card">
             <div className="card-body">
-              <Link to="../Checkout/Checkout">
+              
                 <button
                   type="button"
                   className="btn btn-primary btn-block btn-lg"
+                  onClick={handleToCheckOut}
                 >
                   THANH TOÁN
                 </button>
-              </Link>
+        
             </div>
           </div>
         </div>

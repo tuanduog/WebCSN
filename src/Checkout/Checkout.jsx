@@ -1,43 +1,52 @@
-import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
 const Checkout = () =>{
-
-  const [products, setProducts] = useState([]); 
-
-
+  const location = useLocation();
+  const { chosenBooks = [], chosenProducts = [] } = location.state || {};
+  const [total, setTotal] = useState(0);
+  const [code, setCode] = useState("");
+  const [discountUsed, setdiscountUsed] = useState(false);
+  const [count, setCount] = useState(0);
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('http://localhost:8081/products', {
-          withCredentials: true, 
-        });
-  
-        if (response.data.Status === "success") {
-          setProducts(response.data.Products);
-        } else {
-          console.error('No products found');
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error.response?.data || error.message);
-      }
-    };
-  
-    fetchProducts();
-  }, []);
-    return(
+    const totalPrice =
+      chosenProducts.reduce((total, product) => total + product.gia * product.soluong, 0) +
+      chosenBooks.reduce((total, book) => total + book.gia * book.soluong, 0);
+      
+    setTotal(totalPrice);
+  }, [chosenProducts, chosenBooks]);
+  useEffect(() => {
+    const sl = chosenBooks.reduce((count, book) => count + book.soluong, 0) +
+    chosenProducts.reduce((count, product) => count + product.soluong, 0);
+    setCount(sl);
+  }, [chosenBooks, chosenProducts]); // hooks alwways top level of function => để dưới là lỗi
+  const handleReduce = () => {
+    if(code === 'tuanduog' && !discountUsed){
+      const discount = total * 0.05;
+      setTotal(total - discount);
+      setdiscountUsed(true);
+      alert('Khuyến mãi được áp dụng!')
+    } else if (discountUsed && code === 'tuanduog'){
+      alert('Mã khuyến mãi này đã được áp dụng!');
+    } else {
+      alert('Mã khuyến mãi không hợp lệ!');
+    }
+    
+  }
+  return(
 
-<div className="container">
-<div className="row">
+    <div className="container">
+      <div className="row">
         <div className="col-md-4 order-md-2 mb-4">
           <h4 className="d-flex justify-content-between align-items-center mb-3">
             <span className="text-muted">Giỏ hàng</span>
-            <span className="badge badge-secondary badge-pill">3</span>
+            <span className="badge badge-secondary badge-pill">{count}</span>
           </h4>
           <ul className="list-group mb-3">
-            {products.map((product) => (
-              <div key={product.productId}>
+          {chosenProducts.map((product) => (
+              <div key={product.productid}>
                 <li className="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 className="my-0">{product.tensp}</h6>
@@ -48,31 +57,43 @@ const Checkout = () =>{
             </li>
               </div>
             ))}
+            {chosenBooks.map((book) => (
+              <div key={book.sachid}>
+                <li className="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 className="my-0">{book.tensach}</h6>
+                <small className="text-muted">Số lượng: {book.soluong }</small>
+              </div>
+              
+              <span className="text-muted">{book.gia} </span>
+            </li>
+              </div>
+            ))}
         
             <li className="list-group-item d-flex justify-content-between bg-light">
               <div className="text-success">
                 <h6 className="my-0">Mã thẻ khuyến mại</h6>
-                <small>EXAMPLECODE</small>
+                <small>tuanduog</small>
               </div>
-              <span className="text-success">-$5</span>
+              <span className="text-success">- 5%</span>
             </li>
             <li className="list-group-item d-flex justify-content-between">
-              <span>Tổng tiền (VNĐ)</span>
+              <span><strong style={{color: 'red'}}>Tổng tiền: </strong> {Intl.NumberFormat("de-DE").format(total)}</span>
               <strong>VNĐ</strong>
             </li>
           </ul>
           <form className="card p-2">
             <div className="input-group">
-              <input type="text" className="form-control" placeholder="Khuyến mại"/>
+              <input type="text" className="form-control" placeholder="Khuyến mại" value={code} onChange={(e) => setCode(e.target.value)}/>
               <div className="input-group-append">
-                <button type="submit" className="btn btn-secondary">Áp dụng</button>
+                <button type="button" className="btn btn-primary" style={{height: '34px'}} onClick={handleReduce}>Áp dụng</button>
               </div>
             </div>
           </form>
         </div>
         
           <div className="col-md-8 order-md-1">
-          <h4 className="mb-3 ms-1">Thông tin người nhận</h4>
+          <h3 className="mb-3 ms-1">Thông tin người nhận</h3>
           <form className="needs-validation" noValidate>
             <div className="row ps-0">
               <div className="col mb-3">
@@ -93,7 +114,7 @@ const Checkout = () =>{
               </div>
             </div>
 
-            <div className="mb-3">
+            <div className="mb-3" style={{marginTop: '-20px'}}>
               <label htmlFor="username">Tên đăng nhập</label>
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
               <div className="input-group">
@@ -110,16 +131,15 @@ const Checkout = () =>{
             <div className="mb-3">
               <label htmlFor="email">Email</label>
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
-              <input type="email" className="form-control" id="email" placeholder="you@example.com"/>
+              <input type="email" className="form-control" id="email" placeholder="you@example.com" required/>
               <div className="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
             </div>
-            <div className='mb-3'>
-              <label style={{color: 'red'}}>Mục dành cho sách</label>
-            </div>
+
             <div className="mb-3">
               <label htmlFor="address">Địa chỉ</label>
+              <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
               <input type="text" className="form-control" id="address" placeholder="ex: Số nhà 1 - Xóm Trung Tâm - Xã Nghĩa Phúc - Huyện Tân Kỳ - Tỉnh Nghệ An" required/>
               <div className="invalid-feedback">
                 Please enter your shipping address.
@@ -128,7 +148,8 @@ const Checkout = () =>{
 
             <div className="mb-3">
               <label htmlFor="address2">Số điện thoại </label>
-              <input type="text" className="form-control" id="address2" placeholder="ex: 0123456789"/>
+              <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
+              <input type="text" className="form-control" id="address2" placeholder="ex: 0123456789" required/>
             </div>
 
            
@@ -149,7 +170,7 @@ const Checkout = () =>{
               </div>
               <div className="custom-control custom-radio">
                 <input id="COD" name="paymentMethod" type="radio" className="custom-control-input" required/>
-                <label className="custom-control-label" htmlFor="COD" style={{paddingLeft: '3px'}}>Thanh toán khi nhận hàng (<span style={{color: 'red'}}>Chỉ áp dụng với sách</span>)</label>
+                <label className="custom-control-label" htmlFor="COD" style={{paddingLeft: '3px'}}>Thanh toán khi nhận hàng (<span style={{color: 'red'}}>Chỉ áp dụng đối với sách</span>)</label>
               </div>
             </div>
 

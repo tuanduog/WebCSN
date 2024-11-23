@@ -37,9 +37,15 @@
     background-color: none !important;
     font-size: 16 !important;
 }
+.dropdown {
+    position: relative;
+}
 
 .dropdown-hover:hover .dropdown-menu {
-    display: block !important;
+    display: flex !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
   }
 
 #sub1:hover + .dropdown-submenu{
@@ -138,7 +144,18 @@ img.dropdown{
     height: auto;
     background-color: transparent;
 }
-
+.search-container {
+    background-color: #e0e0e0 !important;
+    height: 50px;
+    display: inline;
+    display: flex;
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 4px;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 16 !important;
+}
 
 .login-button {
     width: 120px;

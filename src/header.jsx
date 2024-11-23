@@ -277,13 +277,19 @@ const Header = () => {
             id="dropdownMenuButton"
             aria-haspopup="true"
             aria-expanded="false"
-            style={{backgroundColor: '#f8f9ff'}}
+            style={{backgroundColor: '#f8f9ff', position: 'relative'}}
           >
             <FontAwesomeIcon icon={faUserLarge} style={{ fontSize: "1.5rem" }} color="black" />
           </button>
-          <div className="dropdown-menu" style={{marginLeft: '-40px'}}>
+          <div className="dropdown-menu" style={{marginLeft: '-40px', position: 'absolute', top: '100%', left: '0'}}>
             <a className="dropdown-item" href="#" style={{textAlign: 'center'}}>
-              {name} {/* Displays the user's name */}
+              {name}
+            </a>
+            <a className="dropdown-item" href="" style={{textAlign: 'center'}}>
+              Thông tin tài khoản
+            </a>
+            <a className="dropdown-item" href="" style={{textAlign: 'center'}}>
+              Khóa học của bạn
             </a>
             <a className="dropdown-item" href="" onClick={logout} style={{textAlign: 'center'}}>
               <FontAwesomeIcon icon={faRightFromBracket} /> Đăng xuất

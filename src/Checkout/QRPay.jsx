@@ -1,6 +1,9 @@
 import QRcode from "../assets/QR.png"
 
 const QR = () =>{
+    const handleSuccess = () => {
+        alert('Bạn đã thanh toán thành công đơn hàng!');
+    }
     return (
         <div className="row"> 
         <div className="col">
@@ -16,7 +19,7 @@ const QR = () =>{
             <img className="rounded mx-auto d-block" src={QRcode} alt="" style={{width:"30%"}}/>
             <p className="mt-2 text-center">Mã hoá đơn: 2000000343</p>
             <div className="text-center">
-            <button className="btn btn-primary " type="submit">Tôi đã hoàn tất thanh toán</button>
+            <button className="btn btn-primary " type="submit" onClick={handleSuccess}>Tôi đã hoàn tất thanh toán</button>
             </div>
             
         </div>

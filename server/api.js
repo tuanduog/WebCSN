@@ -404,7 +404,6 @@ app.post('/comments', verifyUser, (req, res) => {
 
   const { cmttext, time } = req.body;
 
-  // Validate input fields
   if (!cmttext || !time) {
     console.error('Missing fields:', req.body);
     return res.status(400).json({
