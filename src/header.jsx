@@ -13,10 +13,14 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import data from "./data/data.jsx";
 import data_sach from "./data/data_sach.jsx";
+
 const Header = () => {
   const navigate = useNavigate();
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef(null);
+  const navitoYourCourse = () =>{
+    navigate('/YourCourse');
+  }
   const handleCart = () => {
     navigate('cart/cart');
   }
@@ -304,7 +308,7 @@ const Header = () => {
             <a className="dropdown-item" href="" style={{textAlign: 'center'}}>
               Thông tin tài khoản
             </a>
-            <a className="dropdown-item" href="" style={{textAlign: 'center'}}>
+            <a className="dropdown-item" onClick={navitoYourCourse} href="" style={{textAlign: 'center'}}>
               Khóa học của bạn
             </a>
             <a className="dropdown-item" href="" onClick={logout} style={{textAlign: 'center'}}>

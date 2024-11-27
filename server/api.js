@@ -19,7 +19,9 @@ app.use(express.json());
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  database: "bankh"
+  password: '',      // MySQL password (default empty for XAMPP)
+  database: 'bankh',  // Database name
+  port: 3307
 })
 app.use(cookieParser());
 
@@ -322,7 +324,23 @@ app.post('/books', verifyUser, (req, res) => {
     }
   });
 });
+app.get('/users',verifyUser, (req,res) => {
+  console.log('userid: ', req.userid);
+  const sql = "select * from users where userid = ?";
+  const uid = req.userid;
+  db.query(sql,[uid],(err,results)=>{
+    if (err) {
+      console.error('Lỗi cơ sở dữ liệu:', err.message);
+      return res.status(500).json({ Error: "Lỗi cơ sở dữ liệu", Details: err.message });
+    }
 
+    if (results.length === 0) {
+      return res.status(404).json({ Status: "Không tìm thấy user nào", Users: [] });
+    }
+
+    res.json({ Status: "success", Users: results });
+  });
+});
 
 app.get('/books', verifyUser, (req, res) => {
   console.log('UserID:', req.userid); 

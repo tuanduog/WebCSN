@@ -7,7 +7,6 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
   const [name, setName] = useState('');
 
-
   useEffect(() => {
     // Check if the user is logged in when the app loads
     axios.defaults.withCredentials = true;
@@ -37,7 +36,6 @@ export const AuthProvider = ({ children }) => {
         if (res.data.Status === "Success") {
           setAuth(false);
           setName('');
-   
         }
       })
       .catch(err => {
