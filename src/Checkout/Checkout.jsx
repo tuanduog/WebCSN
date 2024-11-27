@@ -1,21 +1,58 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import data from '../data/data';
+import { useAuth } from '../authContext';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const Checkout = () =>{
   const location = useLocation();
+  const {auth,name} = useAuth();
+  const [inputAddress, setInputA] = useState('');
+  const [inputPhonenumber,setInputP] = useState('');
+  const [inputPaymentFee, setInputF] = useState('');
+  const [inputEmail,setInputE] = useState('');
+
   const { chosenBooks = [], chosenProducts = [] } = location.state || {};
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [discountUsed, setdiscountUsed] = useState(false);
   const [count, setCount] = useState(0);
 
   const pdid = location.state?.productid;
+
+  const handleQRpay = () => {
+    navigate('../Checkout/QR',{state:{e:thisE,a:inputAddress,p:inputPhonenumber,total,pdid}});
+  }
   const pd = data.product_data.find((item) => item.id === pdid);
-  
+  const [user,setUser] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:8081/users')
+    .then((res) => {
+       // console.log(res.data);
+        setUser(res.data.Users);
+    })
+    .catch((error) => {
+      console.log('Fetching data error:',error)
+    });
+  },[]);  
+  const [thisE,setThisE] = useState('');
+  const u = user.find((user) => user.username === name);
+  useEffect(() => {
+    if (u != null) {
+      setThisE(u.email); // Set the email to state
+    }
+  }, [u]);
+
+  //console.log(u.email);
+  //setThisE(u.email);
+    
+
   useEffect(() => {
     let totalPrice =
       chosenProducts.reduce((total, product) => total + product.gia * product.soluong, 0) +
@@ -24,7 +61,7 @@ const Checkout = () =>{
         totalPrice += pd.gia;
       }
       if (discountUsed) {
-        totalPrice *= 0.95; 
+        totalPrice *= 0.95;   
       }
     setTotal(totalPrice);
   }, [chosenProducts, chosenBooks, pd, discountUsed]);
@@ -159,7 +196,7 @@ const Checkout = () =>{
                 <div className="input-group-prepend">
                   <span className="input-group-text">@</span>
                 </div>
-                <input type="text" className="form-control" id="username" placeholder="Tên đăng nhập" required/>
+                <input type="text" className="form-control" id="username" placeholder="Tên đăng nhập" value={name} required readOnly/>
                 <div className="invalid-feedback" style={{width:"100%"}}>
                   Your username is required.
                 </div>
@@ -169,7 +206,7 @@ const Checkout = () =>{
             <div className="mb-3">
               <label htmlFor="email">Email</label>
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
-              <input type="email" className="form-control" id="email" placeholder="you@example.com" required/>
+              <input type="email" className="form-control" id="email"  value={thisE} onChange={(e) => setInputE(e.target.value)} placeholder="you@example.com" required/>
               <div className="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
@@ -178,7 +215,7 @@ const Checkout = () =>{
             <div className="mb-3">
               <label htmlFor="address">Địa chỉ</label>
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
-              <input type="text" className="form-control" id="address" placeholder="ex: Số nhà 1 - Xóm Trung Tâm - Xã Nghĩa Phúc - Huyện Tân Kỳ - Tỉnh Nghệ An" required/>
+              <input type="text" value={inputAddress} onChange={(a) => setInputA(a.target.value)} className="form-control" id="address" placeholder="ex: Số nhà 1 - Xóm Trung Tâm - Xã Nghĩa Phúc - Huyện Tân Kỳ - Tỉnh Nghệ An" required/>
               <div className="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -187,7 +224,7 @@ const Checkout = () =>{
             <div className="mb-3">
               <label htmlFor="address2">Số điện thoại </label>
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
-              <input type="text" className="form-control" id="address2" placeholder="ex: 0123456789" required/>
+              <input type="text" value={inputPhonenumber} onChange={(p) =>setInputP(p.target.value)} className="form-control" id="address2" placeholder="ex: 0123456789" required/>
             </div>
 
            
@@ -210,9 +247,9 @@ const Checkout = () =>{
             </div>
 
             <hr className="mb-4"/>
-            <Link to="../Checkout/QR">
-            <button className="btn btn-primary btn-lg btn-block" type="submit">Tiếp tục</button>
-            </Link>
+
+            <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={handleQRpay}>Tiếp tục</button>
+
           </form>
         </div>
       </div>
