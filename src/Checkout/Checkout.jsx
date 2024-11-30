@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import { Link, Navigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -9,14 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
-
 const Checkout = () =>{
   const location = useLocation();
-  const {auth,name} = useAuth();
+  const {name} = useAuth();
   const [inputAddress, setInputA] = useState('');
   const [inputPhonenumber,setInputP] = useState('');
-  const [inputPaymentFee, setInputF] = useState('');
-  const [inputEmail,setInputE] = useState('');
+  const [setInputE] = useState('');
 
   const { chosenBooks = [], chosenProducts = [] } = location.state || {};
   const [total, setTotal] = useState(0);
@@ -31,7 +28,6 @@ const Checkout = () =>{
     navigate('../Checkout/QR',{state:{e:thisE,a:inputAddress,p:inputPhonenumber,total,pdid}});
   }
   const pd = data.product_data.find((item) => item.id === pdid);
-<<<<<<< HEAD
   const [values, setValues] = useState({
     hodem: '',
     ten: '',
@@ -39,8 +35,6 @@ const Checkout = () =>{
     sodt: '',
     tongtien: '',
   });
-  
-=======
   const [user,setUser] = useState([]);
   useEffect(() => {
     axios.get('http://localhost:8081/users')
@@ -59,12 +53,7 @@ const Checkout = () =>{
       setThisE(u.email); // Set the email to state
     }
   }, [u]);
-
-  //console.log(u.email);
-  //setThisE(u.email);
-    
-
->>>>>>> 8ca66398eadca2f0651aa55822242ee84031b78b
+  
   useEffect(() => {
     let totalPrice =
       chosenProducts.reduce((total, product) => total + product.gia * product.soluong, 0) +
@@ -235,26 +224,15 @@ const Checkout = () =>{
             <div className="mb-3">
               <label htmlFor="address">Địa chỉ</label>
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
-<<<<<<< HEAD
               <input type="text" className="form-control" id="diachi" name="diachi"
-              placeholder="ex: Số nhà 1 - Xóm Trung Tâm - Xã Nghĩa Phúc - Huyện Tân Kỳ - Tỉnh Nghệ An" value={values.diachi} onChange={handleInputChange} required/>
+              placeholder="ex: Số nhà 1 - Xóm Trung Tâm - Xã Nghĩa Phúc - Huyện Tân Kỳ - Tỉnh Nghệ An" value={inputAddress} onChange={(a) => setInputA(a.target.value)} required/>
              
-=======
-              <input type="text" value={inputAddress} onChange={(a) => setInputA(a.target.value)} className="form-control" id="address" placeholder="ex: Số nhà 1 - Xóm Trung Tâm - Xã Nghĩa Phúc - Huyện Tân Kỳ - Tỉnh Nghệ An" required/>
-              <div className="invalid-feedback">
-                Please enter your shipping address.
-              </div>
->>>>>>> 8ca66398eadca2f0651aa55822242ee84031b78b
             </div>
 
             <div className="mb-3">
               <label htmlFor="address2">Số điện thoại </label>
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
-<<<<<<< HEAD
-              <input type="text" className="form-control" id="sodt" name='sodt' placeholder="ex: 0123456789" value={values.sodt} onChange={handleInputChange} required/>
-=======
-              <input type="text" value={inputPhonenumber} onChange={(p) =>setInputP(p.target.value)} className="form-control" id="address2" placeholder="ex: 0123456789" required/>
->>>>>>> 8ca66398eadca2f0651aa55822242ee84031b78b
+              <input type="text" className="form-control" id="sodt" name='sodt' placeholder="ex: 0123456789" value={inputPhonenumber} onChange={(p) =>setInputP(p.target.value)} required/>
             </div>
 
            

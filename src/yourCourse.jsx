@@ -1,47 +1,18 @@
 import { useLocation } from 'react-router-dom';
-import data_sach from './data/data_sach.jsx';
+// import data_sach from './data/data_sach.jsx';
 import './find_result/find_result.css';
-import data from './data/data.jsx';
+
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useState,useEffect } from 'react';
+
 const YourCourse = () => {
   const location = useLocation();
-  const {pdid} = location.state ||{};
-  const pd = data.product_data.find((item) => item.id === pdid);
-  //console.log(pd);
-  const [products, setProducts] = useState([]); 
-
   const navigate = useNavigate();
-  const handlePickBook = (sachid) => {
-    navigate('/ctietsach', {state: {sachid}});
-  } 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('http://localhost:8081/products', {
-          withCredentials: true, 
-        });
-  
-        if (response.data.Status === "success") {
-          setProducts(response.data.Products);
-        } else {
-          console.error('No products found');
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error.response?.data || error.message);
-      }
-    };
-  
-    fetchProducts();
-  }, []);
-  
+  const { chosenProducts = [] } = location.state || {};
+
   const handlePickProduct = (productid) => {
     navigate('/khoahoc/khoahoc', {state: {productid: productid}});
   }
-  console.log(products);
- // const fitProducts = product_data.find((item) => item.id === pdid);
-  //console.log(fitProducts);
+
   return (
     <div className="section">
       <div className="container">
@@ -49,7 +20,7 @@ const YourCourse = () => {
         <h2>Khóa học:</h2>
 
         <div className="courses">
-            {products.map((product, index) =>(
+            {chosenProducts.map((product) =>(
                 <div
                 className="box"
                 key={product.productid}

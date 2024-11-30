@@ -1,62 +1,18 @@
 import QRcode from "../assets/QR.png"
-<<<<<<< HEAD
-
-const QRPay = () =>{
-=======
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import data from "../data/data";
-import axios from "axios";
 const QR = () =>{
     const navigate = useNavigate();
     
     const location = useLocation();
-    const {pdid} = location.state ||{};
     const {e} = location.state || {};
     const {a} = location.state  || {};
     const {p} = location.state  || {};
     const {total} = location.state || {};
->>>>>>> 8ca66398eadca2f0651aa55822242ee84031b78b
-    const handleSuccess = () => {
-        alert('Bạn đã thanh toán thành công đơn hàng!');
-        navigate('/YourCourse', {state: {pdid}});
-    }
-    const product = data.product_data.find((item) => item.id === pdid);
 
     const handleToYourCart = () => {
-        alert('Bạn đã thanh toán thành công đơn hàng!');
-        if (!product) {
-          alert('Product not found!');
-          return;
-        }
-      
-        const productData = {
-          anhsp: product.anh,
-          tensp: product.tensp,
-          tengv: product.tengv, 
-          gia: product.gia,
-          soluong: product.soluong,
-          lop: product.lop,
-          mon: product.mon
-        };
-      
-        console.log('Sending product data:', productData);
-      
-        axios.post('http://localhost:8081/products', productData, { withCredentials: true })
-          .then((res) => {
-            console.log('Server response:', res.data);
-            if (res.data.Status === "success") {
-              alert('Khoá học đã được thêm vào cho bạn');
-              navigate('/YourCourse');
-            } else {
-              alert('Error: ' + res.data.Error);
-            }
-          })
-          .catch((err) => {
-            console.error('Error adding to cart:', err.response?.data || err.message);
-            alert('An error occurred while adding the product to the cart.');
-          });
+        alert("Bạn đã thanh toán thành công!");
+        navigate("/yourCourse");
       };
     return (
         <div className="row"> 
@@ -82,4 +38,4 @@ const QR = () =>{
         </div>
     )
 }
-export default QRPay;
+export default QR;

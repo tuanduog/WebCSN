@@ -19,9 +19,7 @@ app.use(express.json());
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: '',      // MySQL password (default empty for XAMPP)
   database: 'bankh',  // Database name
-  port: 3307
 })
 app.use(cookieParser());
 
