@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import data from '../data/data';
 
+
 const Checkout = () =>{
   const location = useLocation();
   const { chosenBooks = [], chosenProducts = [] } = location.state || {};
@@ -15,6 +16,13 @@ const Checkout = () =>{
 
   const pdid = location.state?.productid;
   const pd = data.product_data.find((item) => item.id === pdid);
+  const [values, setValues] = useState({
+    hodem: '',
+    ten: '',
+    diachi: '',
+    sodt: '',
+    tongtien: '',
+  });
   
   useEffect(() => {
     let totalPrice =
@@ -49,7 +57,7 @@ const Checkout = () =>{
         discount = total * 0.05;
         setTotal((prevTotal) => prevTotal - discount);
       }
-      setdiscountUsed(true);
+      setdiscountUsed(true); 
       alert('Khuyến mãi được áp dụng!')
     } else if (discountUsed && code === 'tuanduog'){
       alert('Mã khuyến mãi này đã được áp dụng!');
@@ -57,6 +65,12 @@ const Checkout = () =>{
       alert('Mã khuyến mãi không hợp lệ!');
     }
   }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prevValues) => ({ ...prevValues, [name]: value }));
+  };
+  
+  
   return(
 
     <div className="container">
@@ -135,20 +149,22 @@ const Checkout = () =>{
           <form className="needs-validation" noValidate>
             <div className="row ps-0">
               <div className="col mb-3">
-                <label htmlFor="firstName">Họ đệm</label>
-                <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
-                <input type="text" className="form-control" id="firstName" placeholder="" value="" required/>
-                <div className="invalid-feedback">
-                  Valid first name is required.
-                </div>
+              <label htmlFor="hodem">Họ đệm</label>
+              <span style={{ color: 'red', fontSize: '1.2rem' }}> *</span>
+              <input
+                type="text"
+                className="form-control"
+                id="hodem"
+                name="hodem" // Matches the key in `values`
+                value={values.hodem} // Bound to state
+                onChange={handleInputChange} // Updates state dynamically
+                required
+              />
               </div>
               <div className="col mb-3">
-                <label htmlFor="lastName">Tên</label>
-                <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
-                <input type="text" className="form-control" id="lastName" placeholder="" value="" required/>
-                <div className="invalid-feedback">
-                  Valid last name is required.
-                </div>
+                <label htmlFor="ten">Tên</label>
+                <span style={{ color: 'red', fontSize: '1.2rem' }}> *</span>
+                <input type="text" className="form-control" id="ten" name="ten" value={values.ten} onChange={handleInputChange} required />
               </div>
             </div>
 
@@ -178,16 +194,15 @@ const Checkout = () =>{
             <div className="mb-3">
               <label htmlFor="address">Địa chỉ</label>
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
-              <input type="text" className="form-control" id="address" placeholder="ex: Số nhà 1 - Xóm Trung Tâm - Xã Nghĩa Phúc - Huyện Tân Kỳ - Tỉnh Nghệ An" required/>
-              <div className="invalid-feedback">
-                Please enter your shipping address.
-              </div>
+              <input type="text" className="form-control" id="diachi" name="diachi"
+              placeholder="ex: Số nhà 1 - Xóm Trung Tâm - Xã Nghĩa Phúc - Huyện Tân Kỳ - Tỉnh Nghệ An" value={values.diachi} onChange={handleInputChange} required/>
+             
             </div>
 
             <div className="mb-3">
               <label htmlFor="address2">Số điện thoại </label>
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
-              <input type="text" className="form-control" id="address2" placeholder="ex: 0123456789" required/>
+              <input type="text" className="form-control" id="sodt" name='sodt' placeholder="ex: 0123456789" value={values.sodt} onChange={handleInputChange} required/>
             </div>
 
            

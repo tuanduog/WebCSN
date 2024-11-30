@@ -1,6 +1,6 @@
 import QRcode from "../assets/QR.png"
 
-const QR = () =>{
+const QRPay = () =>{
     const handleSuccess = () => {
         alert('Bạn đã thanh toán thành công đơn hàng!');
     }
@@ -26,4 +26,4 @@ const QR = () =>{
         </div>
     )
 }
-export default QR
+export default QRPay;

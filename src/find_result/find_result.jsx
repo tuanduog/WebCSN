@@ -43,7 +43,8 @@ const FindResult = () => {
               <img src={book.anhsach} alt={book.tensach} className="box-img" />
               <div className="bottom">
                 <p className="name">{book.tensach}</p>
-                <p className="teacher">
+                <span style={{color: 'black'}}>Giá bán: </span><span style={{color: 'red', fontWeight: 'bold'}}>{Intl.NumberFormat('de-DE').format(book.gia)} đ</span>
+                <p className="teacher" style={{color: 'black', paddingTop: '3px'}}>
                   Tác giả: <span>{book.tacgia}</span>
                 </p>
                 

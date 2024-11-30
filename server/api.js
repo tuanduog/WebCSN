@@ -442,6 +442,130 @@ app.post('/comments', verifyUser, (req, res) => {
   });
 });
 
+app.post('/register/checkUser', (req, res) => {
+  const { email, username } = req.body;
+
+  const checkUserSql = "SELECT * FROM users WHERE email = ? OR username = ?";
+  db.query(checkUserSql, [email, username], (err, result) => {
+    if (err) {
+      console.error("Database error:", err.message);
+      return res.status(500).json({ Status: "error", Message: "Database error" });
+    }
+
+    let response = {
+      email: { exists: false },
+      username: { exists: false }
+    };
+
+    result.forEach(user => {
+      if (user.username === username) {
+        response.username.exists = true;
+      }
+      if (user.email === email) {
+        response.email.exists = true;
+      }
+    });
+
+    return res.json(response); 
+  });
+});
+
+
+
+app.post('/login/login', (req, res) => {
+  const sql = "SELECT * FROM users WHERE username = ?";
+  db.query(sql, [req.body.name], (err, data) => {
+    if (err) {
+      return res.json({ Error: "Lỗi server đăng nhập" });
+    } 
+    if (data.length > 0) {
+      bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
+        if (err) return res.json({ Error: "Lỗi password" });
+        if (response) {
+          const name = data[0].username;
+          const userid = data[0].userid;
+          const token = jwt.sign({ name, userid }, "jwt-secret-key", { expiresIn: '1d' }); 
+
+          res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none' });
+ 
+          return res.json({ Status: "Đăng nhập thành công" });
+        } else {
+          return res.json({ Error: "Sai mật khẩu" });
+        }
+      });
+    } else {
+      return res.json({ Error: "Tài khoản không tồn tại" });
+    }
+  });
+});
+
+
+// POST endpoint
+app.post('/checkout', verifyUser, (req, res) => {
+  console.log('Request body received for adding checkout:', req.body);
+
+  // Destructure request body
+  const { hodem, ten, diachi, sodt, tongtien } = req.body;
+
+  // Validate required fields
+  if (!hodem || !ten || !diachi || !sodt || !tongtien) {
+    console.error('Missing fields:', req.body);
+    return res.status(400).json({
+      Error: "Missing required fields",
+      MissingFields: { hodem, ten, diachi, sodt, tongtien, userid},
+    });
+  }
+
+  // SQL to check if checkout entry exists
+  const checkCheckoutSql = "SELECT * FROM thanhtoan WHERE sodt = ? AND userid = ?";
+  db.query(checkCheckoutSql, [sodt, req.userid, productid], (err, result) => {
+    if (err) {
+      console.error('Database error while checking thanh toan:', err.message);
+      return res.status(500).json({ Error: "Database error", Details: err.message });
+    }
+
+    if (result.length > 0) {
+      return res.status(400).json({
+        Status: "error",
+        Message: "Checkout already exists",
+        ExistingCheckout: result[0],
+      });
+    }
+
+    // SQL to insert new checkout entry
+    const insertSql =
+      "INSERT INTO thanhtoan (hodem, ten, diachi, sodt, tongtien, userid, productid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    const values = [hodem, ten, diachi, sodt, tongtien, req.userid, productid, dhid];
+
+    db.query(insertSql, values, (err, insertResult) => {
+      if (err) {
+        console.error('Database error while adding product:', err.message);
+        return res.status(500).json({ Error: "Database error", Details: err.message });
+      }
+
+      console.log('Checkout successfully added with ID:', insertResult.insertId);
+      res.json({
+        Status: "success",
+        Message: "Checkout added successfully",
+        CheckoutId: insertResult.insertId,
+      });
+    });
+  });
+});
+
+app.get('/checkout', verifyUser, (req, res) => {
+  const { userid } = req;
+  const fetchCheckoutSql = "SELECT * FROM thanhtoan WHERE userid = ?";
+  db.query(fetchCheckoutSql, [userid], (err, result) => {
+    if (err) {
+      console.error('Database error while fetching checkouts:', err.message);
+      return res.status(500).json({ Error: "Database error", Details: err.message });
+    }
+    res.json({ Status: "success", Checkouts: result });
+  });
+});
+
+
 app.listen(8081, ()=> {
   console.log("Server running")
 })

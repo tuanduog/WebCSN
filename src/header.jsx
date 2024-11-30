@@ -90,10 +90,10 @@ const Header = () => {
       data-mdb-toggle="dropdown" aria-expanded="false" > KHÓA 2K7 - LUYỆN THI THPT QG 2024 &raquo; </a>
         <ul className=" dropdown-submenu rounded"  aria-labelledby="sub1">
           <li>
-            <a className="dropdown-item" href="">LIVE C - Luyện Thi Chuyên Đề</a>
+            <a className="dropdown-item" href="" onClick={() => handleBlank()}>LIVE C - Luyện Thi Chuyên Đề</a>
           </li>
           <li>
-            <a className="dropdown-item" href="">SLIVE T - Luyện Đề</a>
+            <a className="dropdown-item" href="" onClick={() => handleBlank()}>LIVE T - Luyện Đề</a>
           </li>
         </ul>
         </div>

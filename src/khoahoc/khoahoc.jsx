@@ -127,10 +127,10 @@ const Khoahoc = () => {
         <a className="nav-link active" aria-current="true" href="#">Comment - Đánh giá</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link " href="#">Thông tin khoá học</a>
+        <a className="nav-link " href="">Thông tin khoá học</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link " href="#">Lợi ích của khóa học</a>
+        <a className="nav-link" href="">Lợi ích của khóa học</a>
       </li>
     </ul>
   </div>
@@ -160,6 +160,7 @@ const Khoahoc = () => {
             padding: "10px",
           }}
         >
+          
           <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
             This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
           </p>
