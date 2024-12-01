@@ -1,17 +1,37 @@
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 // import data_sach from './data/data_sach.jsx';
 import './find_result/find_result.css';
-
+import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 const YourCourse = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const { chosenProducts = [] } = location.state || {};
+
 
   const handlePickProduct = (productid) => {
     navigate('/khoahoc/khoahoc', {state: {productid: productid}});
   }
+  const [products, setProducts] = useState([]); 
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:8081/mycourse', {
+          withCredentials: true, 
+        });
+  
+        if (response.data.Status === "success") {
+          setProducts(response.data.Products);
+        } else {
+          console.error('No products found');
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error.response?.data || error.message);
+      }
+    };
+  
+    fetchProducts();
+  }, []);
   
   return (
     <div className="section">
@@ -20,7 +40,7 @@ const YourCourse = () => {
         <h2>Khóa học:</h2>
 
         <div className="courses">
-            {chosenProducts.map((product) =>(
+            {products.map((product) =>(
                 <div
                 className="box"
                 key={product.productid}

@@ -14,18 +14,19 @@ const Checkout = () =>{
   const [inputAddress, setInputA] = useState('');
   const [inputPhonenumber,setInputP] = useState('');
   const [setInputE] = useState('');
-
+  const [inputFirstName,setInputFN] = useState('');
+  const [inputLastName,setInputLN] = useState('');
   const { chosenBooks = [], chosenProducts = [] } = location.state || {};
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [discountUsed, setdiscountUsed] = useState(false);
   const [count, setCount] = useState(0);
-
   const pdid = location.state?.productid;
 
   const handleQRpay = () => {
-    navigate('../Checkout/QR',{state:{e:thisE,a:inputAddress,p:inputPhonenumber,total,pdid}});
+
+    navigate('../Checkout/QR',{state:{e:thisE,a:inputAddress,p:inputPhonenumber,total,pdid,chosenProducts,chosenBooks}});
   }
   const pd = data.product_data.find((item) => item.id === pdid);
   const [values, setValues] = useState({

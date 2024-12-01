@@ -20,6 +20,7 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: 'bankh',  // Database name
+  port: 3307
 })
 app.use(cookieParser());
 
@@ -181,6 +182,109 @@ app.post('/products', verifyUser, (req, res) => {
   });
 });
 
+//Post endpoint cua My course:
+app.post('/mycourse', verifyUser, (req, res) => {
+  console.log('Request body received for adding product:', req.body);
+
+  const { anhsp, tensp, tengv, soluong, gia, lop, mon } = req.body;
+
+  if (!anhsp || !tensp || !tengv || !soluong || !gia || !lop || !mon) {
+    console.error('Missing fields:', req.body);
+    return res.status(400).json({ Error: "Missing required fields", MissingFields: { anhsp, tensp, tengv, soluong, gia, lop, mon } });
+  }
+
+  // check để tăng sl sản phẩm
+  const checkProductSql = "SELECT * FROM mycourse WHERE tensp = ? AND userid = ?";
+  db.query(checkProductSql, [tensp, req.userid], (err, result) => {
+    if (err) {
+      console.error('Database error while checking product:', err.message);
+      return res.status(500).json({ Error: "Database error", Details: err.message });
+    }
+
+    if (result.length > 0) {
+      const newQuantity = result[0].soluong + soluong;
+      const updateQuantitySql = "UPDATE mycourse SET soluong = ? WHERE tensp = ? AND userid = ?";
+      db.query(updateQuantitySql, [newQuantity, tensp, req.userid], (err, updateResult) => {
+        if (err) {
+          console.error('Database error while updating quantity:', err.message);
+          return res.status(500).json({ Error: "Database error", Details: err.message });
+        }
+
+        console.log('Product quantity updated successfully.');
+        res.json({ Status: "success", Message: "Product quantity updated successfully", ProductID: result[0].id });
+      });
+    } else {
+      // Nếu chưa có sp thì add mới
+      const sql = "INSERT INTO mycourse (anhsp, tensp, tengv, soluong, gia, lop, mon, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      const values = [anhsp, tensp, tengv, soluong, gia, lop, mon, req.userid];
+
+      db.query(sql, values, (err, insertResult) => {
+        if (err) {
+          console.error('Database error while adding product:', err.message);
+          return res.status(500).json({ Error: "Database error", Details: err.message });
+        }
+
+        console.log('Product successfully added with ID:', insertResult.insertId);
+        res.json({ Status: "success", Message: "Product added successfully", ProductID: insertResult.insertId });
+      });
+    }
+  });
+});
+
+
+
+//get endpoint of mycourse
+app.get('/mycourse', verifyUser, (req, res) => {
+  console.log('UserID:', req.userid); 
+
+  const userId = req.userid;
+
+  const sql = "SELECT * FROM mycourse WHERE userid = ?";
+  
+  db.query(sql, [userId], (err, results) => {
+    if (err) {
+      console.error('Lỗi cơ sở dữ liệu:', err.message);
+      return res.status(500).json({ Error: "Lỗi cơ sở dữ liệu", Details: err.message });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ Status: "Không tìm thấy sản phẩm nào", Products: [] });
+    }
+
+    res.json({ Status: "success", Products: results });
+  });
+});
+
+app.delete('/products/:productid', verifyUser, (req, res) => {
+  const { productid } = req.params;
+  const { userid } = req.body;
+  
+  if (isNaN(productid)) {
+    return res.status(400).json({ Error: "Invalid product ID" });
+  }
+
+  const sql = "DELETE FROM products WHERE productid = ? AND userid = ?";
+
+  db.query(sql, [productid, userid], (err, result) => {
+    if (err) {
+      console.error('Database error during product deletion:', err.message);
+      return res.status(500).json({ Status: "error", Message: "Database error", Details: err.message });
+    }
+
+    if (result.affectedRows === 0) {
+  
+      console.log(`No rows affected. Product ID: ${productid}, User ID: ${userid}`);
+
+      return res.status(404).json({ Status: "error", Message: "Không tìm thấy sản phẩm hoặc sản phẩm" });
+    }
+
+    // If deletion is successful
+    res.json({ Status: "success", Message: "Xóa sản phẩm thành công" });
+  });
+});
+
+
+
 
 // Update product quantity
 app.put('/products/:productid', verifyUser, (req, res) => {
@@ -304,6 +408,68 @@ app.post('/books', verifyUser, (req, res) => {
     } else {
       // Insert new book if it doesn't exist
       const sql = "INSERT INTO sach (anhsach, tensach, tacgia, soluong, gia, userid) VALUES (?, ?, ?, ?, ?, ?)";
+      const values = [anhsach, tensach, tacgia, soluong, gia, userId];
+
+      db.query(sql, values, (err, insertResult) => {
+        if (err) {
+          console.error('Database error while adding book:', err.message);
+          return res.status(500).json({ Error: "Database error", Details: err.message });
+        }
+
+        console.log('Book successfully added with ID:', insertResult.insertId);
+        return res.json({
+          Status: "success",
+          Message: "Book added successfully",
+          BookID: insertResult.insertId,
+        });
+      });
+    }
+  });
+});
+//post mybook
+app.post('/mybooks', verifyUser, (req, res) => {
+  console.log('Request body received for adding book:', req.body);
+
+  const { anhsach, tensach, tacgia, soluong, gia } = req.body;
+
+  // Validate input fields
+  if (!anhsach || !tensach || !tacgia || !soluong || !gia) {
+    console.error('Missing fields:', req.body);
+    return res.status(400).json({
+      Error: "Missing required fields",
+      MissingFields: { anhsach: !!anhsach, tensach: !!tensach, tacgia: !!tacgia, soluong: !!soluong, gia: !!gia }
+    });
+  }
+
+  const userId = req.userid;
+
+  const checkBookSql = "SELECT * FROM mybooks WHERE tensach = ? AND userid = ?";
+  db.query(checkBookSql, [tensach, userId], (err, result) => {
+    if (err) {
+      console.error('Database error while checking product:', err.message);
+      return res.status(500).json({ Error: "Database error", Details: err.message });
+    }
+
+    if (result.length > 0) {
+
+      const newQuantity = result[0].soluong + parseInt(soluong, 10);
+      const updateQuantitySql = "UPDATE mybooks SET soluong = ? WHERE tensach = ? AND userid = ?";
+      db.query(updateQuantitySql, [newQuantity, tensach, userId], (err) => {
+        if (err) {
+          console.error('Database error while updating quantity:', err.message);
+          return res.status(500).json({ Error: "Database error", Details: err.message });
+        }
+
+        console.log('Book quantity updated successfully.');
+        return res.json({
+          Status: "success",
+          Message: "Book quantity updated successfully",
+          BookID: result[0].id,
+        });
+      });
+    } else {
+      // Insert new book if it doesn't exist
+      const sql = "INSERT INTO mybooks (anhsach, tensach, tacgia, soluong, gia, userid) VALUES (?, ?, ?, ?, ?, ?)";
       const values = [anhsach, tensach, tacgia, soluong, gia, userId];
 
       db.query(sql, values, (err, insertResult) => {
