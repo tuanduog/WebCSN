@@ -12,7 +12,7 @@ const YourCourse = () => {
   const handlePickProduct = (productid) => {
     navigate('/khoahoc/khoahoc', {state: {productid: productid}});
   }
-
+  
   return (
     <div className="section">
       <div className="container">
