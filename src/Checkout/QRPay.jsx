@@ -1,19 +1,99 @@
 import QRcode from "../assets/QR.png"
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import data from "../data/data";
+import axios from "axios";
+import { useState } from "react";
 const QR = () =>{
     const navigate = useNavigate();
-    
     const location = useLocation();
     const {e} = location.state || {};
     const {a} = location.state  || {};
     const {p} = location.state  || {};
     const {total} = location.state || {};
+    const {pdid} = location.state || {};
+    const { chosenBooks = [], chosenProducts = [] } = location.state || [];
+    const product = data.product_data.find((item) => item.id === pdid);
 
     const handleToYourCart = () => {
-        alert("Bạn đã thanh toán thành công!");
-        navigate("/yourCourse");
-      };
+        alert('Bạn đã thanh toán thành công đơn hàng!');
+
+        const postProductsInParallel = async () => {
+          try {
+            const requests = chosenProducts.map((product) =>
+              axios.post('http://localhost:8081/mycourse', product, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              })
+            );
+            const responses = await Promise.all(requests);
+            responses.forEach((response, index) => {
+              console.log(`Posted product ${chosenProducts[index].name}:`, response.data);
+            });
+            console.log('All products posted successfully');
+          } catch (error) {
+            console.error('Error posting products:', error.response?.data || error.message);
+          }
+        };
+        
+        postProductsInParallel();
+        const postProductsInParallels = async () => {
+          try {
+            const requests = chosenBooks.map((product) =>
+              axios.post('http://localhost:8081/mybooks', product, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              })
+            );
+            const responses = await Promise.all(requests);
+            responses.forEach((response, index) => {
+              console.log(`Posted product ${chosenProducts[index].name}:`, response.data);
+            });
+            console.log('All products posted successfully');
+          } catch (error) {
+            console.error('Error posting products:', error.response?.data || error.message);
+          }
+        };
+        
+        postProductsInParallels();
+        navigate('/YourCourse');
+        if (!product) {
+          alert('Sản phẩm đã được thêm vào cho bạn!');
+          return;
+        }
+      
+        const productData = {
+          anhsp: product.anh,
+          tensp: product.tensp,
+          tengv: product.tengv, 
+          gia: product.gia,
+          soluong: product.soluong,
+          lop: product.lop,
+          mon: product.mon
+        };
+      
+        console.log('Sending product data:', productData);
+      
+        axios.post('http://localhost:8081/mycourse', productData, { withCredentials: true })
+          .then((res) => {
+            console.log('Server response:', res.data);
+            if (res.data.Status === "success") {
+              alert('Khoá học đã được thêm vào cho bạn');
+              navigate('/YourCourse');
+            } else {
+              alert('Error: ' + res.data.Error);
+            }
+          })
+          .catch((err) => {
+            console.error('Error adding to cart:', err.response?.data || err.message);
+            alert('An error occurred while adding the product to the cart.');
+          });
+          
+            };
+      
+         
     return (
         <div className="row"> 
         <div className="col">
