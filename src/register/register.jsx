@@ -32,13 +32,8 @@ const Register = () => {
       if (response.data.email.exists) {
         alert("Email đã được sử dụng rồi");
         return;
-      } 
-
-      const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
-      if (!passwordRegex.test(values.password)) {
-        alert("Mật khẩu phải có ít nhất 8 ký tự, chứa ít nhất 1 ký tự đặc biệt và 1 số.");
-        return;
       }
+
       // check mật khẩu
       if (values.confirmpassword !== values.password) {
           alert("Vui lòng xác nhận lại đúng mật khẩu");

@@ -14,8 +14,8 @@ const Checkout = () =>{
   const [inputAddress, setInputA] = useState('');
   const [inputPhonenumber,setInputP] = useState('');
   const [setInputE] = useState('');
-  const [inputFirstName,setInputFN] = useState('');
-  const [inputLastName,setInputLN] = useState('');
+  // const [inputFirstName,setInputFN] = useState('');
+  // const [inputLastName,setInputLN] = useState('');
   const { chosenBooks = [], chosenProducts = [] } = location.state || {};
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();

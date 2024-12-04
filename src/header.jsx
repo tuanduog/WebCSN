@@ -21,6 +21,9 @@ const Header = () => {
   const navitoYourCourse = () =>{
     navigate('/YourCourse');
   }
+  const handleChangeAcc = () => {
+    navigate('/change_acc/changeacc');
+  }
   const handleCart = () => {
     navigate('cart/cart');
   }
@@ -305,11 +308,11 @@ const Header = () => {
             <a className="dropdown-item" href="#" style={{textAlign: 'center'}}>
               {name}
             </a>
-            <a className="dropdown-item" href="" style={{textAlign: 'center'}}>
+            <a className="dropdown-item" onClick={handleChangeAcc} href="" style={{textAlign: 'center'}}>
               Thông tin tài khoản
             </a>
             <a className="dropdown-item" onClick={navitoYourCourse} href="" style={{textAlign: 'center'}}>
-              Khóa học của bạn
+              Khóa học của tôi
             </a>
             <a className="dropdown-item" href="" onClick={logout} style={{textAlign: 'center'}}>
               <FontAwesomeIcon icon={faRightFromBracket} /> Đăng xuất

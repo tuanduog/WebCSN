@@ -1,17 +1,21 @@
-// import { useLocation } from 'react-router-dom';
+
 // import data_sach from './data/data_sach.jsx';
 import './find_result/find_result.css';
 import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const YourCourse = () => {
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
   const handlePickProduct = (productid) => {
     navigate('/khoahoc/khoahoc', {state: {productid: productid}});
   }
   const [products, setProducts] = useState([]); 
+  const [books, setBooks] = useState([]);
+  const handlePickBook = (sachid) => {
+    navigate('/ctietsach', {state: {sachid: sachid}});
+  }
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,11 +36,29 @@ const YourCourse = () => {
   
     fetchProducts();
   }, []);
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get('http://localhost:8081/mybooks', {
+          withCredentials: true, 
+        });
   
+        if (response.data.Status === "success") {
+          setBooks(response.data.Books);
+        } else {
+          console.error('No products found');
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error.response?.data || error.message);
+      }
+    };
+  
+    fetchBooks();
+  }, []);
   return (
     <div className="section">
       <div className="container">
-        <h2>Sách:</h2>
+        
         <h2>Khóa học:</h2>
 
         <div className="courses">
@@ -63,6 +85,31 @@ const YourCourse = () => {
             ))}
               
           </div>   
+          <br/>
+          <h2>Sách:</h2>
+          <br/>
+        <div className="courses">
+            {books.map((book) =>(
+                <div
+                className="box"
+                key={book.sachid}
+                style={{ cursor: 'pointer', padding: '5px', marginLeft: '10px'
+                }}
+                onClick={() => handlePickBook(book.sachid)}
+              >
+                <img src={book.anhsach} alt={book.tensach} className="box-img" />
+                <div className="bottom">
+                  <p className="name">{book.tensach}</p>
+                 
+                  <p className="teacher">
+                    Tác giả: <span>{book.tacgia}</span>
+                  </p>
+                  
+                </div>
+              </div>
+            ))}
+              
+          </div> 
         
       </div><br/><br/>
       <div className="row flex flex-row justify-content-between">

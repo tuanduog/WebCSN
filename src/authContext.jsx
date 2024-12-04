@@ -3,10 +3,10 @@ import axios from 'axios';
 import PropTypes from 'prop-types'; // Import PropTypes for validation
 const AuthContext = createContext();
 
+
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
   const [name, setName] = useState('');
-
   useEffect(() => {
     // Check if the user is logged in when the app loads
     axios.defaults.withCredentials = true;
@@ -31,7 +31,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    axios.get("http://localhost:8081/logout")
+  
+    axios.get("http://localhost:8081/logout", { withCredentials: true })
       .then(res => {
         if (res.data.Status === "Success") {
           setAuth(false);

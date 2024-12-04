@@ -20,7 +20,6 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: 'bankh',  // Database name
-  port: 3307
 })
 app.use(cookieParser());
 
@@ -103,34 +102,100 @@ app.post('/register/checkUser', (req, res) => {
   });
 });
 
+app.post('/user/change-password', verifyUser, (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  const userId = req.userid;
+
+  // Password validation regex
+  const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-zA-Z]).{8,}$/;
+
+  if (!passwordRegex.test(newPassword)) {
+    return res.status(400).json({
+      Error:
+        "Mật khẩu mới phải có ít nhất 8 ký tự, chứa ít nhất 1 ký tự đặc biệt và 1 số.",
+    });
+  }
 
 
-app.post('/login/login', (req, res) => {
-  const sql = "SELECT * FROM users WHERE username = ?";
-  db.query(sql, [req.body.name], (err, data) => {
+  const sql = "SELECT password FROM users WHERE userid = ?";
+  db.query(sql, [userId], (err, results) => {
     if (err) {
-      return res.json({ Error: "Lỗi server đăng nhập" });
-    } 
-    if (data.length > 0) {
-      bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
-        if (err) return res.json({ Error: "Lỗi password" });
-        if (response) {
-          const name = data[0].username;
-          const userid = data[0].userid;
-          const token = jwt.sign({ name, userid }, "jwt-secret-key", { expiresIn: '1d' }); 
-
-          res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none' });
- 
-          return res.json({ Status: "Đăng nhập thành công" });
-        } else {
-          return res.json({ Error: "Sai mật khẩu" });
-        }
-      });
-    } else {
-      return res.json({ Error: "Tài khoản không tồn tại" });
+      return res.status(500).json({ Error: "Lỗi cơ sở dữ liệu", Details: err });
     }
+
+    if (results.length === 0) {
+      return res.status(404).json({ Error: "Người dùng không tồn tại" });
+    }
+
+    const hashedPassword = results[0].password;
+
+    // Compare current password with the hashed password in the database
+    bcrypt.compare(oldPassword, hashedPassword, (err, isMatch) => {
+      if (err) {
+        return res.status(500).json({ Error: "Lỗi xác thực mật khẩu" });
+      }
+
+      if (!isMatch) {
+        return res.status(400).json({ Error: "Mật khẩu hiện tại không chính xác" });
+      }
+
+      // Hash the new password
+      bcrypt.hash(newPassword, 10, (err, hashedNewPassword) => {
+        if (err) {
+          return res.status(500).json({ Error: "Lỗi mã hóa mật khẩu mới", Details: err });
+        }
+
+        const updateSql = "UPDATE users SET password = ? WHERE userid = ?";
+        db.query(updateSql, [hashedNewPassword, userId], (err, result) => {
+          if (err) {
+            return res.status(500).json({ Error: "Lỗi cơ sở dữ liệu", Details: err });
+          }
+
+          if (result.affectedRows === 0) {
+            return res.status(404).json({ Error: "Không tìm thấy người dùng để cập nhật" });
+          }
+
+          res.json({ Status: "Success", Message: "Mật khẩu đã được thay đổi thành công" });
+        });
+      });
+    });
   });
 });
+
+app.put('/user/update-info', verifyUser, (req, res) => {
+  const { hoten, sodt, facebookLink } = req.body;  
+  const userId = req.userid; 
+
+  if (!hoten || !sodt || !facebookLink) {
+    return res.status(400).json({ Error: "Full name (hoten), phone number (sodt), and Facebook link are required" });
+  }
+ 
+  const getUserSql = "SELECT email FROM users WHERE userid = ?";
+  
+  db.query(getUserSql, [userId], (err, results) => {
+    if (err) {
+      return res.status(500).json({ Error: "Database error", Details: err.message });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ Error: "User not found" });
+    }
+
+    const email = results[0].email;  
+
+    const updateSql = "UPDATE users SET hoten = ?, sodt = ?, flink = ? WHERE userid = ?";
+
+    db.query(updateSql, [hoten, sodt, facebookLink, userId], (err, result) => {
+      if (err) {
+        return res.status(500).json({ Error: "Database error", Details: err.message });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ Error: "User not found" });
+      }
+      res.json({ Status: "Success", Message: "Cập nhật thông tin thành công!"});
+    });
+  });
+});
+
 
 
 // POST endpoint
@@ -512,6 +577,27 @@ app.get('/books', verifyUser, (req, res) => {
   const userId = req.userid;
 
   const sql = "SELECT * FROM sach WHERE userid = ?";
+  
+  db.query(sql, [userId], (err, results) => {
+    if (err) {
+      console.error('Lỗi cơ sở dữ liệu:', err.message);
+      return res.status(500).json({ Error: "Lỗi cơ sở dữ liệu", Details: err.message });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ Status: "Không tìm thấy sản phẩm nào", Books: [] });
+    }
+
+    res.json({ Status: "success", Books: results });
+  });
+});
+
+app.get('/mybooks', verifyUser, (req, res) => {
+  console.log('UserID:', req.userid); 
+
+  const userId = req.userid;
+
+  const sql = "SELECT * FROM mybooks WHERE userid = ?";
   
   db.query(sql, [userId], (err, results) => {
     if (err) {

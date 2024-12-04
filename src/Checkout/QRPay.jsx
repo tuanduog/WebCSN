@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import data from "../data/data";
 import axios from "axios";
-import { useState } from "react";
 const QR = () =>{
     const navigate = useNavigate();
     const location = useLocation();
