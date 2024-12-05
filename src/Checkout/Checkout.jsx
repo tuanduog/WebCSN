@@ -11,11 +11,11 @@ import axios from 'axios';
 const Checkout = () =>{
   const location = useLocation();
   const {name} = useAuth();
+  const [inputHodem, setInputHd] = useState('');
+  const [inputTen, setInputTen] = useState('');
   const [inputAddress, setInputA] = useState('');
   const [inputPhonenumber,setInputP] = useState('');
   const [setInputE] = useState('');
-  // const [inputFirstName,setInputFN] = useState('');
-  // const [inputLastName,setInputLN] = useState('');
   const { chosenBooks = [], chosenProducts = [] } = location.state || {};
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
@@ -25,17 +25,14 @@ const Checkout = () =>{
   const pdid = location.state?.productid;
 
   const handleQRpay = () => {
-
-    navigate('../Checkout/QR',{state:{e:thisE,a:inputAddress,p:inputPhonenumber,total,pdid,chosenProducts,chosenBooks}});
+    if(!inputHodem || !inputTen || !inputAddress || !inputPhonenumber){
+      alert("Cần nhập đủ thông tin để thanh toán!");
+      return;
+    }
+    navigate('../Checkout/QR',{state:{e:thisE, h:inputHodem, t:inputTen,a:inputAddress,p:inputPhonenumber,total,pdid,chosenProducts,chosenBooks}});
   }
   const pd = data.product_data.find((item) => item.id === pdid);
-  const [values, setValues] = useState({
-    hodem: '',
-    ten: '',
-    diachi: '',
-    sodt: '',
-    tongtien: '',
-  });
+ 
   const [user,setUser] = useState([]);
   useEffect(() => {
     axios.get('http://localhost:8081/users')
@@ -96,12 +93,7 @@ const Checkout = () =>{
       alert('Mã khuyến mãi không hợp lệ!');
     }
   }
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues((prevValues) => ({ ...prevValues, [name]: value }));
-  };
-  
-  
+ 
   return(
 
     <div className="container">
@@ -187,15 +179,15 @@ const Checkout = () =>{
                 className="form-control"
                 id="hodem"
                 name="hodem" // Matches the key in `values`
-                value={values.hodem} // Bound to state
-                onChange={handleInputChange} // Updates state dynamically
+                value={inputHodem} // Bound to state
+                onChange={(h) => setInputHd(h.target.value)} // Updates state dynamically
                 required
               />
               </div>
               <div className="col mb-3">
                 <label htmlFor="ten">Tên</label>
                 <span style={{ color: 'red', fontSize: '1.2rem' }}> *</span>
-                <input type="text" className="form-control" id="ten" name="ten" value={values.ten} onChange={handleInputChange} required />
+                <input type="text" className="form-control" id="ten" name="ten" value={inputTen} onChange={(t) => setInputTen(t.target.value)} required />
               </div>
             </div>
 
@@ -218,7 +210,7 @@ const Checkout = () =>{
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
               <input type="email" className="form-control" id="email"  value={thisE} onChange={(e) => setInputE(e.target.value)} placeholder="you@example.com" required/>
               <div className="invalid-feedback">
-                Please enter a valid email address for shipping updates.
+      
               </div>
             </div>
 

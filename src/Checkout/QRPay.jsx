@@ -6,6 +6,8 @@ import axios from "axios";
 const QR = () =>{
     const navigate = useNavigate();
     const location = useLocation();
+    const {h} = location.state || {};
+    const {t} = location.state || {};
     const {e} = location.state || {};
     const {a} = location.state  || {};
     const {p} = location.state  || {};
@@ -97,7 +99,7 @@ const QR = () =>{
         <div className="row"> 
         <div className="col">
             <h4>Thông tin của bạn</h4>
-            <p>Họ và Tên: </p>
+            <p>Họ và Tên: {h} {t}</p>
             <p>Địa chỉ: {a ||'No address provided'}</p>
             <p>Email: {e || 'No email provided'}</p>
             <p>Số điện thoại: {p || 'No phone number provided'}</p>

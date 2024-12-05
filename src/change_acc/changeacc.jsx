@@ -5,6 +5,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { faUserLarge } from "@fortawesome/free-solid-svg-icons";
 const Changeacc = () => {
   const [hoten, setHoten] = useState('');
   const [sodt, setSodt] = useState('');
@@ -77,18 +78,15 @@ const Changeacc = () => {
               <div className="account-settings">
                 <div className="user-profile">
                   <div className="user-avatar">
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                      alt="Maxwell Admin"
-                    />
+                    <FontAwesomeIcon icon={faUserLarge} style={{fontSize: '3rem', marginTop: '20px'}}></FontAwesomeIcon>
                   </div>
-                  <h5 className="user-name">{username}</h5>
+                  <h5 className="user-name">{hoten}</h5>
                   <h6 className="user-email">{email}</h6>
                 </div>
                 <div className="about">
-                  <h5>About</h5>
+                  <h5>Giới thiệu</h5>
                   <p>
-                    dddd
+                    
                   </p>
                 </div>
               </div>
