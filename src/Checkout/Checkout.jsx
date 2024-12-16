@@ -6,9 +6,11 @@ import data from '../data/data';
 import { useAuth } from '../authContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useRef } from 'react';
 
 
 const Checkout = () =>{
+  const codRad = useRef();
   const location = useLocation();
   const {name} = useAuth();
   const [inputHodem, setInputHd] = useState('');
@@ -29,13 +31,18 @@ const Checkout = () =>{
       alert("Cần nhập đủ thông tin để thanh toán!");
       return;
     }
+    const phoneCheck = /^[0-9]{10}$/;
+  if (!phoneCheck.test(inputPhonenumber)) {
+    alert("Bạn cần nhập đúng số điện thoại!");
+    return;
+  }
     navigate('../Checkout/QR',{state:{e:thisE, h:inputHodem, t:inputTen,a:inputAddress,p:inputPhonenumber,total,pdid,chosenProducts,chosenBooks}});
   }
   const pd = data.product_data.find((item) => item.id === pdid);
  
   const [user,setUser] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:8081/users')
+    axios.get('http://localhost:8081/nguoidung')
     .then((res) => {
        // console.log(res.data);
         setUser(res.data.Users);
@@ -48,7 +55,7 @@ const Checkout = () =>{
   const u = user.find((user) => user.username === name);
   useEffect(() => {
     if (u != null) {
-      setThisE(u.email); // Set the email to state
+      setThisE(u.email); 
     }
   }, [u]);
   
@@ -70,8 +77,9 @@ const Checkout = () =>{
     setCount(sl);
   }, [chosenBooks, chosenProducts, pd]); // hooks alwways top level of function => để dưới là lỗi
   const handleCOD = () => {
-    if(chosenBooks.length === 0){
+    if(chosenBooks.length === 0 || chosenProducts.length > 0){
       alert('Sản phẩm bạn muốn mua không hỗ trợ phương thức thanh toán này!');
+      codRad.current.checked = false;
     }
   }
   const handleReduce = () => {
@@ -241,16 +249,14 @@ const Checkout = () =>{
                 <label className="custom-control-label" htmlFor="QR" style={{paddingLeft: '3px'}}>QR Pay</label>
               </div>
               <div className="custom-control custom-radio">
-                <input id="COD" name="paymentMethod" type="radio" className="custom-control-input" required onChange={handleCOD}/>
+                <input id="COD" name="paymentMethod" type="radio" className="custom-control-input" required ref={codRad} onChange={handleCOD}/>
                 <label className="custom-control-label" htmlFor="COD" style={{paddingLeft: '3px'}}>
                   Thanh toán khi nhận hàng (<span style={{color: 'red'}}>Chỉ áp dụng đối với sách</span>)</label>
               </div>
             </div>
 
             <hr className="mb-4"/>
-
             <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={handleQRpay}>Tiếp tục</button>
-
           </form>
         </div>
       </div>

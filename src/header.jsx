@@ -13,11 +13,13 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import data from "./data/data.jsx";
 import data_sach from "./data/data_sach.jsx";
+import axios from "axios";
 
 const Header = () => {
   const navigate = useNavigate();
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const navitoYourCourse = () =>{
     navigate('/YourCourse');
   }
@@ -78,6 +80,27 @@ const Header = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+  }, []);
+  const fetchAvatar = async () => {
+    try {
+      const response = await axios.get('http://localhost:8081/user/avatar', {
+        responseType: 'blob',  
+        withCredentials: true, 
+      });
+
+      if(response.data.size == 0){
+        setImagePreview(null);
+      } else {
+        const imageUrl = URL.createObjectURL(response.data);
+        setImagePreview(imageUrl); 
+      }
+    } catch (error) {
+      console.error("Error fetching avatar:", error.response?.data || error.message);
+    }
+  };
+  
+  useEffect(() => {
+    fetchAvatar();
   }, []);
   return (
     <div id="header">
@@ -300,12 +323,17 @@ const Header = () => {
             id="dropdownMenuButton"
             aria-haspopup="true"
             aria-expanded="false"
-            style={{backgroundColor: '#f8f9ff', position: 'relative'}}
+            style={{backgroundColor: '#f8f9ff', position: 'relative', background: 'none'}}
           >
-            <FontAwesomeIcon icon={faUserLarge} style={{ fontSize: "1.5rem" }} color="black" />
+            {imagePreview ? (
+              <img src={imagePreview} alt="User Avatar" style={{ width: '50px', height: '50px', borderRadius: '50%', marginBottom: '5px' }} />
+            ): (
+              <FontAwesomeIcon icon={faUserLarge} style={{ fontSize: '1.5rem', color: 'black' }} />
+            )}
           </button>
-          <div className="dropdown-menu" style={{marginLeft: '-40px', position: 'absolute', top: '100%', left: '0'}}>
-            <a className="dropdown-item" href="#" style={{textAlign: 'center'}}>
+          {imagePreview ? (
+            <div className="dropdown-menu" style={{marginLeft: '-30px', position: 'absolute', top: '100%', left: '0', marginTop: '-7px'}}>
+            <a className="dropdown-item" href="" style={{textAlign: 'center'}}>
               {name}
             </a>
             <a className="dropdown-item" onClick={handleChangeAcc} href="" style={{textAlign: 'center'}}>
@@ -318,6 +346,22 @@ const Header = () => {
               <FontAwesomeIcon icon={faRightFromBracket} /> Đăng xuất
             </a>
           </div>
+          ): (
+            <div className="dropdown-menu" style={{marginLeft: '-42px', position: 'absolute', top: '100%', left: '0'}}>
+            <a className="dropdown-item" href="" style={{textAlign: 'center'}}>
+              {name}
+            </a>
+            <a className="dropdown-item" onClick={handleChangeAcc} href="" style={{textAlign: 'center'}}>
+              Thông tin tài khoản
+            </a>
+            <a className="dropdown-item" onClick={navitoYourCourse} href="" style={{textAlign: 'center'}}>
+              Khóa học của tôi
+            </a>
+            <a className="dropdown-item" href="" onClick={logout} style={{textAlign: 'center'}}>
+              <FontAwesomeIcon icon={faRightFromBracket} /> Đăng xuất
+            </a>
+          </div>
+          )}
         </div>
       </div>      
       ) : (

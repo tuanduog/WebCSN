@@ -16,7 +16,7 @@ const Cart = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/products', {
+        const response = await axios.get('http://localhost:8081/khoahoc', {
           withCredentials: true, 
         });
   
@@ -67,7 +67,7 @@ const Cart = () => {
         updatedProducts[existingProductIndex].soluong -= 1;
       }
     } 
-    axios.put(`http://localhost:8081/products/${currentProduct.productid}`, {
+    axios.put(`http://localhost:8081/khoahoc/${currentProduct.productid}`, {
       soluong: updatedProducts[existingProductIndex].soluong
     }, { withCredentials: true })
     .then(response => {
@@ -121,7 +121,7 @@ const Cart = () => {
     }
   
     const { userid } = productToDelete;
-    axios.delete(`http://localhost:8081/products/${productid}`, {
+    axios.delete(`http://localhost:8081/khoahoc/${productid}`, {
       withCredentials: true, 
       data: { userid }, 
     })
@@ -185,6 +185,10 @@ const Cart = () => {
   };
 
   const handleToCheckOut = () => {
+    if(selectedBooks.length == 0 && selectedProducts.length == 0){
+      alert("Bạn cần chọn ít nhất 1 sản phẩm để thanh toán!");
+      return;
+    }
     const chosenBooks = books.filter((book) => selectedBooks.includes(book.sachid));
     const chosenProducts = products.filter((product) =>
       selectedProducts.includes(product.productid)
@@ -234,7 +238,10 @@ const Cart = () => {
               <h5 style={{ lineHeight: '40px' }}>Chọn</h5>
             </div>
           </div>
-
+          {products.length == 0 && books.length == 0 ? (
+            <h2 style={{marginTop: '40px', marginBottom: '40px', textAlign: 'center'}}>Hiện không có sản phẩm nào trong giỏ hàng</h2>
+          ):(
+            <>
           {products.map((product, index) => (
             <div className="card rounded-3 mb-4" key={product.productid}>
               <div className="card-body p-4" style={{ backgroundColor: 'white', width: '96%' }}>
@@ -338,7 +345,8 @@ const Cart = () => {
               </div>
             </div>
           ))}
-
+          </>
+          )}
           {/* Checkout Button */}
           <div className="card">
             <div className="card-body">

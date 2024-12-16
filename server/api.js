@@ -6,6 +6,9 @@ import bcrypt from "bcrypt";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 const salt = 10;
+import multer from "multer";
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 const app = express()
 app.use(cors(
   {
@@ -51,7 +54,7 @@ app.get('/logout', (req, res) => {
 })
 
 app.post('/register/register', (req, res) => {
-  const sql = "INSERT INTO users (`username`, `email`, `password`) VALUES (?, ?, ?)";
+  const sql = "INSERT INTO nguoidung (`username`, `email`, `password`) VALUES (?, ?, ?)";
 
   const saltRounds = 10; 
   const password = req.body.password.toString();
@@ -77,7 +80,7 @@ app.post('/register/register', (req, res) => {
 app.post('/register/checkUser', (req, res) => {
   const { email, username } = req.body;
 
-  const checkUserSql = "SELECT * FROM users WHERE email = ? OR username = ?";
+  const checkUserSql = "SELECT * FROM nguoidung WHERE email = ? OR username = ?";
   db.query(checkUserSql, [email, username], (err, result) => {
     if (err) {
       console.error("Database error:", err.message);
@@ -117,7 +120,7 @@ app.post('/user/change-password', verifyUser, (req, res) => {
   }
 
 
-  const sql = "SELECT password FROM users WHERE userid = ?";
+  const sql = "SELECT password FROM nguoidung WHERE userid = ?";
   db.query(sql, [userId], (err, results) => {
     if (err) {
       return res.status(500).json({ Error: "Lỗi cơ sở dữ liệu", Details: err });
@@ -129,7 +132,6 @@ app.post('/user/change-password', verifyUser, (req, res) => {
 
     const hashedPassword = results[0].password;
 
-    // Compare current password with the hashed password in the database
     bcrypt.compare(oldPassword, hashedPassword, (err, isMatch) => {
       if (err) {
         return res.status(500).json({ Error: "Lỗi xác thực mật khẩu" });
@@ -145,7 +147,7 @@ app.post('/user/change-password', verifyUser, (req, res) => {
           return res.status(500).json({ Error: "Lỗi mã hóa mật khẩu mới", Details: err });
         }
 
-        const updateSql = "UPDATE users SET password = ? WHERE userid = ?";
+        const updateSql = "UPDATE nguoidung SET password = ? WHERE userid = ?";
         db.query(updateSql, [hashedNewPassword, userId], (err, result) => {
           if (err) {
             return res.status(500).json({ Error: "Lỗi cơ sở dữ liệu", Details: err });
@@ -162,15 +164,13 @@ app.post('/user/change-password', verifyUser, (req, res) => {
   });
 });
 
+
 app.put('/user/update-info', verifyUser, (req, res) => {
   const { hoten, sodt, facebookLink } = req.body;  
   const userId = req.userid; 
 
-  if (!hoten || !sodt || !facebookLink) {
-    return res.status(400).json({ Error: "Full name (hoten), phone number (sodt), and Facebook link are required" });
-  }
  
-  const getUserSql = "SELECT email FROM users WHERE userid = ?";
+  const getUserSql = "SELECT email FROM nguoidung WHERE userid = ?";
   
   db.query(getUserSql, [userId], (err, results) => {
     if (err) {
@@ -182,7 +182,7 @@ app.put('/user/update-info', verifyUser, (req, res) => {
 
     const email = results[0].email;  
 
-    const updateSql = "UPDATE users SET hoten = ?, sodt = ?, flink = ? WHERE userid = ?";
+    const updateSql = "UPDATE nguoidung SET hoten = ?, sodt = ?, flink = ? WHERE userid = ?";
 
     db.query(updateSql, [hoten, sodt, facebookLink, userId], (err, result) => {
       if (err) {
@@ -196,10 +196,58 @@ app.put('/user/update-info', verifyUser, (req, res) => {
   });
 });
 
+app.post('/upload-image', verifyUser, upload.single('avatar'), (req, res) => {
+  const file = req.file;
+  const userId = req.userid;
+
+  if (!file) {
+      return res.status(400).json({ Error: 'No file uploaded.' });
+  }
+
+  if (!userId) {
+      return res.status(401).json({ Error: 'Unauthorized: User ID missing.' });
+  }
+
+  const image = file.buffer; 
+  const sql = "UPDATE nguoidung SET avatar = ? WHERE userid = ?";
+
+  db.query(sql, [image, userId], (err, result) => {
+      if (err) {
+          return res.status(500).json({ Error: "Database error", Details: err.message });
+      }
+      if (result.affectedRows === 0) {
+          return res.status(404).json({ Error: "User not found or image not uploaded." });
+      }
+      res.json({ success: true, message: 'Tải ảnh lên thành công!' });
+  });
+});
+app.get('/user/avatar', verifyUser, (req, res) => {
+  const userId = req.userid;
+  const sql = "SELECT avatar FROM nguoidung WHERE userid = ?";
+  db.query(sql, [userId], (err, result) => {
+    if (err) {
+      return res.status(500).json({ 
+        Error: "Database error", 
+        Details: err.message 
+      });
+    }
+    
+    if (result.length === 0 || !result[0].avatar) {
+      return res.status(404).json({ 
+        Error: "Avatar not found" 
+      });
+    }
+    const avatar = result[0].avatar;
+    const contentType = 'image/jpeg'; 
+    
+    res.setHeader('Content-Type', contentType);
+    res.send(avatar);
+  });
+});
 
 
 // POST endpoint
-app.post('/products', verifyUser, (req, res) => {
+app.post('/khoahoc', verifyUser, (req, res) => {
   console.log('Request body received for adding product:', req.body);
 
   const { anhsp, tensp, tengv, soluong, gia, lop, mon } = req.body;
@@ -210,7 +258,7 @@ app.post('/products', verifyUser, (req, res) => {
   }
 
   // check để tăng sl sản phẩm
-  const checkProductSql = "SELECT * FROM products WHERE tensp = ? AND userid = ?";
+  const checkProductSql = "SELECT * FROM khoahoc WHERE tensp = ? AND userid = ?";
   db.query(checkProductSql, [tensp, req.userid], (err, result) => {
     if (err) {
       console.error('Database error while checking product:', err.message);
@@ -219,7 +267,7 @@ app.post('/products', verifyUser, (req, res) => {
 
     if (result.length > 0) {
       const newQuantity = result[0].soluong + soluong;
-      const updateQuantitySql = "UPDATE products SET soluong = ? WHERE tensp = ? AND userid = ?";
+      const updateQuantitySql = "UPDATE khoahoc SET soluong = ? WHERE tensp = ? AND userid = ?";
       db.query(updateQuantitySql, [newQuantity, tensp, req.userid], (err, updateResult) => {
         if (err) {
           console.error('Database error while updating quantity:', err.message);
@@ -231,7 +279,7 @@ app.post('/products', verifyUser, (req, res) => {
       });
     } else {
       // Nếu chưa có sp thì add mới
-      const sql = "INSERT INTO products (anhsp, tensp, tengv, soluong, gia, lop, mon, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      const sql = "INSERT INTO khoahoc (anhsp, tensp, tengv, soluong, gia, lop, mon, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
       const values = [anhsp, tensp, tengv, soluong, gia, lop, mon, req.userid];
 
       db.query(sql, values, (err, insertResult) => {
@@ -248,7 +296,7 @@ app.post('/products', verifyUser, (req, res) => {
 });
 
 //Post endpoint cua My course:
-app.post('/mycourse', verifyUser, (req, res) => {
+app.post('/khoahoccuatoi', verifyUser, (req, res) => {
   console.log('Request body received for adding product:', req.body);
 
   const { anhsp, tensp, tengv, soluong, gia, lop, mon } = req.body;
@@ -259,7 +307,7 @@ app.post('/mycourse', verifyUser, (req, res) => {
   }
 
   // check để tăng sl sản phẩm
-  const checkProductSql = "SELECT * FROM mycourse WHERE tensp = ? AND userid = ?";
+  const checkProductSql = "SELECT * FROM khoahoccuatoi WHERE tensp = ? AND userid = ?";
   db.query(checkProductSql, [tensp, req.userid], (err, result) => {
     if (err) {
       console.error('Database error while checking product:', err.message);
@@ -268,7 +316,7 @@ app.post('/mycourse', verifyUser, (req, res) => {
 
     if (result.length > 0) {
       const newQuantity = result[0].soluong + soluong;
-      const updateQuantitySql = "UPDATE mycourse SET soluong = ? WHERE tensp = ? AND userid = ?";
+      const updateQuantitySql = "UPDATE khoahoccuatoi SET soluong = ? WHERE tensp = ? AND userid = ?";
       db.query(updateQuantitySql, [newQuantity, tensp, req.userid], (err, updateResult) => {
         if (err) {
           console.error('Database error while updating quantity:', err.message);
@@ -280,7 +328,7 @@ app.post('/mycourse', verifyUser, (req, res) => {
       });
     } else {
       // Nếu chưa có sp thì add mới
-      const sql = "INSERT INTO mycourse (anhsp, tensp, tengv, soluong, gia, lop, mon, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      const sql = "INSERT INTO khoahoccuatoi (anhsp, tensp, tengv, soluong, gia, lop, mon, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
       const values = [anhsp, tensp, tengv, soluong, gia, lop, mon, req.userid];
 
       db.query(sql, values, (err, insertResult) => {
@@ -299,12 +347,12 @@ app.post('/mycourse', verifyUser, (req, res) => {
 
 
 //get endpoint of mycourse
-app.get('/mycourse', verifyUser, (req, res) => {
+app.get('/khoahoccuatoi', verifyUser, (req, res) => {
   console.log('UserID:', req.userid); 
 
   const userId = req.userid;
 
-  const sql = "SELECT * FROM mycourse WHERE userid = ?";
+  const sql = "SELECT * FROM khoahoccuatoi WHERE userid = ?";
   
   db.query(sql, [userId], (err, results) => {
     if (err) {
@@ -320,7 +368,7 @@ app.get('/mycourse', verifyUser, (req, res) => {
   });
 });
 
-app.delete('/products/:productid', verifyUser, (req, res) => {
+app.delete('/khoahoc/:productid', verifyUser, (req, res) => {
   const { productid } = req.params;
   const { userid } = req.body;
   
@@ -328,7 +376,7 @@ app.delete('/products/:productid', verifyUser, (req, res) => {
     return res.status(400).json({ Error: "Invalid product ID" });
   }
 
-  const sql = "DELETE FROM products WHERE productid = ? AND userid = ?";
+  const sql = "DELETE FROM khoahoc WHERE productid = ? AND userid = ?";
 
   db.query(sql, [productid, userid], (err, result) => {
     if (err) {
@@ -343,16 +391,14 @@ app.delete('/products/:productid', verifyUser, (req, res) => {
       return res.status(404).json({ Status: "error", Message: "Không tìm thấy sản phẩm hoặc sản phẩm" });
     }
 
-    // If deletion is successful
+    // Xóa thành công
     res.json({ Status: "success", Message: "Xóa sản phẩm thành công" });
   });
 });
 
 
-
-
 // Update product quantity
-app.put('/products/:productid', verifyUser, (req, res) => {
+app.put('/khoahoc/:productid', verifyUser, (req, res) => {
 
   const { productid } = req.params;
   const { soluong } = req.body;
@@ -361,7 +407,7 @@ app.put('/products/:productid', verifyUser, (req, res) => {
     return res.status(400).json({ Error: 'Quantity cannot be negative' });
   }
 
-  const sql = "UPDATE products SET soluong = ? WHERE productid = ?";
+  const sql = "UPDATE khoahoc SET soluong = ? WHERE productid = ?";
   db.query(sql, [soluong, productid], (err, result) => {
     if (err) {
       console.error('Database error while updating quantity:', err.message);
@@ -380,12 +426,12 @@ app.put('/products/:productid', verifyUser, (req, res) => {
 
 
 // get  endpoint
-app.get('/products', verifyUser, (req, res) => {
+app.get('/khoahoc', verifyUser, (req, res) => {
   console.log('UserID:', req.userid); 
 
   const userId = req.userid;
 
-  const sql = "SELECT * FROM products WHERE userid = ?";
+  const sql = "SELECT * FROM khoahoc WHERE userid = ?";
   
   db.query(sql, [userId], (err, results) => {
     if (err) {
@@ -401,35 +447,34 @@ app.get('/products', verifyUser, (req, res) => {
   });
 });
 
-app.delete('/products/:productid', verifyUser, (req, res) => {
-  const { productid } = req.params;
-  const { userid } = req.body;
+// app.delete('/khoahoc/:productid', verifyUser, (req, res) => {
+//   const { productid } = req.params;
+//   const { userid } = req.body;
   
-  if (isNaN(productid)) {
-    return res.status(400).json({ Error: "Invalid product ID" });
-  }
+//   if (isNaN(productid)) {
+//     return res.status(400).json({ Error: "Invalid product ID" });
+//   }
 
-  const sql = "DELETE FROM products WHERE productid = ? AND userid = ?";
+//   const sql = "DELETE FROM khoahoc WHERE productid = ? AND userid = ?";
 
-  db.query(sql, [productid, userid], (err, result) => {
-    if (err) {
-      console.error('Database error during product deletion:', err.message);
-      return res.status(500).json({ Status: "error", Message: "Database error", Details: err.message });
-    }
+//   db.query(sql, [productid, userid], (err, result) => {
+//     if (err) {
+//       console.error('Database error during product deletion:', err.message);
+//       return res.status(500).json({ Status: "error", Message: "Database error", Details: err.message });
+//     }
 
-    if (result.affectedRows === 0) {
+//     if (result.affectedRows === 0) {
   
-      console.log(`No rows affected. Product ID: ${productid}, User ID: ${userid}`);
+//       console.log(`No rows affected. Product ID: ${productid}, User ID: ${userid}`);
 
-      return res.status(404).json({ Status: "error", Message: "Không tìm thấy sản phẩm hoặc sản phẩm" });
-    }
+//       return res.status(404).json({ Status: "error", Message: "Không tìm thấy sản phẩm hoặc sản phẩm" });
+//     }
 
-    // If deletion is successful
-    res.json({ Status: "success", Message: "Xóa sản phẩm thành công" });
-  });
-});
+//     // Xóa thành công
+//     res.json({ Status: "success", Message: "Xóa sản phẩm thành công" });
+//   });
+// });
 
-// Route to add a book or update the quantity if it already exists
 app.post('/books', verifyUser, (req, res) => {
   console.log('Request body received for adding book:', req.body);
 
@@ -492,7 +537,7 @@ app.post('/books', verifyUser, (req, res) => {
   });
 });
 //post mybook
-app.post('/mybooks', verifyUser, (req, res) => {
+app.post('/sachcuatoi', verifyUser, (req, res) => {
   console.log('Request body received for adding book:', req.body);
 
   const { anhsach, tensach, tacgia, soluong, gia } = req.body;
@@ -508,7 +553,7 @@ app.post('/mybooks', verifyUser, (req, res) => {
 
   const userId = req.userid;
 
-  const checkBookSql = "SELECT * FROM mybooks WHERE tensach = ? AND userid = ?";
+  const checkBookSql = "SELECT * FROM sachcuatoi WHERE tensach = ? AND userid = ?";
   db.query(checkBookSql, [tensach, userId], (err, result) => {
     if (err) {
       console.error('Database error while checking product:', err.message);
@@ -518,7 +563,7 @@ app.post('/mybooks', verifyUser, (req, res) => {
     if (result.length > 0) {
 
       const newQuantity = result[0].soluong + parseInt(soluong, 10);
-      const updateQuantitySql = "UPDATE mybooks SET soluong = ? WHERE tensach = ? AND userid = ?";
+      const updateQuantitySql = "UPDATE sachcuatoi SET soluong = ? WHERE tensach = ? AND userid = ?";
       db.query(updateQuantitySql, [newQuantity, tensach, userId], (err) => {
         if (err) {
           console.error('Database error while updating quantity:', err.message);
@@ -534,7 +579,7 @@ app.post('/mybooks', verifyUser, (req, res) => {
       });
     } else {
       // Insert new book if it doesn't exist
-      const sql = "INSERT INTO mybooks (anhsach, tensach, tacgia, soluong, gia, userid) VALUES (?, ?, ?, ?, ?, ?)";
+      const sql = "INSERT INTO sachcuatoi (anhsach, tensach, tacgia, soluong, gia, userid) VALUES (?, ?, ?, ?, ?, ?)";
       const values = [anhsach, tensach, tacgia, soluong, gia, userId];
 
       db.query(sql, values, (err, insertResult) => {
@@ -553,9 +598,9 @@ app.post('/mybooks', verifyUser, (req, res) => {
     }
   });
 });
-app.get('/users',verifyUser, (req,res) => {
+app.get('/nguoidung',verifyUser, (req,res) => {
   console.log('userid: ', req.userid);
-  const sql = "select * from users where userid = ?";
+  const sql = "select * from nguoidung where userid = ?";
   const uid = req.userid;
   db.query(sql,[uid],(err,results)=>{
     if (err) {
@@ -592,12 +637,12 @@ app.get('/books', verifyUser, (req, res) => {
   });
 });
 
-app.get('/mybooks', verifyUser, (req, res) => {
+app.get('/sachcuatoi', verifyUser, (req, res) => {
   console.log('UserID:', req.userid); 
 
   const userId = req.userid;
 
-  const sql = "SELECT * FROM mybooks WHERE userid = ?";
+  const sql = "SELECT * FROM sachcuatoi WHERE userid = ?";
   
   db.query(sql, [userId], (err, results) => {
     if (err) {
@@ -667,7 +712,7 @@ app.delete('/books/:sachid', verifyUser, (req, res) => {
   });
 });
 // pót cmt
-app.post('/comments', verifyUser, (req, res) => {
+app.post('/binhluan', verifyUser, (req, res) => {
   console.log('Request body received for adding comment:', req.body);
 
   const { cmttext, time } = req.body;
@@ -683,7 +728,7 @@ app.post('/comments', verifyUser, (req, res) => {
   const userId = req.userid;
   const productId = req.productid;
 
-  const checkCommentSql = "SELECT * FROM comments WHERE cmttext = ? AND userid = ? AND productid = ?";
+  const checkCommentSql = "SELECT * FROM binhluan WHERE cmttext = ? AND userid = ? AND productid = ?";
   db.query(checkCommentSql, [cmttext, userId, productId], (err, result) => {
     if (err) {
       console.error('Database error while checking comment:', err.message);
@@ -691,7 +736,7 @@ app.post('/comments', verifyUser, (req, res) => {
     }
 
     
-      const sql = "INSERT INTO comments (cmttext, time, productid, userid) VALUES (?, ?, ?, ?)";
+      const sql = "INSERT INTO binhluan (cmttext, time, productid, userid) VALUES (?, ?, ?, ?)";
       const values = [cmttext, time, productId, userId];
 
       db.query(sql, values, (err, insertResult) => {
@@ -713,7 +758,7 @@ app.post('/comments', verifyUser, (req, res) => {
 app.post('/register/checkUser', (req, res) => {
   const { email, username } = req.body;
 
-  const checkUserSql = "SELECT * FROM users WHERE email = ? OR username = ?";
+  const checkUserSql = "SELECT * FROM nguoidung WHERE email = ? OR username = ?";
   db.query(checkUserSql, [email, username], (err, result) => {
     if (err) {
       console.error("Database error:", err.message);
@@ -741,7 +786,7 @@ app.post('/register/checkUser', (req, res) => {
 
 
 app.post('/login/login', (req, res) => {
-  const sql = "SELECT * FROM users WHERE username = ?";
+  const sql = "SELECT * FROM nguoidung WHERE username = ?";
   db.query(sql, [req.body.name], (err, data) => {
     if (err) {
       return res.json({ Error: "Lỗi server đăng nhập" });

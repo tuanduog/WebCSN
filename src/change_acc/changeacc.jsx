@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { faUserLarge } from "@fortawesome/free-solid-svg-icons";
+
 const Changeacc = () => {
   const [hoten, setHoten] = useState('');
   const [sodt, setSodt] = useState('');
@@ -13,6 +14,8 @@ const Changeacc = () => {
   const [email, setEmail] = useState('');
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [oldPassword, setOldPassword] = useState('');
@@ -40,7 +43,7 @@ const Changeacc = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:8081/users', { withCredentials: true })
+    axios.get('http://localhost:8081/nguoidung', { withCredentials: true })
       .then(response => {
         const user = response.data.Users[0]; 
         setHoten(user.hoten); 
@@ -67,7 +70,57 @@ const Changeacc = () => {
         console.error("Error updating hoten:", error.response?.data || error.message); 
       });
   };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+
+    if (!imageFile) {
+      alert("Bạn cần chọn 1 ảnh muốn tải lên!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('avatar', imageFile); 
+
+    axios.post('http://localhost:8081/upload-image', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      withCredentials: true, 
+    })
+      .then((response) => {
+        alert(response.data.message);
+        fetchAvatar();
+      })
+      .catch((error) => {
+        console.error("Error uploading image:", error.response?.data || error.message);
+      });
+  };
+  const fetchAvatar = async () => {
+    try {
+      const response = await axios.get('http://localhost:8081/user/avatar', {
+        responseType: 'blob',  
+        withCredentials: true, 
+      });
+
+      if (response.data.size === 0) {
+        setImagePreview(null); 
+      } else {
+        const imageUrl = URL.createObjectURL(response.data);
+        setImagePreview(imageUrl);
+      }
+    } catch (error) {
+      console.error("Error fetching avatar:", error.response?.data || error.message);
+    }
+  };
   
+  useEffect(() => {
+    fetchAvatar();
+  }, []);
   
   return (
     <div className="container">
@@ -78,17 +131,23 @@ const Changeacc = () => {
               <div className="account-settings">
                 <div className="user-profile">
                   <div className="user-avatar">
-                    <FontAwesomeIcon icon={faUserLarge} style={{fontSize: '3rem', marginTop: '20px'}}></FontAwesomeIcon>
+                  {imagePreview ? (
+                      <img src={imagePreview} alt="User Avatar" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
+                    ) : (
+                      <FontAwesomeIcon icon={faUserLarge} style={{ fontSize: '3rem', marginTop: '20px', color: 'black' }} />
+                    )}
                   </div>
-                  <h5 className="user-name">{hoten}</h5>
+                  <form action="/profile" method="POST" encType="multipart/form-data" style={{marginLeft: '20px'}}>
+                    <input type="file" accept="image/*" onChange={handleImageChange}/>
+                    <button className="btn btn-primary mt-3" onClick={handleImageUpload}>
+                    Tải ảnh lên
+                    </button>
+                  </form>
+                  
+                  <h5 className="user-name mt-4">{hoten}</h5>
                   <h6 className="user-email">{email}</h6>
                 </div>
-                <div className="about">
-                  <h5>Giới thiệu</h5>
-                  <p>
-                    
-                  </p>
-                </div>
+                
               </div>
             </div>
           </div>

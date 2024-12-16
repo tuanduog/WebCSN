@@ -50,8 +50,8 @@ const Tailieu = () => {
             </li>
           </ul>
         </div>
-
-        <h4>Tên đề thi</h4>
+      
+        <h4 style={{marginTop: '8px'}}>Tên đề thi</h4>
         <table>
           <thead>
             <tr>

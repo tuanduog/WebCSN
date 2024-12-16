@@ -17,6 +17,7 @@ const Khoahoc = () => {
   const product = data.product_data.find((item) => item.id === productid);
   // const [comment, setComment] = useState();
   const {auth} = useAuth();
+  // const [inputCMT, setInputCMT] = useState('');
 
   const handleBefortLog = () => {
     alert('Bạn cần đăng nhập trước khi thực hiện các chức năng của hệ thống');
@@ -43,7 +44,7 @@ const Khoahoc = () => {
   
     console.log('Sending product data:', productData);
   
-    axios.post('http://localhost:8081/products', productData, { withCredentials: true })
+    axios.post('http://localhost:8081/khoahoc', productData, { withCredentials: true })
       .then((res) => {
         console.log('Server response:', res.data);
         if (res.data.Status === "success") {
@@ -124,7 +125,7 @@ const Khoahoc = () => {
   <div className="card-header">
     <ul className="nav nav-tabs card-header-tabs">
       <li className="nav-item">
-        <a className="nav-link active" aria-current="true" href="#">Comment - Đánh giá</a>
+        <a className="nav-link active" aria-current="true" href="#">Bình luận - Đánh giá</a>
       </li>
       <li className="nav-item">
         <a className="nav-link " href="">Thông tin khoá học</a>
@@ -142,8 +143,76 @@ const Khoahoc = () => {
           src={avatar}
           alt=""
           style={{
-            width: "50px",
-            height: "50px",
+            width: "60px",
+            height: "60px",
+            borderRadius: "50%",
+            objectFit: "cover",
+            marginTop: '5px'
+          }}
+        />
+        <p>name</p>
+      </div>
+      <div className="col">
+        <div
+          className="card-body"
+          style={{
+            backgroundColor: "white",
+            border: "none",
+            padding: "10px",
+          }}
+        >
+          
+          <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
+            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+          </p>
+          <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
+            <small className="text-body-secondary">Last updated 3 mins ago</small>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div className="row align-items-center" style={{ margin: "5px 0" }}>
+      <div className="col-2">
+        <img
+          src={avatar}
+          alt=""
+          style={{
+            width: "60px",
+            height: "60px",
+            borderRadius: "50%",
+            objectFit: "cover",
+            marginTop: '5px'
+          }}
+        />
+        <p>name</p>
+      </div>
+      <div className="col">
+        <div
+          className="card-body"
+          style={{
+            backgroundColor: "white",
+            border: "none",
+            padding: "10px",
+          }}
+        >
+          
+          <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
+            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+          </p>
+          <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
+            <small className="text-body-secondary">Last updated 3 mins ago</small>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div className="row align-items-center" style={{ margin: "5px 0" }}>
+      <div className="col-2">
+        <img
+          src={avatar}
+          alt=""
+          style={{
+            width: "60px",
+            height: "60px",
             borderRadius: "50%",
             objectFit: "cover",
             marginTop: '5px'
@@ -172,76 +241,6 @@ const Khoahoc = () => {
     </div>
   </div>
 
-  <div className="card mb-3">
-    <div className="row align-items-center" style={{ margin: "5px 0" }}>
-      <div className="col-2">
-        <img
-          src={avatar}
-          alt=""
-          style={{
-            width: "50px",
-            height: "50px",
-            borderRadius: "50%",
-            objectFit: "cover",
-            marginTop: '5px'
-          }}
-        />
-      </div>
-      <div className="col">
-        <div
-          className="card-body"
-          style={{
-            backgroundColor: "white",
-            border: "none",
-            padding: "10px",
-          }}
-        >
-          <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
-            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-          </p>
-          <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
-            <small className="text-body-secondary">Last updated 3 mins ago</small>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div className="card mb-3">
-    <div className="row align-items-center" style={{ margin: "5px 0" }}>
-      <div className="col-2">
-        <img
-          src={avatar}
-          alt=""
-          style={{
-            width: "50px",
-            height: "50px",
-            borderRadius: "50%",
-            objectFit: "cover",
-            marginTop: '5px'
-          }}
-        />
-      </div>
-      <div className="col">
-        <div
-          className="card-body"
-          style={{
-            backgroundColor: "white",
-            border: "none",
-            padding: "10px",
-          }}
-        >
-          <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
-            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-          </p>
-          <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
-            <small className="text-body-secondary">Last updated 3 mins ago</small>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div className="form-floating" style={{ backgroundColor: "white", marginTop: "10px" }}>
     <textarea
       className="form-control"
@@ -250,9 +249,9 @@ const Khoahoc = () => {
       style={{ height: "80px", fontSize: "0.85rem" }}
     ></textarea>
     <label htmlFor="floatingTextarea2" style={{ fontSize: "0.85rem" }}>
-      Comments
+      Viết bình luận của bạn ...
     </label>
-    <a href="#" className="btn btn-primary float-end p-2 m-2" style={{ fontSize: "0.85rem" }}>
+    <a href="" className="btn btn-primary float-end p-2 m-2" style={{ fontSize: "0.85rem" }}>
       Gửi bình luận
     </a>
   </div>

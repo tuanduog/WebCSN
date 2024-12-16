@@ -1,26 +1,18 @@
 
-// import data_sach from './data/data_sach.jsx';
 import './find_result/find_result.css';
 import { useState,useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const YourCourse = () => {
 
-  const navigate = useNavigate();
 
-  const handlePickProduct = (productid) => {
-    navigate('/khoahoc/khoahoc', {state: {productid: productid}});
-  }
+  
   const [products, setProducts] = useState([]); 
   const [books, setBooks] = useState([]);
-  const handlePickBook = (sachid) => {
-    navigate('/ctietsach', {state: {sachid: sachid}});
-  }
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/mycourse', {
+        const response = await axios.get('http://localhost:8081/khoahoccuatoi', {
           withCredentials: true, 
         });
   
@@ -39,7 +31,7 @@ const YourCourse = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/mybooks', {
+        const response = await axios.get('http://localhost:8081/sachcuatoi', {
           withCredentials: true, 
         });
   
@@ -68,7 +60,7 @@ const YourCourse = () => {
                 key={product.productid}
                 style={{ cursor: 'pointer', padding: '5px', marginLeft: '10px'
                 }}
-                onClick={() => handlePickProduct(product.productid)}
+                
               >
                 <img src={product.anhsp} alt={product.tensp} className="box-img" />
                 <div className="bottom">
@@ -95,7 +87,7 @@ const YourCourse = () => {
                 key={book.sachid}
                 style={{ cursor: 'pointer', padding: '5px', marginLeft: '10px'
                 }}
-                onClick={() => handlePickBook(book.sachid)}
+               
               >
                 <img src={book.anhsach} alt={book.tensach} className="box-img" />
                 <div className="bottom">

@@ -499,26 +499,46 @@ img.dropdown{
 }
 
 @media (max-width: 480px) {
-    .search-container {
-        width: 100%;
+    /* Stack cart and user icons vertically */
+    .carrt, .userr, .carrt1 {
+      display: block;
+      text-align: center;
+      margin: 10px 0;
     }
-
+  
+    .dropdown-menu {
+      margin-left: 0; /* Adjust for mobile view */
+      width: 100%;
+    }
+  
     .login-button,
     .register-button {
-        width: 100%;
-        margin: 0.5rem 0;
+      width: 100%; /* Make buttons full width */
+      margin: 5px 0;
     }
-
-    .select img {
-        width: 100%;
-        height: auto;
+  
+    /* Adjust the avatar button size */
+    .dropdown-button {
+      padding: 10px;
+      font-size: 1rem;
     }
-
-    .body {
-        width: 100%;
+  
+    .user-info {
+      text-align: center;
     }
-}
-
+  
+    /* Adjust cart icon for mobile */
+    .carrt, .carrt1 {
+      font-size: 1.5rem;
+    }
+  
+    /* Ensure dropdown menu appears directly below */
+    .dropdown-menu {
+      position: static; /* Avoid absolute positioning for mobile */
+      box-shadow: none; /* Optional: remove box shadow */
+      background-color: #f8f9ff;
+    }
+  }
 /* new */
 
   .container {

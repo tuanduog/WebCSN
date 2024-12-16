@@ -22,7 +22,7 @@ const QR = () =>{
         const postProductsInParallel = async () => {
           try {
             const requests = chosenProducts.map((product) =>
-              axios.post('http://localhost:8081/mycourse', product, {
+              axios.post('http://localhost:8081/khoahoccuatoi', product, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
@@ -42,7 +42,7 @@ const QR = () =>{
         const postProductsInParallels = async () => {
           try {
             const requests = chosenBooks.map((product) =>
-              axios.post('http://localhost:8081/mybooks', product, {
+              axios.post('http://localhost:8081/sachcuatoi', product, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
@@ -77,7 +77,7 @@ const QR = () =>{
       
         console.log('Sending product data:', productData);
       
-        axios.post('http://localhost:8081/mycourse', productData, { withCredentials: true })
+        axios.post('http://localhost:8081/khoahoccuatoi', productData, { withCredentials: true })
           .then((res) => {
             console.log('Server response:', res.data);
             if (res.data.Status === "success") {
