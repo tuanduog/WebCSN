@@ -204,9 +204,6 @@ const Checkout = () =>{
               <label htmlFor="username">Tên đăng nhập</label>
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
               <div className="input-group">
-                <div className="input-group-prepend">
-                  <span className="input-group-text">@</span>
-                </div>
                 <input type="text" className="form-control" id="username" placeholder="Tên đăng nhập" value={name} required readOnly/>
                 <div className="invalid-feedback" style={{width:"100%"}}>
                   Your username is required.
@@ -217,9 +214,11 @@ const Checkout = () =>{
             <div className="mb-3">
               <label htmlFor="email">Email</label>
               <span style={{color: 'red', fontSize: '1.2rem'}}> *</span>
+              <div className="input-group">
+              <div className="input-group-prepend">
+                  <span className="input-group-text">@</span>
+                </div>
               <input type="email" className="form-control" id="email"  value={thisE} onChange={(e) => setInputE(e.target.value)} placeholder="you@example.com" required/>
-              <div className="invalid-feedback">
-      
               </div>
             </div>
 
