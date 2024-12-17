@@ -12,7 +12,7 @@ const FindResult = () => {
     navigate('/ctietsach', {state: {sachid}});
   }
   const handlePickProduct = (productid) => {
-    navigate('/khoahoc/khoahoc', {state: {productid: productid}});
+    navigate('/khoahoc/khoahoc', {state: {productid}});
   }
 
   const { sach_data = [] } = data_sach || {};
@@ -64,7 +64,7 @@ const FindResult = () => {
               key={product.id}
               style={fitProducts.length < 4 ? { cursor: 'pointer', padding: '5px', marginLeft: '10px'
               }:{cursor: 'pointer', padding: '5px'}}
-              onClick={() => handlePickProduct(product.productid)}
+              onClick={() => handlePickProduct(product.id)}
             >
               <img src={product.anh} alt={product.tensp} className="box-img" />
               <div className="bottom">

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types'; // Import PropTypes for validation
+import PropTypes from 'prop-types'; 
 const AuthContext = createContext();
 
 
@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
   const [name, setName] = useState('');
   useEffect(() => {
-    // Check if the user is logged in when the app loads
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:8081", { withCredentials: true })
       .then(res => {
@@ -51,7 +50,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// PropTypes validation for children only
 AuthProvider.propTypes = {
   children: PropTypes.node.isRequired, // Only validate children prop
 };

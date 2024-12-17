@@ -45,7 +45,7 @@ const Full = () => {
           </li>
             
           <li>
-            <a href="#">KHÓA ĐÁNH GIÁ NĂNG LỰC 2K7</a>
+            <a href="">KHÓA ĐÁNH GIÁ NĂNG LỰC 2K7</a>
             <ul className="sub-menu-side">
               <li>
                 <strong>KHOA ĐÁNH GIÁ NĂNG LỰC 2K7</strong>
@@ -61,7 +61,7 @@ const Full = () => {
           </li>
 
           <li>
-            <a href="#">Chinh Phục Lớp 11</a>
+            <a href="">Chinh Phục Lớp 11</a>
             <ul className="sub-menu-side">
               <li>
                 <strong>Chinh Phục Lớp 11</strong>
@@ -80,7 +80,7 @@ const Full = () => {
           </li>
 
           <li>
-            <a href="#">Chinh Phục Lớp 10</a>
+            <a href="">Chinh Phục Lớp 10</a>
             <ul className="sub-menu-side">
               <li>
                 <strong>Chinh Phục Lớp 10</strong>
@@ -93,7 +93,7 @@ const Full = () => {
           </li>
 
           <li>
-            <a href="#">BẬC ĐẠI HỌC</a>
+            <a href="">BẬC ĐẠI HỌC</a>
             <ul className="sub-menu-side">
               <li>
                 <strong>BẬC ĐẠI HỌC</strong>
@@ -111,7 +111,7 @@ const Full = () => {
           </li>
 
           <li>
-            <a href="#">IELTS</a>
+            <a href="">IELTS</a>
             <ul className="sub-menu-side">
               <li>
                 <strong>IELTS</strong>
@@ -127,7 +127,7 @@ const Full = () => {
         </ul>
         <div className="main-poster">
   <div className="poster">
-    <a href="#">
+    <a href="">
       <img 
         src="https://cdn.mclass.vn/blog/uploads/2024/08/13181118/2k7.jpg" 
         style={{width: "720px"}}

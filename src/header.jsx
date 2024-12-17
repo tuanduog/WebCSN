@@ -326,13 +326,13 @@ const Header = () => {
             style={{backgroundColor: '#f8f9ff', position: 'relative', background: 'none'}}
           >
             {imagePreview ? (
-              <img src={imagePreview} alt="User Avatar" style={{ width: '50px', height: '50px', borderRadius: '50%', marginBottom: '5px' }} />
+              <img src={imagePreview} alt="User Avatar" style={{ width: '40px', height: '40px', borderRadius: '50%', marginBottom: '5px' }} />
             ): (
               <FontAwesomeIcon icon={faUserLarge} style={{ fontSize: '1.5rem', color: 'black' }} />
             )}
           </button>
           {imagePreview ? (
-            <div className="dropdown-menu" style={{marginLeft: '-30px', position: 'absolute', top: '100%', left: '0', marginTop: '-7px'}}>
+            <div className="dropdown-menu" style={{marginLeft: '-35px', position: 'absolute', top: '100%', left: '0', marginTop: '-7px'}}>
             <a className="dropdown-item" href="" style={{textAlign: 'center'}}>
               {name}
             </a>

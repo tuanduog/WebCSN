@@ -516,7 +516,7 @@ app.post('/books', verifyUser, (req, res) => {
         });
       });
     } else {
-      // Insert new book if it doesn't exist
+      // thêm sách mới vào nếu chưa có
       const sql = "INSERT INTO sach (anhsach, tensach, tacgia, soluong, gia, userid) VALUES (?, ?, ?, ?, ?, ?)";
       const values = [anhsach, tensach, tacgia, soluong, gia, userId];
 

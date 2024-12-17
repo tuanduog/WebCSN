@@ -26,16 +26,17 @@ const Checkout = () =>{
   const [count, setCount] = useState(0);
   const pdid = location.state?.productid;
 
-  const handleQRpay = () => {
+  const handleQRpay = (e) => {
+    e.preventDefault();
     if(!inputHodem || !inputTen || !inputAddress || !inputPhonenumber){
       alert("Cần nhập đủ thông tin để thanh toán!");
       return;
     }
     const phoneCheck = /^[0-9]{10}$/;
-  if (!phoneCheck.test(inputPhonenumber)) {
-    alert("Bạn cần nhập đúng số điện thoại!");
-    return;
-  }
+    if (!phoneCheck.test(inputPhonenumber)) {
+      alert("Bạn cần nhập đúng số điện thoại!");
+      return;
+    }
     navigate('../Checkout/QR',{state:{e:thisE, h:inputHodem, t:inputTen,a:inputAddress,p:inputPhonenumber,total,pdid,chosenProducts,chosenBooks}});
   }
   const pd = data.product_data.find((item) => item.id === pdid);
@@ -186,9 +187,9 @@ const Checkout = () =>{
                 type="text"
                 className="form-control"
                 id="hodem"
-                name="hodem" // Matches the key in `values`
-                value={inputHodem} // Bound to state
-                onChange={(h) => setInputHd(h.target.value)} // Updates state dynamically
+                name="hodem"
+                value={inputHodem} 
+                onChange={(h) => setInputHd(h.target.value)} 
                 required
               />
               </div>
@@ -237,9 +238,8 @@ const Checkout = () =>{
             </div>
 
            
-            <hr className="mb-4"/>
-          
-            <hr className="mb-4"/>
+            <hr className="mb-3"/>
+      
 
             <h4 className="mb-3 ms-0">Phương thức thanh toán</h4>
 
