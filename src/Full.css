@@ -251,21 +251,16 @@ img.dropdown{
 
 }
 
-
-
-
 .menu-side {
-    list-style: none;           /* Removes default bullets for the <ul> */
-    padding: 0;                 /* Removes default padding */
-    margin: 0;                  /* Removes default margin */
+    list-style: none;        
+    padding: 0;               
     border-radius: 10px !important;
-    width: fit-content;          /* Adjusts to fit the content */
-    max-width: 90vw;             /* Limits width to 90% of the viewport */
-    height: auto;                /* Automatically adjusts height based on content */
-    max-height: 85vh;            /* Ensures it doesn't overflow the screen */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Adds shadow effect */
-        /* Enables scrolling if content exceeds max-height */
-    background-color: #fff;      /* Optional: Sets background color */
+    width: fit-content;        
+    max-width: 90vw;             
+    height: auto;              
+    max-height: 85vh;         
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    background-color: #fff;
 }
 
 
@@ -275,7 +270,6 @@ img.dropdown{
     height: 44px;
     padding: 0 1em;
     width: 100% !important;
-
     list-style-type: none;
 }
 
@@ -283,13 +277,14 @@ img.dropdown{
     text-decoration: none;
     color: #142744;
     display: block;
+    width: 100%;
 }
 
 .sub-menu-side ul li {
     position: relative !important;
 }
 
-.sub-menu-side {
+.menu-side li:hover .sub-menu-side {
     background-color: hsla(0, 0%, 100%, .97);
     border-radius: 0 10px 10px 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .05);
@@ -297,10 +292,10 @@ img.dropdown{
     width: 950px;
     display: none;
     height: 513px; 
+    margin-left: 5%;
 }
 
 .sub-menu-side a {
-    
     display: inline-block;
 }
 
@@ -318,6 +313,7 @@ img.dropdown{
     font-weight: 700;
     text-decoration: ☐red;
 }
+
 
 .poster {
     display: flex;
@@ -506,21 +502,10 @@ img.dropdown{
       margin: 10px 0;
     }
   
-    .dropdown-menu {
-      margin-left: 0; /* Adjust for mobile view */
-      width: 100%;
-    }
-  
     .login-button,
     .register-button {
       width: 100%; /* Make buttons full width */
       margin: 5px 0;
-    }
-  
-    /* Adjust the avatar button size */
-    .dropdown-button {
-      padding: 10px;
-      font-size: 1rem;
     }
   
     .user-info {
@@ -532,14 +517,7 @@ img.dropdown{
       font-size: 1.5rem;
     }
   
-    /* Ensure dropdown menu appears directly below */
-    .dropdown-menu {
-      position: static; /* Avoid absolute positioning for mobile */
-      box-shadow: none; /* Optional: remove box shadow */
-      background-color: #f8f9ff;
-    }
   }
-/* new */
 
   .container {
     width: 100%;

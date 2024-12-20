@@ -44,6 +44,7 @@ const Register = () => {
       axios.post('http://localhost:8081/register/register', values)
         .then(res => {
           if (res.data.Status === "Success") {
+            alert("Đăng ký tài khoản thành công");
             navigate('/login/login', { state: { username: values.name } });
           } else {
             alert("Error during registration");

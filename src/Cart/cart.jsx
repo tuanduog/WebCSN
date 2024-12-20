@@ -12,7 +12,7 @@ const Cart = () => {
   const [selectedBooks, setSelectedBooks] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
 
-  
+  // get khóa học đã thêm vào giỏ
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -32,6 +32,7 @@ const Cart = () => {
   
     fetchProducts();
   }, []);
+  // get sách đã thêm vào giỏ
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -52,14 +53,13 @@ const Cart = () => {
     fetchBooks();
   }, []);
   
-  
+  // handle cái tăng giảm số lượng khóa học
   const handleQuantityChange = (index, type) => {
     const updatedProducts = [...products];
     const currentProduct = updatedProducts[index];
   
-    // Check if the product already exists in the cart by name
     const existingProductIndex = updatedProducts.findIndex(product => product.tensp === currentProduct.tensp);
-  
+    // check tăng giảm
     if (existingProductIndex !== -1) {
       if (type === 'increment') {
         updatedProducts[existingProductIndex].soluong += 1;
@@ -67,6 +67,7 @@ const Cart = () => {
         updatedProducts[existingProductIndex].soluong -= 1;
       }
     } 
+    // tăng giảm xong thì put số lượng mới lên db
     axios.put(`http://localhost:8081/khoahoc/${currentProduct.productid}`, {
       soluong: updatedProducts[existingProductIndex].soluong
     }, { withCredentials: true })
@@ -79,12 +80,13 @@ const Cart = () => {
   
     setProducts(updatedProducts); 
   };
+  // handle tăng giảm số lượng sách tương tự như khóa học
   const handleQuantityChanges = (index, type) => {
     const updatedBooks = [...books];
     const currentBook = updatedBooks[index];
 
     const existingBookIndex = updatedBooks.findIndex(book => book.tensach === currentBook.tensach);
-  
+    // check tăng giảm
     if (existingBookIndex !== -1) {
       if (type === 'increment') {
         updatedBooks[existingBookIndex].soluong += 1;
@@ -92,6 +94,7 @@ const Cart = () => {
         updatedBooks[existingBookIndex].soluong -= 1;
       }
     } 
+    // cập nhật số lượng sau khi thay đổi lên db
     axios.put(`http://localhost:8081/books/${currentBook.sachid}`, {
       soluong: updatedBooks[existingBookIndex].soluong
     }, { withCredentials: true })
@@ -105,8 +108,9 @@ const Cart = () => {
     setBooks(updatedBooks); 
   };
  
-
+  // xóa sản phẩm trong giỏ
   const handleDeleteProduct = (productid) => {
+    // check xem sản pahm có không
     if (!productid) {
       console.error('Invalid product ID provided for deletion');
       alert('Invalid product ID provided');
@@ -121,6 +125,7 @@ const Cart = () => {
     }
   
     const { userid } = productToDelete;
+    // goi del trong api để xóa sản phẩm
     axios.delete(`http://localhost:8081/khoahoc/${productid}`, {
       withCredentials: true, 
       data: { userid }, 
@@ -144,7 +149,7 @@ const Cart = () => {
         alert(`Error deleting product: ${errorMessage}`);
       });
   };
-  //
+  // tương tự xóa khóa học
   const handleDeleteBook = (sachid) => {
     if (!sachid) {
       console.error('Invalid product ID provided for deletion');
@@ -183,12 +188,13 @@ const Cart = () => {
         alert(`Error deleting product: ${errorMessage}`);
       });
   };
-
+  // handle navigate -> thanh toán
   const handleToCheckOut = () => {
     if(selectedBooks.length == 0 && selectedProducts.length == 0){
       alert("Bạn cần chọn ít nhất 1 sản phẩm để thanh toán!");
       return;
     }
+    // lấy những ssaarn phẩm đã chọn để truyền sang trang thanh toán
     const chosenBooks = books.filter((book) => selectedBooks.includes(book.sachid));
     const chosenProducts = products.filter((product) =>
       selectedProducts.includes(product.productid)
@@ -196,7 +202,7 @@ const Cart = () => {
     navigate("/Checkout/Checkout", { state: { chosenBooks, chosenProducts } });
   };
   
-
+  // kiểm tra checkbox đã được hcojn chưa
   const handlePickProduct = (productId) => {
     setSelectedProducts((prevSelected) =>
       prevSelected.includes(productId)
@@ -212,7 +218,7 @@ const Cart = () => {
         : [...prevSelected, bookId]
     );
   };
-  
+  // end logic
 
   return (
     <div style={{ backgroundColor: 'white' }}>

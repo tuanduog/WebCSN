@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types'; 
 const AuthContext = createContext();
 
-
+// gọi useAuth để dùng ở trang khác 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
   const [name, setName] = useState('');

@@ -18,6 +18,7 @@ import Find from './find_result/find_result';
 import Test from './test';
 import YourCourse from './yourCourse';
 import ChangeAcc from './change_acc/changeacc';
+import COD from './Checkout/COD';
 
 const AppContent = () => {
   const location = useLocation(); 
@@ -43,6 +44,7 @@ const AppContent = () => {
         <Route path="/find_result/find_result" element={<Find/>}></Route>
         <Route path="/test" element={<Test/>}></Route>
         <Route path="/yourCourse" element={<YourCourse/>}></Route>
+        <Route path="/Checkout/COD" element={<COD/>}></Route>
         <Route path="/change_acc/changeacc" element={<ChangeAcc/>}></Route>
       </Routes>
     </>

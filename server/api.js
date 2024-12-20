@@ -345,7 +345,6 @@ app.post('/khoahoccuatoi', verifyUser, (req, res) => {
 });
 
 
-
 //get endpoint of mycourse
 app.get('/khoahoccuatoi', verifyUser, (req, res) => {
   console.log('UserID:', req.userid); 

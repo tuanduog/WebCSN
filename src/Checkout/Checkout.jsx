@@ -25,8 +25,20 @@ const Checkout = () =>{
   const [discountUsed, setdiscountUsed] = useState(false);
   const [count, setCount] = useState(0);
   const pdid = location.state?.productid;
-
-  const handleQRpay = (e) => {
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('QR');
+  const handlePaymentChange = (e) => {
+    setSelectedPaymentMethod(e.target.id);
+  };
+  const handleCOD = () => {
+    if (chosenBooks.length === 0 || chosenProducts.length > 0) {
+      alert('Sản phẩm bạn muốn mua không hỗ trợ phương thức thanh toán này!');
+      if (codRad.current) {
+        codRad.current.checked = false; 
+      }
+      setSelectedPaymentMethod('QR');
+    }
+  };
+  const handlePay = (e) => {
     e.preventDefault();
     if(!inputHodem || !inputTen || !inputAddress || !inputPhonenumber){
       alert("Cần nhập đủ thông tin để thanh toán!");
@@ -37,7 +49,12 @@ const Checkout = () =>{
       alert("Bạn cần nhập đúng số điện thoại!");
       return;
     }
-    navigate('../Checkout/QR',{state:{e:thisE, h:inputHodem, t:inputTen,a:inputAddress,p:inputPhonenumber,total,pdid,chosenProducts,chosenBooks}});
+    if(selectedPaymentMethod === 'QR'){
+      navigate('../Checkout/QR',{state:{e:thisE, h:inputHodem, t:inputTen,a:inputAddress,p:inputPhonenumber,total,pdid,chosenProducts,chosenBooks}});
+    } else
+    if(selectedPaymentMethod === 'COD'){
+      navigate('../Checkout/COD',{state:{e:thisE, h:inputHodem, t:inputTen,a:inputAddress,p:inputPhonenumber,total,pdid,chosenProducts,chosenBooks}});
+    }
   }
   const pd = data.product_data.find((item) => item.id === pdid);
  
@@ -77,12 +94,6 @@ const Checkout = () =>{
     chosenProducts.reduce((count, product) => count + product.soluong, 0);
     setCount(sl);
   }, [chosenBooks, chosenProducts, pd]); // hooks alwways top level of function => để dưới là lỗi
-  const handleCOD = () => {
-    if(chosenBooks.length === 0 || chosenProducts.length > 0){
-      alert('Sản phẩm bạn muốn mua không hỗ trợ phương thức thanh toán này!');
-      codRad.current.checked = false;
-    }
-  }
   const handleReduce = () => {
     if(code === 'tuanduog' && !discountUsed){
       let discount = 0;
@@ -244,18 +255,24 @@ const Checkout = () =>{
 
             <div className="d-block my-3">
               <div className="custom-control custom-radio">
-                <input id="QR" name="paymentMethod" type="radio" className="custom-control-input" checked required/>
+                <input id="QR" name="paymentMethod" type="radio" className="custom-control-input" required checked={selectedPaymentMethod === 'QR'}
+                    onChange={handlePaymentChange}/>
                 <label className="custom-control-label" htmlFor="QR" style={{paddingLeft: '3px'}}>QR Pay</label>
               </div>
               <div className="custom-control custom-radio">
-                <input id="COD" name="paymentMethod" type="radio" className="custom-control-input" required ref={codRad} onChange={handleCOD}/>
+                <input id="COD" name="paymentMethod" type="radio" className="custom-control-input" required ref={codRad}
+                  checked={selectedPaymentMethod === 'COD'}
+                  onChange={() => {
+                    handlePaymentChange({ target: { id: 'COD' } });
+                    handleCOD();
+                  }}/>
                 <label className="custom-control-label" htmlFor="COD" style={{paddingLeft: '3px'}}>
                   Thanh toán khi nhận hàng (<span style={{color: 'red'}}>Chỉ áp dụng đối với sách</span>)</label>
               </div>
             </div>
 
             <hr className="mb-4"/>
-            <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={handleQRpay}>Tiếp tục</button>
+            <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={handlePay}>Tiếp tục</button>
           </form>
         </div>
       </div>

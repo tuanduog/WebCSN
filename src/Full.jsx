@@ -125,6 +125,7 @@ const Full = () => {
             </ul>
           </li>
         </ul>
+        
         <div className="main-poster">
   <div className="poster">
     <a href="">
@@ -152,7 +153,7 @@ const Full = () => {
       <Link to="/bangvinhdanh">Chi tiết</Link>
     </div>
   </div>
-  
+
   <ul className="select">
     <li>
       <Link to="/luyende/luyende">
