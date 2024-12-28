@@ -245,6 +245,95 @@ app.get('/user/avatar', verifyUser, (req, res) => {
   });
 });
 
+app.get('/luyende', (req, res) => {
+  const sql = "SELECT * FROM luyende";
+  db.query(sql, (err, result) => {
+    if(err){
+     console.error("Loi csdl", err); 
+     res.status(500).send("Loi truy van");
+    }  else {
+      res.status(200).json(result);
+    }
+  });
+});
+
+app.get('/tailieu', (req, res) => {
+  const sql = "SELECT * FROM tailieu";
+  db.query(sql, (err, result) => {
+    if(err){
+     console.error("Loi csdl", err); 
+     res.status(500).send("Loi truy van");
+    }  else {
+      res.status(200).json(result);
+    }
+  });
+});
+
+app.post('/luyende/filter', (req, res) => {
+  const { name, maDe, giangVien, monHoc, capDo } = req.body;
+  let sql = 'SELECT * FROM luyende WHERE 1=1';
+  const params = [];
+  if (maDe) {
+    sql += ' AND deid LIKE ?';
+    params.push(`%${maDe}%`);
+  }
+  if (name) {
+    sql += ' AND tende LIKE ?';
+    params.push(`%${name}%`);
+  }
+  if (giangVien && giangVien !== 'Tất cả') {
+    sql += ' AND giangvien = ?';
+    params.push(giangVien);
+  }
+  if (monHoc && monHoc !== 'Chọn...') {
+    sql += ' AND mon = ?';
+    params.push(monHoc);
+  }
+  if (capDo && capDo !== 'Chọn...') {
+    sql += ' AND capdo = ?';
+    params.push(capDo);
+  }
+
+  db.query(sql, params, (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Lỗi truy vấn cơ sở dữ liệu');
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+app.post('/tailieu/filter', (req, res) => {
+  const { tentl, tinhtp, nam, capDo } = req.body;
+  let sql = 'SELECT * FROM tailieu WHERE 1=1';
+  const params = [];
+  if (tentl) {
+    sql += ' AND tentailieu LIKE ?';
+    params.push(`%${tentl}%`);
+  }
+  if (tinhtp && tinhtp !== 'Tỉnh thành') {
+    sql += ' AND tinhtp = ?';
+    params.push(tinhtp);
+  }
+  if (capDo && capDo !== 'Cấp độ') {
+    sql += ' AND capdo = ?';
+    params.push(capDo);
+  }
+  if (nam && nam !== 'Năm') {
+    sql += ' AND nam = ?';
+    params.push(nam);
+  }
+
+  db.query(sql, params, (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Lỗi truy vấn cơ sở dữ liệu');
+    } else {
+      res.json(results);
+    }
+  });
+});
 
 // POST endpoint
 app.post('/khoahoc', verifyUser, (req, res) => {

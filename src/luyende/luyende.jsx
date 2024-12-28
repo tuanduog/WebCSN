@@ -2,19 +2,71 @@
 import '../luyende/luyende.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import background from '../assets/background.svg';
+import { useEffect, useState } from 'react';
 
+const Luyende = () => {
+  const [data, setData] = useState([]);
+  const [filters, setFilters] = useState({
+    name: "",
+    maDe: "",
+    giangVien: "Tất cả",
+    monHoc: "Chọn...",
+    capDo: "Chọn..."
+  });
+  const [filteredData, setFilteredData] = useState([]);
+  useEffect(() => {
+    // Gọi API để lấy dữ liệu
+    fetch('http://localhost:8081/luyende')
+      .then(response => response.json())
+      .then(result => {
+        setData(result);
+        setFilteredData(result);
+      })
+      .catch(error => {
+        console.error('Lỗi:', error);
+      });
+  }, []);
 
-const luyende = () => {
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFilters({ ...filters, [id]: value });
+  };
+  const handleFilter = () => {
+    fetch('http://localhost:8081/luyende/filter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(filters),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        setFilteredData(result);
+      })
+      .catch((error) => {
+        console.error('Lỗi:', error);
+      });
+  };
+
+  // Xóa bộ lọc
+  const handleReset = () => {
+    setFilters({
+      name: "",
+      maDe: "",
+      giangVien: "Tất cả",
+      monHoc: "Chọn...",
+      capDo: "Chọn...",
+    });
+    setFilteredData(data);
+  };
+  
   return (
     <div id="main">
-        
       <div
     className="header text-center"
     style={{
         backgroundImage: `url(${background})`,
         height: '250px',
     }}
->
+    >
         <h1>Luyện Đề</h1>
         <p>Giải đề là cách tổng hợp kiến thức nhanh và dễ dàng nhất!</p>
         </div>
@@ -50,6 +102,9 @@ const luyende = () => {
         className="form-control"
         placeholder="Nhập tên"
         id="name"
+        style={{height: '38px', borderRadius: '3px', fontSize: '16px'}}
+        value={filters.name}
+        onChange={handleChange}
       />
     </div>
     <div className="col-md-2">
@@ -59,60 +114,55 @@ const luyende = () => {
         className="form-control"
         placeholder="Nhập mã đề"
         id="maDe"
+        style={{height: '38px', borderRadius: '3px', fontSize: '16px'}}
+        value={filters.maDe}
+        onChange={handleChange}
       />
     </div>
     <div className="col-md-2">
       <label htmlFor="mucDoSelect">Giảng viên</label>
-      <select className="form-select" id="mucDoSelect">
-        <option selected>Tất cả</option>
-        <option value="1">Hồ Thức Thuận</option>
-        <option value="2">Phạm Văn Thuận</option>
+      <select className="form-select" id="giangVien" value={filters.giangVien} onChange={handleChange}>
+        <option value="Tất cả">Tất cả</option>
+        <option value="Thầy Hồ Thức Thuận">Thầy Hồ Thức Thuận</option>
+        <option value="Thầy Vũ Tuấn Anh">Thầy Vũ Tuấn Anh</option>
+        <option value="Cô Huyền Trang">Cô Huyền Trang</option>
+        <option value="Thầy Nhật">Thầy Nhật</option>
+        <option value="Cô Phước">Cô Phước</option>
       </select>
     </div>
     <div className="col-md-2">
       <label htmlFor="monHocSelect">Môn học</label>
-      <select className="form-select" id="monHocSelect">
-        <option selected>Chọn...</option>
-        <option value="1">Vật lý</option>
-        <option value="2">Hóa học</option>
+      <select className="form-select" id="monHoc" value={filters.monHoc} onChange={handleChange}>
+        <option value="Chọn...">Chọn...</option>
+        <option value="Vật lý">Vật lý</option>
+        <option value="Hóa học">Hóa học</option>
+        <option value="Toán">Toán</option>
+        <option value="Tiếng Anh">Tiếng Anh</option>
+        <option value="Ngữ Văn">Ngữ Văn</option>
+        <option value="Sinh học">Sinh học</option>
       </select>
     </div>
-    <div className="col-md-2">
-      <label htmlFor="mucDoSelect">Danh mục</label>
-      <select className="form-select" id="mucDoSelect">
-        <option selected>Chọn...</option>
-        <option value="1">Kiếm tra học kì 1 lớp 12</option>
-        <option value="2">Kiếm tra học kì 2 lớp 12</option>
-      </select>
-    </div>
+    
     <div className="col-md-2">
       <label htmlFor="capDoSelect">Cấp độ</label>
-      <select className="form-select" id="capDoSelect">
-        <option selected>Chọn...</option>
-        <option value="1">Lớp 10</option>
-        <option value="2">Lớp 11</option>
-        <option value="3">Lớp 12</option>
-      </select>
-    </div>
-    <div className="col-md-2">
-      <label htmlFor="mucDoSelect">Mức độ</label>
-      <select className="form-select" id="mucDoSelect">
-        <option selected>Chọn...</option>
-        <option value="1">Tổ hợp</option>
-        <option value="2">Cơ bản</option>
+      <select className="form-select" id="capDo" value={filters.capDo} onChange={handleChange}>
+        <option value="Chọn...">Chọn...</option>
+        <option value="Lớp 10">Lớp 10</option>
+        <option value="Lớp 11">Lớp 11</option>
+        <option value="Lớp 12">Lớp 12</option>
       </select>
     </div>
   </form>
 
-    <button className="btn btn-primary mt-3">
+    <button className="btn btn-primary mt-3" onClick={handleFilter}>
     <i className="fa fa-filter" aria-hidden="true"></i> Lọc
     </button>
-    <button className="btn btn-secondary mt-3">Bỏ lọc</button>
+    <button className="btn btn-secondary mt-3" onClick={handleReset}>Bỏ lọc</button>
     </div>
     <div className="container table-section">
   <table className="table table-bordered">
     <thead>
-      <tr>
+      <tr style={{textAlign: 'center'}}>
         <th>No</th>
         <th>Mã đề</th>
         <th>Tiêu đề</th>
@@ -124,54 +174,21 @@ const luyende = () => {
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>010</td>
-        <td>Thi thử 01</td>
-        <td>Vật lý</td>
-        <td>Thầy A</td>
-        <td>10/11/2023</td>
-        <td>Lớp 12</td>
-        <td>
-          <button className="btn btn-success">Làm Đề</button>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>011</td>
-        <td>Thi thử 02</td>
-        <td>Hóa học</td>
-        <td>Cô B</td>
-        <td>10/11/2023</td>
-        <td>Lớp 12</td>
-        <td>
-          <button className="btn btn-success">Làm Đề</button>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>011</td>
-        <td>Thi thử 02</td>
-        <td>Hóa học</td>
-        <td>Cô B</td>
-        <td>10/11/2023</td>
-        <td>Lớp 12</td>
-        <td>
-          <button className="btn btn-success">Làm Đề</button>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>011</td>
-        <td>Thi thử 02</td>
-        <td>Hóa học</td>
-        <td>Cô B</td>
-        <td>10/11/2023</td>
-        <td>Lớp 12</td>
-        <td>
-          <button className="btn btn-success">Làm Đề</button>
-        </td>
-      </tr>
+        {filteredData.map((row, index) => (
+        <tr key={index} style={{ textAlign: 'center' }}>
+          <td>{index + 1}</td>
+          <td>{row.deid}</td>
+          <td>{row.tende}</td>
+          <td>{row.mon}</td>
+          <td>{row.giangvien}</td>
+          <td>{row.ngaymode}</td>
+          <td>{row.capdo}</td>
+          <td>
+            <button className="btn btn-success">Làm Đề</button>
+          </td>
+        </tr>
+        ))}
+
       </tbody>
     </table>
     </div>
@@ -207,4 +224,4 @@ const luyende = () => {
   )
 }
 
-export default luyende;
+export default Luyende;

@@ -215,7 +215,7 @@ const Header = () => {
 </div>
 
       
-<div className="search-container" style={{ width: '450px', border: 'none', backgroundColor: 'none'}} ref={searchRef}>
+<div className="search-container" style={{ width: '450px', border: 'none', backgroundColor: 'none', marginLeft: '180px'}} ref={searchRef}>
   <input 
     type="text" 
     placeholder="Tìm kiếm khóa học" 
