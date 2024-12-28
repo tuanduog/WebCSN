@@ -828,7 +828,6 @@ app.post('/checkout', verifyUser, (req, res) => {
     });
   }
 
-  // SQL to check if checkout entry exists
   const checkCheckoutSql = "SELECT * FROM thanhtoan WHERE sodt = ? AND userid = ?";
   db.query(checkCheckoutSql, [sodt, req.userid, productid], (err, result) => {
     if (err) {
@@ -844,7 +843,7 @@ app.post('/checkout', verifyUser, (req, res) => {
       });
     }
 
-    // SQL to insert new checkout entry
+
     const insertSql =
       "INSERT INTO thanhtoan (hodem, ten, diachi, sodt, tongtien, userid, productid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     const values = [hodem, ten, diachi, sodt, tongtien, req.userid, productid, dhid];

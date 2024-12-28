@@ -150,7 +150,7 @@ const Khoahoc = () => {
             marginTop: '5px'
           }}
         />
-        <p>name</p>
+        <p>user1</p>
       </div>
       <div className="col">
         <div
@@ -163,10 +163,10 @@ const Khoahoc = () => {
         >
           
           <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
-            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            Tôi thấy khóa học này rất bổ ích, kiến thức của thầy truyền đạt rất dễ hiểu.
           </p>
           <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
-            <small className="text-body-secondary">Last updated 3 mins ago</small>
+            <small className="text-body-secondary">5 ngày trước</small>
           </p>
         </div>
       </div>
@@ -184,7 +184,7 @@ const Khoahoc = () => {
             marginTop: '5px'
           }}
         />
-        <p>name</p>
+        <p>user2</p>
       </div>
       <div className="col">
         <div
@@ -197,10 +197,10 @@ const Khoahoc = () => {
         >
           
           <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
-            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            Thầy Vũ Tuấn anh dạy siêu dễ hiểu, thầy hỗ trợ rất nhiệt tình trong quá trình học ạ! Cảm ơn thầy nhiều ạ!
           </p>
           <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
-            <small className="text-body-secondary">Last updated 3 mins ago</small>
+            <small className="text-body-secondary">1 giờ trước</small>
           </p>
         </div>
       </div>
@@ -218,7 +218,7 @@ const Khoahoc = () => {
             marginTop: '5px'
           }}
         />
-        <p>name</p>
+        <p>user3</p>
       </div>
       <div className="col">
         <div
@@ -231,10 +231,10 @@ const Khoahoc = () => {
         >
           
           <p className="card-text" style={{ fontSize: "0.85rem", margin: "5px 0" }}>
-            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            Rất cảm ơn thầy nhờ khóa học này mà em đã lấy được rất nhiều điểm 10 và cảm thấy yêu môn học này nhiều hơn
           </p>
           <p className="card-text" style={{ fontSize: "0.75rem", margin: "0" }}>
-            <small className="text-body-secondary">Last updated 3 mins ago</small>
+            <small className="text-body-secondary">1 ngày trước</small>
           </p>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types'; 
+
 const AuthContext = createContext();
 
 // gọi useAuth để dùng ở trang khác 
@@ -36,6 +37,7 @@ export const AuthProvider = ({ children }) => {
         if (res.data.Status === "Success") {
           setAuth(false);
           setName('');
+          
         }
       })
       .catch(err => {

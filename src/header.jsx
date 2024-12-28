@@ -39,6 +39,10 @@ const Header = () => {
   const handleBlank = () => {
     navigate('/blank')
   }
+  const handleLogout = () => {
+    logout();
+    navigate('/login/login');
+  }
   // handle find
   const [query, setQuery] = useState('');
 
@@ -324,6 +328,7 @@ const Header = () => {
             aria-haspopup="true"
             aria-expanded="false"
             style={{backgroundColor: '#f8f9ff', position: 'relative', background: 'none'}}
+            onClick={handleChangeAcc}
           >
             {imagePreview ? (
               <img src={imagePreview} alt="User Avatar" style={{ width: '40px', height: '40px', borderRadius: '50%', marginBottom: '5px' }} />
@@ -342,7 +347,7 @@ const Header = () => {
             <a className="dropdown-item" onClick={navitoYourCourse} href="" style={{textAlign: 'center'}}>
               Khóa học của tôi
             </a>
-            <a className="dropdown-item" href="" onClick={logout} style={{textAlign: 'center'}}>
+            <a className="dropdown-item" href="" onClick={handleLogout} style={{textAlign: 'center'}}>
               <FontAwesomeIcon icon={faRightFromBracket} /> Đăng xuất
             </a>
           </div>

@@ -57,19 +57,44 @@ const Changeacc = () => {
         console.error("Error fetching user data:", error.response?.data || error.message);
       });
   }, []);
-  const handleUpdate = () => {
+  const handleHuy = () => {
+      window.location.reload();
+  }
+  const handleUpdate = async () => {
+    // Kiểm tra số điện thoại
     if (sodt.length !== 10 || !/^\d+$/.test(sodt)) {
       alert('Bạn cần nhập đúng số điện thoại');
       return;
     }
-    axios.put('http://localhost:8081/user/update-info', { hoten, sodt, facebookLink }, { withCredentials: true })
-      .then(response => {
-        alert(response.data.Message); 
-      })
-      .catch(error => {
-        console.error("Error updating hoten:", error.response?.data || error.message); 
-      });
+  
+    try {
+      // Nếu có file ảnh, tải lên trước
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append('avatar', imageFile);
+  
+        await axios.post('http://localhost:8081/upload-image', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+          withCredentials: true,
+        });
+  
+      }
+  
+      // Cập nhật thông tin
+      const updateResponse = await axios.put(
+        'http://localhost:8081/user/update-info',
+        { hoten, sodt, facebookLink },
+        { withCredentials: true }
+      );
+  
+      alert(updateResponse.data.Message);
+      fetchAvatar(); 
+    } catch (error) {
+      console.error("Error:", error.response?.data || error.message);
+      alert('Đã xảy ra lỗi trong quá trình cập nhật!');
+    }
   };
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -77,29 +102,7 @@ const Changeacc = () => {
       setImagePreview(URL.createObjectURL(file));
     }
   };
-  const handleImageUpload = (e) => {
-    e.preventDefault();
 
-    if (!imageFile) {
-      alert("Bạn cần chọn 1 ảnh muốn tải lên!");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('avatar', imageFile); 
-
-    axios.post('http://localhost:8081/upload-image', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-      withCredentials: true, 
-    })
-      .then((response) => {
-        alert(response.data.message);
-        fetchAvatar();
-      })
-      .catch((error) => {
-        console.error("Error uploading image:", error.response?.data || error.message);
-      });
-  };
   const fetchAvatar = async () => {
     try {
       const response = await axios.get('http://localhost:8081/user/avatar', {
@@ -139,9 +142,7 @@ const Changeacc = () => {
                   </div>
                   <form action="/profile" method="POST" encType="multipart/form-data" style={{marginLeft: '20px'}}>
                     <input type="file" accept="image/*" onChange={handleImageChange}/>
-                    <button className="btn btn-primary mt-3" onClick={handleImageUpload}>
-                    Tải ảnh lên
-                    </button>
+                  
                   </form>
                   
                   <h5 className="user-name mt-4">{hoten}</h5>
@@ -321,6 +322,7 @@ const Changeacc = () => {
                       id="cancel"
                       name="cancel"
                       className="btn btn-secondary"
+                      onClick={() => handleHuy()}
                     >
                       Hủy
                     </button>

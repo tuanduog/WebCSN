@@ -16,7 +16,6 @@ const COD = () =>{
     const handleDis = () => {
         navigate(-1);
     }
-         
     return (
         <section
           style={{

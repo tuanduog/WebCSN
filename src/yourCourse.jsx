@@ -3,8 +3,6 @@ import './find_result/find_result.css';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 const YourCourse = () => {
-
-
   
   const [products, setProducts] = useState([]); 
   const [books, setBooks] = useState([]);
