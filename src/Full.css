@@ -283,6 +283,39 @@ img.dropdown{
 .sub-menu-side ul li {
     position: relative !important;
 }
+.running-text {
+    position: absolute;
+    top: 10%; 
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: black;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    animation: marquee 10s linear infinite, blink 1s step-start infinite;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  @keyframes marquee {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(-27%);
+    }
+    
+  }
+  @keyframes blink {
+    0%, 100% {
+        color: black; 
+    }
+    50% {
+        color: red;
+    }
+}
+ 
 
 .menu-side li:hover .sub-menu-side {
     background-color: hsla(0, 0%, 100%, .97);

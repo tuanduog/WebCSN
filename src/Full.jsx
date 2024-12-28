@@ -23,7 +23,7 @@ const Full = () => {
     <div id="main">
       
       <div className="containt">
-        <ul className="menu-side">
+        <ul className="menu-side" style={{zIndex: '1000'}}>
           <p className="danhmuc">DANH MỤC</p>
 
           <li>
@@ -135,6 +135,9 @@ const Full = () => {
         alt="Khai giảng Khóa Luyện thi TN THPT 2025" 
       />
     </a>
+    <div className="running-text">
+      Ưu đãi đăng ký sớm lên đến 50%
+    </div>
     <div className="poster1">
       <img 
         src="https://cdn.mclass.vn/blog/uploads/2023/11/17112153/Banner-website-doc.jpg" 
