@@ -1,15 +1,8 @@
 import "./Full.css";
 import { Link} from "react-router-dom";
-// import logo from "./assets/logo-land.png";
-// import search from "./assets/search.png"
-// import dropdownIcon from "./assets/drop.png";
-// import { useEffect, useState } from "react";
-// // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// // import { faUserLarge } from '@fortawesome/free-solid-svg-icons';
-// // import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from 'react-router-dom';
 import data from './data/data';
-
+import Marquee from "react-fast-marquee";
 const Full = () => {
   const navigate = useNavigate();
 
@@ -20,10 +13,10 @@ const Full = () => {
     navigate('/blank');
   }
   return (
-    <div id="main">
+    <div id="main" >
       
       <div className="containt">
-        <ul className="menu-side" style={{zIndex: '1000'}}>
+        <ul className="menu-side" style={{zIndex: '2'}}>
           <p className="danhmuc">DANH MỤC</p>
 
           <li>
@@ -135,9 +128,7 @@ const Full = () => {
         alt="Khai giảng Khóa Luyện thi TN THPT 2025" 
       />
     </a>
-    <div className="running-text">
-      Ưu đãi đăng ký sớm lên đến 50%
-    </div>
+    <Marquee className="running-text">Ưu đãi đăng ký sớm lên đến 50%</Marquee>
     <div className="poster1">
       <img 
         src="https://cdn.mclass.vn/blog/uploads/2023/11/17112153/Banner-website-doc.jpg" 

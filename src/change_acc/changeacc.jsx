@@ -89,6 +89,7 @@ const Changeacc = () => {
   
       alert(updateResponse.data.Message);
       fetchAvatar(); 
+      window.location.reload();
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
       alert('Đã xảy ra lỗi trong quá trình cập nhật!');
